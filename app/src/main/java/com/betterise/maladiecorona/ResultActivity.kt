@@ -62,10 +62,10 @@ class ResultActivity : AppCompatActivity() {
 //       }
 
         result_text.text =
-            "Names : " + intent.getStringExtra("firstname") + " " + intent.getStringExtra("lastname") + "\n" + "\n" +
-                    "Gender:  " + intent.getStringExtra("gender") + "\n" + "\n" +
-                    "Telephone : " + intent.getStringExtra("telephone") + "\n" + "\n" +
-                    "Date of Birth : " + intent.getStringExtra("dob") + "\n" + "\n" +
+            "Names : " + intent.getStringExtra("firstname") + " " + intent.getStringExtra("lastname") + "\n" +
+                    "Gender:  " + intent.getStringExtra("gender") + "\n" +
+                    "Telephone : " + intent.getStringExtra("telephone") + "\n" +
+                    "Date of Birth : " + intent.getStringExtra("dob") + "\n" +
                     "Address : " + intent.getStringExtra("province") + "," + intent.getStringExtra("district") + "," + intent.getStringExtra(
                 "sector"
             ) + "," + intent.getStringExtra("cell") + "," + intent.getStringExtra("village") + "\n" + "\n" +

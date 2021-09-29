@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/grey_f8f8f8"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -54,7 +54,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp"
+            android:padding="6dp"
             >
             <LinearLayout
                 android:id="@+id/lau"
@@ -80,9 +80,9 @@
 
 
             <LinearLayout
-                android:padding="5dp"
+                android:padding="4dp"
                 android:layout_below="@id/lau"
-                android:layout_margin="5dp"
+                android:layout_margin="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
