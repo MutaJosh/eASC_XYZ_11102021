@@ -1,6 +1,7 @@
 package com.betterise.maladiecorona.managers
 
 import android.content.Context
+import android.content.Intent
 import com.betterise.maladiecorona.R
 import com.betterise.maladiecorona.model.*
 import com.betterise.maladiecorona.model.out.Poll
@@ -8,6 +9,11 @@ import com.betterise.maladiecorona.model.out.PollAnswer
 import com.betterise.maladiecorona.model.out.PollResult
 import java.text.SimpleDateFormat
 import java.util.*
+import android.content.Context.MODE_PRIVATE
+
+import android.content.SharedPreferences
+import com.betterise.maladiecorona.PatientDetailsActivity
+
 
 /**
  * Created by mjc on 24/06/20.
@@ -85,31 +91,33 @@ class QuestionManager(
         poll.date = SimpleDateFormat(dateFormat).format(Calendar.getInstance().time)
 
         // Poll's agent phone number
-        poll.agent = AgentManager().getAgentNumber(context)
+        poll.CHW_phone = AgentManager().getAgentNumber(context)
 
+       // val pref: SharedPreferences =context.getSharedPreferences("patient_Data", MODE_PRIVATE)
 
-       // Poll's agent names
-        poll.agentname = AgentManager().getAgentName(context)
+        // Poll's agent names
+        poll.CHW_name = AgentManager().getAgentName(context)
 
-        poll.firstname=PatientManager().getPatientFirstname(context)
-        poll.lastname=PatientManager().getPatientLastname(context)
-        poll.national_ID=PatientManager().getPatientNational_ID(context)
-        poll.patientgender=PatientManager().getPatientGender(context)
-        poll.patienttelephone=PatientManager().getPatientTelephone(context)
-        poll.dob=PatientManager().getPatientDob(context)
-        poll.occupation=PatientManager().getPatientOccupation(context)
-        poll.nationality=PatientManager().getPatientNationality(context)
-        poll.residence=PatientManager().getPatientResidence(context)
-        poll.province=PatientManager().getPatientProvince(context)
-        poll.district=PatientManager().getPatientDistrict(context)
-        poll.sector=PatientManager().getPatientSector(context)
-        poll.cell=PatientManager().getPatientCell(context)
-        poll.village=PatientManager().getPatientVillage(context)
-        poll.ascov_result=PatientManager().getPatientAscov_Result(context)
+        poll.firstname= AgentManager().getFirstname(context)
+        poll.lastname=AgentManager().getLastname(context)
+        poll.national_ID=AgentManager().getNid(context)
+        poll.patientgender=AgentManager().getGender(context)
+        poll.patienttelephone=AgentManager().getTelephone(context)
+        poll.dob=AgentManager().getDob(context)
+        poll.occupation=AgentManager().getOccupation(context)
+        poll.residence=AgentManager().getResidence(context)
+        poll.nationality=AgentManager().getNationality(context)
+        poll.province=AgentManager().getProvince(context)
+        poll.district=AgentManager().getDistrict(context)
+        poll.sector=AgentManager().getSector(context)
+        poll.cell=AgentManager().getCell(context)
+        poll.village=AgentManager().getVillage(context)
+        poll.rdt_result=AgentManager().getrdt_result(context)
+
 
         // Poll's result
         var result = getResults()
-        poll.result = PollResult(
+        poll.eascov_result = PollResult(
             result.ordinal + 1, context.getString(
                 when (result) {
                     ResultType.CASE1 -> R.string.result1
@@ -126,7 +134,7 @@ class QuestionManager(
         answers.forEachIndexed() { index, answer ->
 
             var pollAnswer = PollAnswer()
-            pollAnswer.questionId = index
+           // pollAnswer.questionId = index
 
             if (!answer.text.isNullOrEmpty())
                 pollAnswer.answer = answer.text
@@ -144,7 +152,7 @@ class QuestionManager(
                 }
             }
 
-            poll.answers.add(pollAnswer)
+            poll.ASCOV_answers.add(pollAnswer)
         }
 
         return poll

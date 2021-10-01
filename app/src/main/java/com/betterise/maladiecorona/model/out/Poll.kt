@@ -7,8 +7,8 @@ class Poll {
 
     var pollId : Int = 0
     var date : String = ""
-    var agent : String = ""
-    var agentname:String=""
+    var CHW_phone : String = ""
+    var CHW_name:String=""
 
     var firstname : String = ""
     var lastname : String = ""
@@ -24,9 +24,9 @@ class Poll {
     var sector : String = ""
     var cell: String = ""
     var village: String = ""
-    var ascov_result: String=""
+    var rdt_result: String=""
 
-    var answers : MutableList<PollAnswer> = arrayListOf()
-    var result : PollResult = PollResult()
+    var ASCOV_answers : MutableList<PollAnswer> = arrayListOf()
+    var eascov_result : PollResult = PollResult()
 
 }

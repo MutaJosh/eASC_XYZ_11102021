@@ -43,7 +43,13 @@ class ResultActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_RESULT = "EXTRA_RESULT"
+
+        const val PRIVATE_MODE = 0
+
+        const val PREFS = "PREFS"
+        const val PREF_POLLS = "patient_data"
     }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,40 +60,26 @@ class ResultActivity : AppCompatActivity() {
 
         val res: ResultType = intent.extras?.getSerializable(EXTRA_RESULT) as ResultType
 
-//
-//       if (intent.getStringExtra("resulti").equals("CASE1")){
-//           btn_proceedtest.setVisibility(View.GONE)
-//       }else{
-//           btn_proceedtest.setVisibility(View.VISIBLE)
-//       }
 
-        result_text.text =
-            "Names : " + intent.getStringExtra("firstname") + " " + intent.getStringExtra("lastname") + "\n" +
-                    "Gender:  " + intent.getStringExtra("gender") + "\n" +
-                    "Telephone : " + intent.getStringExtra("telephone") + "\n" +
-                    "Date of Birth : " + intent.getStringExtra("dob") + "\n" +
-                    "Address : " + intent.getStringExtra("province") + "," + intent.getStringExtra("district") + "," + intent.getStringExtra(
-                "sector"
-            ) + "," + intent.getStringExtra("cell") + "," + intent.getStringExtra("village") + "\n" + "\n" +
-                    "National ID  : " + intent.getStringExtra("nid") + "\n" + "\n" +
-                    "Results with e-ASCOV :                        " +
+        result_names.setText(intent.getStringExtra("firstname") + " " + intent.getStringExtra("lastname"))
+        result_gender.setText(intent.getStringExtra("gender"))
+        result_telephone.setText(intent.getStringExtra("telephone"))
+        result_dob.setText(intent.getStringExtra("dob"))
+        result_nid.setText(intent.getStringExtra("nid"))
+        result_nationality.setText(intent.getStringExtra("nationality"))
+        result_address.setText(intent.getStringExtra("province") + "," + intent.getStringExtra("district") + "," + intent.getStringExtra(
+            "sector") + "," + intent.getStringExtra("cell") + "," + intent.getStringExtra("village"))
 
-                    getString(
-                        when (res) {
-                            ResultType.CASE1 -> R.string.result1
-                            ResultType.CASE2 -> R.string.result2
-                            ResultType.CASE3 -> R.string.result3
-                            ResultType.CASE3bis -> R.string.result3bis
-                            ResultType.CASE4 -> R.string.result4
-                            ResultType.CASE5 -> R.string.result5
+        result_ascov.text=getString(
+            when (res) {
+                ResultType.CASE1 -> R.string.result1
+                ResultType.CASE2 -> R.string.result2
+                ResultType.CASE3 -> R.string.result3
+                ResultType.CASE3bis -> R.string.result3bis
+                ResultType.CASE4 -> R.string.result4
+                ResultType.CASE5 -> R.string.result5 })
+        result_rdtresult.setText("No RDT result available yet")
 
-
-                        }
-
-                    ) + "\n" + "\n" + "\n" + "RDT Toolkit test type" + "        COVID-19 Ag Test"
-
-        result2_text1.setText( "Results with RDT Toolkit : ")
-        result2_text2.setText("No RDT result available yet")
 
 
         btn_start.setOnClickListener {
@@ -96,25 +88,6 @@ class ResultActivity : AppCompatActivity() {
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout)
              finish()
         }
-
-
-
-        PatientManager().savePatientAscov_Result(
-            this,
-            getString(
-                when (res) {
-                    ResultType.CASE1 -> R.string.result1
-                    ResultType.CASE2 -> R.string.result2
-                    ResultType.CASE3 -> R.string.result3
-                    ResultType.CASE3bis -> R.string.result3bis
-                    ResultType.CASE4 -> R.string.result4
-                    ResultType.CASE5 -> R.string.result5
-
-
-                }
-
-            )
-        )
 
 
     }
@@ -187,15 +160,17 @@ class ResultActivity : AppCompatActivity() {
             val ibisubizoo = u[4].substring(u[4].indexOf("{") + 1, u[4].indexOf("}"))
             val str: String
             str = if (ibisubizoo == "sars_cov2=sars_cov2_pos") {
-                result2_text2.setText("POSITIVE").toString();
+                result_rdtresult.setText("POSITIVE").toString();
+                val p: String=result_rdtresult.text.toString()
+                AgentManager().saverdt_result(baseContext,p)
             } else if (ibisubizoo == "sars_cov2=sars_cov2_neg") {
+                result_rdtresult.setText("NEGATIVE").toString();
 
-                result2_text2.setText("NEGATIVE").toString();
             } else if (ibisubizoo == "sars_cov2=universal_control_failure") {
 
-                result2_text2.setText("Invalid Test").toString()
+                result_rdtresult.setText("Invalid Test").toString()
             } else {
-                result2_text2.setText("Error occured").toString()
+                result_rdtresult.setText("Error occured").toString()
             }
 
 //            val builder = AlertDialog.Builder(this)
@@ -212,59 +187,6 @@ class ResultActivity : AppCompatActivity() {
     }
 
 
-    fun createPo(context: Context): Poll {
-
-        var poll = Poll()
-
-        // Poll's id
-        poll.pollId = 1
-
-        // Poll's date
-        var dateFormat = context.getString(R.string.datetime_format)
-        poll.date = SimpleDateFormat(dateFormat).format(Calendar.getInstance().time)
-
-        // Poll's agent phone number
-        poll.agent = AgentManager().getAgentNumber(context)
-
-
-        // Poll's agent names
-        poll.agentname = AgentManager().getAgentName(context)
-
-        poll.firstname=PatientManager().getPatientFirstname(context)
-        poll.lastname=PatientManager().getPatientLastname(context)
-        poll.national_ID=PatientManager().getPatientNational_ID(context)
-        poll.patientgender=PatientManager().getPatientGender(context)
-        poll.patienttelephone=PatientManager().getPatientTelephone(context)
-        poll.dob=PatientManager().getPatientDob(context)
-        poll.occupation=PatientManager().getPatientOccupation(context)
-        poll.nationality=PatientManager().getPatientNationality(context)
-        poll.residence=PatientManager().getPatientResidence(context)
-        poll.province=PatientManager().getPatientProvince(context)
-        poll.district=PatientManager().getPatientDistrict(context)
-        poll.sector=PatientManager().getPatientSector(context)
-        poll.cell=PatientManager().getPatientCell(context)
-        poll.village=PatientManager().getPatientVillage(context)
-        poll.ascov_result=PatientManager().getPatientAscov_Result(context)
-
-
-        // Poll's result
-        var result = getResults()
-        poll.result = PollResult(
-            result.ordinal + 1, context.getString(
-                when (result) {
-                    ResultType.CASE1 -> R.string.result1
-                    ResultType.CASE2 -> R.string.result2
-                    ResultType.CASE3 -> R.string.result3
-                    ResultType.CASE3bis -> R.string.result3bis
-                    ResultType.CASE4 -> R.string.result4
-                    ResultType.CASE5 -> R.string.result5
-                }
-            )
-        )
-
-
-        return poll
-    }
 
 
 

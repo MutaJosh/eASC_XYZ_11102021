@@ -80,13 +80,290 @@
 
 
             <LinearLayout
+                android:id="@+id/layNames"
+                android:padding="15dp"
+                android:layout_below="@id/lau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Names:"
+                    style="@style/DefaultText"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_names"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="mugisha Jean Claude"
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layGender"
+                android:padding="15dp"
+                android:layout_below="@id/layNames"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Gender:"
+                    style="@style/DefaultText"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_gender"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layTel"
+                android:padding="15dp"
+                android:layout_below="@id/layGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Telephone:"
+                    style="@style/DefaultText"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_telephone"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="0788237148"
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layDob"
+                android:padding="15dp"
+                android:layout_below="@id/layTel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Date of Birth:"
+                    style="@style/DefaultText"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_dob"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="17/04/1978"
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layNationalid"
+                android:padding="15dp"
+                android:layout_below="@id/layDob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="National ID:"
+                    style="@style/DefaultText"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_nid"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="1198790003863535902"
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layNationality"
+                android:padding="15dp"
+                android:layout_below="@id/layNationalid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Nationality:"
+                    style="@style/DefaultText"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_nationality"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Rwandan"
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layAddress"
+                android:padding="15dp"
+                android:visibility="gone"
+                android:layout_below="@id/layNationality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Address:"
+                    style="@style/DefaultText"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_address"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Gasabo-Kimihurura-Ubumwe"
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layresults_ascov"
+                android:padding="15dp"
+                android:layout_below="@id/layAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Results with e-ASCOV:"
+                    style="@style/DefaultText"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_ascov"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Consult Doctors"
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/layrdttitle"
+                android:padding="15dp"
+                android:layout_below="@id/layresults_ascov"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="RDT Toolkit test type:"
+                    style="@style/DefaultText"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_rdttype"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="COVID-19 Ag Test"
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layrdtresulttype"
+                android:padding="15dp"
+                android:layout_below="@id/layrdttitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="Results with RDT Toolkit:"
+                    style="@style/DefaultText"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_rdtresult"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    android:text="NEGATIVE"
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:padding="4dp"
                 android:layout_below="@id/lau"
                 android:layout_margin="4dp"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 >
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/result_text"
                 android:layout_width="match_parent"
@@ -96,6 +373,7 @@
 
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"

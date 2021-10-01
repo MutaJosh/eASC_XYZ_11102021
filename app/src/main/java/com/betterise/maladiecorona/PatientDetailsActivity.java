@@ -2,8 +2,11 @@ package com.betterise.maladiecorona;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,6 +29,7 @@ import java.util.List;
 public class PatientDetailsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
 
+    private static final int PRIVATE_MODE =0 ;
     /**
      * Created by MJC on 01/07/20.
      */
@@ -39,7 +43,9 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
     private int mYear, mMonth, mDay;
     private EditText etfirstname, etlastname, etnational_ID, etpatientgender, etpatienttelephone, etoccupation, etresidence, etnationality, etprovince, etdistrict, etsector, etcell, etvillage;
     private String fn, lastname, national_ID, patientgender, patienttelephone, occupation, residence, province, district, sector, cell, village;
-
+public static final String PREF_FIRSTNAME = "firstname";
+    public static final String PREF_LASTNAME = "lastname";
+    public static final String PREFS="PREFS";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -200,6 +206,8 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
                 }else {
 
 
+
+
                     Intent intent = new Intent(PatientDetailsActivity.this, QuestionActivity.class);
                     intent.putExtra("firstname", fn);
                     intent.putExtra("lastname", lastname);
@@ -215,7 +223,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
                     intent.putExtra("sector", sector);
                     intent.putExtra("cell", cell);
                     intent.putExtra("village", village);
-
+                    intent.putExtra("rdt_result","null");
 
                     startActivity(intent);
                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -230,6 +238,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
 
         }
     }
+
 
 
 }

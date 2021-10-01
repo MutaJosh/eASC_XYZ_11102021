@@ -43,43 +43,20 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
         setContentView(R.layout.activity_question)
 
-
-//        val intent: Intent = getIntent()
-//        var firstname: String = intent.getStringExtra("firstname")
-//        var lastname: String = intent.getStringExtra("lastname")
-//        var national_ID: String = intent.getStringExtra("national_ID")
-//        var patientgender: String = intent.getStringExtra("patientgender")
-//        var patienttelephone: String = intent.getStringExtra("patienttelephone")
-//        var dob: String = intent.getStringExtra("dob")
-//        var occupation: String = intent.getStringExtra("occupation")
-//        var ressidence: String = intent.getStringExtra("residence")
-//        var nationality: String = intent.getStringExtra("nationality")
-//        var province: String = intent.getStringExtra("province")
-//        var district: String = intent.getStringExtra("district")
-//        var sector: String = intent.getStringExtra("sector")
-//        var cell: String = intent.getStringExtra("cell")
-//        var village: String = intent.getStringExtra("village")
-
-
-//
-//        AgentManager().saveAgentName(this, chw_names.text.toString())
-//        AgentManager().saveAgentName(this, phone.text.toString())
-        PatientManager().savePatientFirstname(this, intent.getStringExtra("firstname"));
-        PatientManager().savePatientLastname(this, intent.getStringExtra("lastname"));
-        PatientManager().savePatientNational_ID(this, intent.getStringExtra("national_ID"));
-        PatientManager().savePatientGender(this, intent.getStringExtra("patientgender"));
-        PatientManager().savePatientTelephone(this, intent.getStringExtra("patienttelephone"));
-        PatientManager().savePatientDob(this, intent.getStringExtra("dob"));
-        PatientManager().savePatientOccupation(this, intent.getStringExtra("occupation"));
-        PatientManager().savePatientNationality(this, intent.getStringExtra("nationality"));
-        PatientManager().savePatientResidence(this, intent.getStringExtra("residence"));
-        PatientManager().savePatientProvince(this, intent.getStringExtra("province"));
-        PatientManager().savePatientDistrict(this, intent.getStringExtra("district"));
-        PatientManager().savePatientSector(this, intent.getStringExtra("sector"));
-        PatientManager().savePatientCell(this, intent.getStringExtra("cell"));
-        PatientManager().savePatientVillage(this, intent.getStringExtra("village"));
-        PatientManager().savePatientAscov_Result(this,"null")
-
+        AgentManager().savefirstname(this,intent.getStringExtra("firstname"))
+        AgentManager().savelastname(this,intent.getStringExtra("lastname"))
+        AgentManager().savenational_ID(this,intent.getStringExtra("national_ID"))
+        AgentManager().savegender(this,intent.getStringExtra("patientgender"))
+        AgentManager().savetelephone(this,intent.getStringExtra("patienttelephone"))
+        AgentManager().savedob(this,intent.getStringExtra("dob"))
+        AgentManager().saveoccupation(this,intent.getStringExtra("occupation"))
+        AgentManager().saveresidence(this,intent.getStringExtra("residence"))
+        AgentManager().savenationality(this,intent.getStringExtra("nationality"))
+        AgentManager().saveprovince(this,intent.getStringExtra("province"))
+        AgentManager().savedistrict(this,intent.getStringExtra("district"))
+        AgentManager().savesector(this,intent.getStringExtra("sector"))
+        AgentManager().savecell(this,intent.getStringExtra("cell"))
+        AgentManager().savevillage(this,intent.getStringExtra("village"))
 
         questionManager = QuestionManager(
             resources.getStringArray(R.array.questions),
@@ -146,7 +123,6 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                 PollManager().addPoll(this, poll)
 
 
-
                 var result = questionManager!!.getResults()
                 val intenti = Intent(this, ResultActivity::class.java)
 
@@ -164,15 +140,13 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                 intenti.putExtra("sector",intent.getStringExtra("sector").toString())
                 intenti.putExtra("cell", intent.getStringExtra("cell").toString())
                 intenti.putExtra("village", intent.getStringExtra("village").toString())
-             //  intenti.putExtra("resulti",result)
 
                 intenti.putExtra(ResultActivity.EXTRA_RESULT, result)
 
 
-
            startActivity(intenti)
        overridePendingTransition(R.anim.fadein,R.anim.fadeout);
-
+    finish()
 
             }
         }

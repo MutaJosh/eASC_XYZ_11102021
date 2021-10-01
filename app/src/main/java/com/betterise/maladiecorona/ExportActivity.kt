@@ -1,6 +1,7 @@
 package com.betterise.maladiecorona
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,10 +16,15 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_export.*
 import java.text.SimpleDateFormat
+import android.app.ProgressDialog
 import java.util.*
+import android.preference.PreferenceManager
+
+import android.content.SharedPreferences
+
 
 /**
- * Created by MJC on 01/07/20.
+ * Created by MJC on 29/09/21.
  */
 class ExportActivity : AppCompatActivity(), View.OnClickListener{
 
@@ -26,23 +32,8 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
         const val PRIVATE_MODE = 0
         const val prefs = "PREFS"
         const val prefLastExport = "prefLastExport"
-        const val FIRSTNAME="firstname"
-        const val LASTNAME="LASTNAME"
-        const val NATIONAL_ID="NATIONAL_ID"
-        const val PATIENTGENDER="patientgender"
-        const val PATIENTTELEPHONE="patienttelephone"
-        const val DOB="dob"
-        const val OCCUPATION="occupation"
-        const val RESIDENCE="residence"
-        const val NATIONALITY="nationality"
-        const val PROVINCE="province"
-        const val DISTRICT="district"
-        const val sector="sector"
-        const val CELL="cell"
-        const val VILLAGE="village"
+
     }
-
-
 
     private var pollManager = PollManager()
     private lateinit var networkManager : NetworkManager
@@ -58,9 +49,12 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
         btn_back.setOnClickListener{finish()}
         btn_start.setOnClickListener(this)
 
+
+
         networkManager = NetworkManager(this, getString(R.string.api_url))
         polls = pollManager.getPolls(this)
         export_text.text = getString(R.string.export_text, polls.size)
+
 
         var lastExport = getLastExportFlag()
 
@@ -72,8 +66,22 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
     /***
      * Sending poll list
      */
-    @SuppressLint("CheckResult")
+    @SuppressLint("CheckResult", "WrongConstant")
     override fun onClick(v: View?) {
+
+        val progressDialog = ProgressDialog(this@ExportActivity)
+        progressDialog.setTitle("Exporting the data")
+        progressDialog.setMessage("Busy syncing the data, please wait")
+       // progressDialog.setCanceledOnTouchOutside(false)
+        progressDialog.show()
+
+        val sharedPreferences: SharedPreferences =
+            baseContext.getSharedPreferences(prefs, MODE_PRIVATE)
+        val allEntries = sharedPreferences.all
+        for ((key, value1) in allEntries) {
+            val value = value1!!
+            Log.d("Data from Storage", "$key: $value")
+        }
 
         if (polls.size > 0 && !isSending) {
             isSending = true
@@ -88,16 +96,20 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
                     Log.e("Result", res.toString())
 
                     if (res[ApiService.API_STATUS].asString != ApiService.API_SUCCESS) {
+                        progressDialog.dismiss()
                         export_text.text = getString(R.string.export_error)
 
                     }  else {
+
                         // On success, flagging date and erasing current poll list
                         flagLastExport()
                         last_export.text = getLastExportFlag()
                         pollManager.clearPolls(this)
                         polls = pollManager.getPolls(this)
+
                         export_text.text = getString(R.string.export_text, polls.size)
 
+                        progressDialog.dismiss()
                         Toast.makeText(this,"Result "+res.toString(),Toast.LENGTH_LONG).show()
 
                     }
@@ -110,10 +122,12 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
                     Log.e(this.localClassName, error.message)
                     export_text.text = getString(R.string.export_error)
                     isSending = false
+                    progressDialog.dismiss()
                 })
 
         }
     }
+
 
     /***
      * Saving the date and time of the last working export
