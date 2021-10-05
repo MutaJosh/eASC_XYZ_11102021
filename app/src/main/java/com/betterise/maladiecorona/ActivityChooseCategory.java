@@ -81,8 +81,10 @@ private TextView errorBulletcate;
                         category="Index";
                         //.replace("-", "")
                         code=UUID.randomUUID().toString();
-                        intent.putExtra("uuid", code.toUpperCase());
+                        intent.putExtra("uuid", code.substring(9,18).toString());
                         intent.putExtra("category",category);
+
+                        new AgentManager().saveindexcode(getBaseContext(),code.substring(9,18));
                         startActivity(intent);
                         finish();
 

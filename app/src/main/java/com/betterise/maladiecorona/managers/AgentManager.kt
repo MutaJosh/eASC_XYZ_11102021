@@ -187,6 +187,6 @@ class AgentManager() {
     fun getCell(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("cell", "")
     fun getVillage(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("village", "")
     fun getrdt_result(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("rdt_result", "")
-    fun getindexcode(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("index", "")
+    fun getindexcode(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("Index", "")
     fun getcategory(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("category", "")
 }

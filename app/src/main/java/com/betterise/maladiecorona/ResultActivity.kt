@@ -87,9 +87,6 @@ class ResultActivity : AppCompatActivity() {
             resources.getStringArray(R.array.question_types)
         )
 
-        var poll = qm!!.createPoll(this)
-
-        PollManager().addPoll(this, poll)
 
 
     }

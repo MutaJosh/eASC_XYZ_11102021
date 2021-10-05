@@ -61,7 +61,7 @@ public static final String PREF_FIRSTNAME = "firstname";
 
         tvindexcode.setTextIsSelectable(true);
         String x=getIntent().getStringExtra("uuid").toString();
-        tvindexcode.setText("Index: "+x.substring(9,18));
+        tvindexcode.setText(x);
 
 
         etfirstname=findViewById(R.id.firstname);
@@ -218,7 +218,6 @@ public static final String PREF_FIRSTNAME = "firstname";
 
 
                     new AgentManager().savecategory(this,getIntent().getStringExtra("category"));
-
 
                     Intent intent = new Intent(PatientDetailsActivity.this, QuestionActivity.class);
                     intent.putExtra("firstname", fn);
