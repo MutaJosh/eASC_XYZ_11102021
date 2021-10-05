@@ -147,12 +147,16 @@ private TextView errorBulletcate;
                             Toast.makeText(getBaseContext(), "Message:  "+message+" \n Description: "+desc, Toast.LENGTH_LONG).show();
 
 
+                            if (message.equals("Found")) {
                                 //for temporary testing ,validation needed
-                                Intent intt=new Intent(ActivityChooseCategory.this,PatientDetailsActivity.class);
-                                category="contact";
-                                intt.putExtra("uuid",eTindexcode.getText().toString().trim());
-                                intt.putExtra("category",category);
+                                Intent intt = new Intent(ActivityChooseCategory.this, PatientDetailsActivity.class);
+                                category = "contact";
+                                intt.putExtra("uuid", eTindexcode.getText().toString().trim());
+                                intt.putExtra("category", category);
                                 startActivity(intt);
+                            }else{
+                                Toast.makeText(getBaseContext(), "Invalid code", Toast.LENGTH_LONG).show();
+                            }
 
                         }else{
                             progressDialog.dismiss();
