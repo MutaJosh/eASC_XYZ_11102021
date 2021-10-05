@@ -128,5 +128,6 @@
     <string name="question_example">Avez-vous de l’hypertension artérielle mal équilibrée ? Ou avez-vous une maladie cardiaque ou vasculaire ? Prenez-vous un traitement pour le cœur ? </string>
     <string name="export_example">Vous êtes sur le point d’exporter les 213 précédents diagnostics effectués.\n\nLe dernière export date du 21/06/20, à 21h15.</string>
     <string name="results_example">Votre situation peut relever d’un COVID-19. A adresser au centre de santé pour évaluation par un(e) infirmier(e).</string>
+    <string name="Invalid_code">Invalid Case Index code</string>
 
 </resources>

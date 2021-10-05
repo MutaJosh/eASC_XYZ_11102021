@@ -56,11 +56,11 @@ public static final String PREF_FIRSTNAME = "firstname";
 
         tvindexcode=findViewById(R.id.tvindexcode);
 
-        long l = ByteBuffer.wrap(getIntent().getStringExtra("uuid").toString().getBytes()).getLong();
-      String a= Long.toString(l, Character.MAX_RADIX);
+        //long l = ByteBuffer.wrap(getIntent().getStringExtra("uuid").toString().getBytes()).getLong();
+    //  String a= Long.toString(l, Character.MAX_RADIX);
 
         tvindexcode.setTextIsSelectable(true);
-        String x=getIntent().getStringExtra("uuid").toString();
+        String x=getIntent().getStringExtra("uuid").substring(9,18).toString();
         tvindexcode.setText(x);
 
 

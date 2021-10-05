@@ -144,9 +144,6 @@ private TextView errorBulletcate;
                             String desc = reader.getString("Description");
                              message=reader.getString("message");
 
-                            Toast.makeText(getBaseContext(), "Message:  "+message+" \n Description: "+desc, Toast.LENGTH_LONG).show();
-
-
                             if (message.equals("Found")) {
                                 //for temporary testing ,validation needed
                                 Intent intt = new Intent(ActivityChooseCategory.this, PatientDetailsActivity.class);
@@ -155,7 +152,7 @@ private TextView errorBulletcate;
                                 intt.putExtra("category", category);
                                 startActivity(intt);
                             }else{
-                                Toast.makeText(getBaseContext(), "Invalid code", Toast.LENGTH_LONG).show();
+                                Toast.makeText(ActivityChooseCategory.this, R.string.Invalid_code, Toast.LENGTH_SHORT).show();
                             }
 
                         }else{
