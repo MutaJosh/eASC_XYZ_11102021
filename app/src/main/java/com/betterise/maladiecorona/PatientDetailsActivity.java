@@ -60,7 +60,9 @@ public static final String PREF_FIRSTNAME = "firstname";
       String a= Long.toString(l, Character.MAX_RADIX);
 
         tvindexcode.setTextIsSelectable(true);
-        tvindexcode.setText("Index: "+getIntent().getStringExtra("uuid").toString());
+        String x=getIntent().getStringExtra("uuid").toString();
+        tvindexcode.setText("Index: "+x.substring(9,18));
+
 
         etfirstname=findViewById(R.id.firstname);
         etlastname=findViewById(R.id.etlastname);
