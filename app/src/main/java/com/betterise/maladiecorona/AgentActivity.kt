@@ -9,9 +9,6 @@ import androidx.core.widget.doOnTextChanged
 import com.betterise.maladiecorona.managers.AgentManager
 import kotlinx.android.synthetic.main.activity_agent.*
 
-/**
- * Created by MJC on 01/07/20.
- */
 
 class AgentActivity : AppCompatActivity(){
 
