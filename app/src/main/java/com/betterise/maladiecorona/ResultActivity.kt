@@ -85,8 +85,6 @@ class ResultActivity : AppCompatActivity() {
             resources.getStringArray(R.array.question_types)
         )
 
-
-
     }
 
 
@@ -107,7 +105,7 @@ class ResultActivity : AppCompatActivity() {
             .setFlavorTwo(nid) //.setClassifierBehavior(ClassifierMode.CHECK_YOUR_WORK)
             .setInTestQaMode() //.setSecondaryCaptureRequirements("capture_windowed")
             .setSubmitAllImagesToCloudworks(true)
-            .setCloudworksBackend("https://vmi651800.contaboserver.net/.../"+intent.getStringExtra("firstname")+intent.getStringExtra("lastname"), nid) // DSN Config
+            .setCloudworksBackend("https://vmi651800.contaboserver.net/./"+intent.getStringExtra("firstname")+intent.getStringExtra("lastname"), nid) // DSN Config
 
             // .setCallingPackage()
                .setReturnApplication(this)
@@ -120,7 +118,7 @@ class ResultActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             val iz = RdtIntentBuilder.forCapture()
-                .setSessionId(intent.getStringExtra("firstname")+" "+intent.getStringExtra("firstname")+"-"+nid) //Populated during provisioning callout, or result
+                .setSessionId(intent.getStringExtra("nid")) //Populated during provisioning callout, or result
                 .build()
             this.startActivityForResult(iz, 2)
         }, 1000)
