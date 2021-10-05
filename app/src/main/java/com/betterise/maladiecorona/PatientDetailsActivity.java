@@ -60,8 +60,13 @@ public static final String PREF_FIRSTNAME = "firstname";
     //  String a= Long.toString(l, Character.MAX_RADIX);
 
         tvindexcode.setTextIsSelectable(true);
-        String x=getIntent().getStringExtra("uuid").substring(9,18).toString();
-        tvindexcode.setText(x);
+        if (getIntent().getStringExtra("category").equals("contact")){
+            tvindexcode.setText(getIntent().getStringExtra("indexcodee"));
+        }else{
+            String x=getIntent().getStringExtra("uuid");
+            tvindexcode.setText(x);
+        }
+
 
 
         etfirstname=findViewById(R.id.firstname);
@@ -243,8 +248,8 @@ public static final String PREF_FIRSTNAME = "firstname";
                 break;
 
             case R.id.btn_back:
-               // startActivity(new Intent(PatientDetailsActivity.this,ActivityChooseCategory.class));
-                //overridePendingTransition(R.anim.fadeout, R.anim.fadein);
+                startActivity(new Intent(PatientDetailsActivity.this,ActivityChooseCategory.class));
+                overridePendingTransition(R.anim.fadeout, R.anim.fadein);
                 finish();
                 break;
 

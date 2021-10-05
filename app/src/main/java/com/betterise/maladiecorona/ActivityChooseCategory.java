@@ -148,8 +148,9 @@ private TextView errorBulletcate;
                                 //for temporary testing ,validation needed
                                 Intent intt = new Intent(ActivityChooseCategory.this, PatientDetailsActivity.class);
                                 category = "contact";
-                                intt.putExtra("uuid", eTindexcode.getText().toString().trim());
+                                intt.putExtra("indexcodee", eTindexcode.getText().toString().trim());
                                 intt.putExtra("category", category);
+                                new AgentManager().saveindexcode(getBaseContext(),eTindexcode.getText().toString().trim());
                                 startActivity(intt);
                             }else{
                                 Toast.makeText(ActivityChooseCategory.this, R.string.Invalid_code, Toast.LENGTH_SHORT).show();

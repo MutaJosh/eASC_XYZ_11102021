@@ -73,8 +73,6 @@ class ResultActivity : AppCompatActivity() {
                 ResultType.CASE5 -> R.string.result5 })
         result_rdtresult.setText("No RDT result available yet")
 
-
-
         btn_start.setOnClickListener {
 
             startActivity(Intent(this, IntroActivity::class.java))
