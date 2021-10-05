@@ -150,6 +150,21 @@ class AgentManager() {
             .putString("rdt_result", rdt_result)
             .apply()
     }
+    fun saveindexcode(context:Context,index:String){
+        var sharedPrefs = context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE)
+        sharedPrefs
+            .edit()
+            .putString("Index", index)
+            .apply()
+    }
+
+    fun savecategory(context:Context,category:String){
+        var sharedPrefs = context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE)
+        sharedPrefs
+            .edit()
+            .putString("category", category)
+            .apply()
+    }
 
     /***
      * Retrieving the current agent number
@@ -172,5 +187,6 @@ class AgentManager() {
     fun getCell(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("cell", "")
     fun getVillage(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("village", "")
     fun getrdt_result(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("rdt_result", "")
-
+    fun getindexcode(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("index", "")
+    fun getcategory(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("category", "")
 }

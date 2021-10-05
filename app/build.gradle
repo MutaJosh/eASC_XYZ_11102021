@@ -40,6 +40,7 @@ android {
 allprojects {
     repositories {
         maven { url 'https://jitpack.io' }
+
     }
 }
 
@@ -66,5 +67,15 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.3.5'
 
     implementation 'com.github.dimagi:rd-toolkit:0.9.3'
+
+    implementation 'com.github.aabhasr1:OtpView:v1.1.2'
+
+
+
+    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.2'
+
+    implementation 'com.squareup.retrofit2:converter-scalars:+'
+
 
 }

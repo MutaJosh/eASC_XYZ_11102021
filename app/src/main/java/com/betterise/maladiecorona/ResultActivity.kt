@@ -12,6 +12,7 @@ import com.betterise.maladiecorona.managers.*
 import com.betterise.maladiecorona.model.Answer
 import com.betterise.maladiecorona.model.QuestionType
 import com.betterise.maladiecorona.model.ResultType
+import com.betterise.maladiecorona.managers.QuestionManager
 import com.betterise.maladiecorona.model.out.Poll
 import com.betterise.maladiecorona.model.out.PollAnswer
 import com.betterise.maladiecorona.model.out.PollResult
@@ -32,15 +33,6 @@ import java.util.regex.Pattern
  */
 class ResultActivity : AppCompatActivity() {
 
-    private val SPLASH_TIME_OUT = 5000
-    private val ACTIVITY_PROVISION = 1
-
-    private val answers: MutableList<Answer> = arrayListOf()
-//    private val binding: ActivityRdtBinding? = null
-
-
-    fun getResults() = ResultManager().getResults(answers)
-
     companion object {
         const val EXTRA_RESULT = "EXTRA_RESULT"
 
@@ -50,6 +42,7 @@ class ResultActivity : AppCompatActivity() {
         const val PREF_POLLS = "patient_data"
     }
 
+    var qm: QuestionManager? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,6 +81,15 @@ class ResultActivity : AppCompatActivity() {
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout)
              finish()
         }
+        qm = QuestionManager(
+            resources.getStringArray(R.array.questions),
+            resources.getStringArray(R.array.choices),
+            resources.getStringArray(R.array.question_types)
+        )
+
+        var poll = qm!!.createPoll(this)
+
+        PollManager().addPoll(this, poll)
 
 
     }
@@ -117,8 +119,7 @@ class ResultActivity : AppCompatActivity() {
             .setIndeterminateResultsAllowed(true)
             .build()
 
-          RdtIntentBuilder.forCapture()
-            .setSessionId(nid) //Populated during provisioning callout, or result
+       //   RdtIntentBuilder.forCapture().setSessionId(nid) //Populated during provisioning callout, or result
 
         this.startActivityForResult(i, 1)
 
@@ -127,13 +128,8 @@ class ResultActivity : AppCompatActivity() {
                 .setSessionId(intent.getStringExtra("firstname")+" "+intent.getStringExtra("firstname")+"-"+nid) //Populated during provisioning callout, or result
                 .build()
             this.startActivityForResult(iz, 2)
-        }, 6000)
-
-
-
-
+        }, 1000)
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -145,9 +141,7 @@ class ResultActivity : AppCompatActivity() {
                     session!!.timeResolved.toString()
                 )
             )
-            Toast.makeText(
-                this,
-                "Activity-Result: " + session.timeResolved.toString(),
+            Toast.makeText(this, "RDT-Result: " + session.timeResolved.toString(),
                 Toast.LENGTH_LONG
             ).show()
         } else if (requestCode == 2 && resultCode == RESULT_OK) {
@@ -155,33 +149,26 @@ class ResultActivity : AppCompatActivity() {
             val result: TestSession.TestResult? = sess!!.result
             val red = String.format("result is  %s", sess.result.toString())
 
+
+            Toast.makeText(this, "RDT-Result: " + sess.sessionId.toString(), Toast.LENGTH_LONG).show()
+
             val u: List<String> = Pattern.compile(",").split(red).toList()
 
             val ibisubizoo = u[4].substring(u[4].indexOf("{") + 1, u[4].indexOf("}"))
-            val str: String
-            str = if (ibisubizoo == "sars_cov2=sars_cov2_pos") {
-                result_rdtresult.setText("POSITIVE").toString();
-                val p: String=result_rdtresult.text.toString()
-                AgentManager().saverdt_result(baseContext,p)
+
+            if (ibisubizoo == "sars_cov2=sars_cov2_pos") {
+                result_rdtresult.setText("POSITIVE").toString()
+                AgentManager().saverdt_result(this,"POSITIVE")
             } else if (ibisubizoo == "sars_cov2=sars_cov2_neg") {
-                result_rdtresult.setText("NEGATIVE").toString();
-
+                result_rdtresult.setText("NEGATIVE").toString()
+                AgentManager().saverdt_result(this,"NEGATIVE")
             } else if (ibisubizoo == "sars_cov2=universal_control_failure") {
-
                 result_rdtresult.setText("Invalid Test").toString()
+                AgentManager().saverdt_result(this,"Invalid Test")
             } else {
                 result_rdtresult.setText("Error occured").toString()
+                AgentManager().saverdt_result(this,"null")
             }
-
-//            val builder = AlertDialog.Builder(this)
-//            builder.setMessage("IGISUBIZO NI : $str")
-//            builder.setCancelable(false)
-//            builder.setPositiveButton(
-//                "OK"
-//            ) { dialog, which -> }
-//            builder.show()
-//
-
 
         }
     }

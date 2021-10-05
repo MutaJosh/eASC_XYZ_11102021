@@ -18,7 +18,6 @@ interface ApiService {
         const val API_SUCCESS = "200"
         const val API_STATUS = "status"
     }
-
     // Posting the polls
     @POST(".")
     @Headers("Content-Type: application/json")

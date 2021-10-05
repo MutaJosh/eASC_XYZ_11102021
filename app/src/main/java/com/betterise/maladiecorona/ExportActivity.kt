@@ -69,6 +69,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
     @SuppressLint("CheckResult", "WrongConstant")
     override fun onClick(v: View?) {
 
+
         val progressDialog = ProgressDialog(this@ExportActivity)
         progressDialog.setTitle("Exporting the data")
         progressDialog.setMessage("Busy syncing the data, please wait")
@@ -81,6 +82,10 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
         for ((key, value1) in allEntries) {
             val value = value1!!
             Log.d("Data from Storage", "$key: $value")
+
+        //    Toast.makeText(this, "$key: $value",Toast.LENGTH_LONG).show()
+
+            testpref.text="data from SP : "+"$key: $value"
         }
 
         if (polls.size > 0 && !isSending) {

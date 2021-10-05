@@ -14,7 +14,7 @@ class IntroActivity : AppCompatActivity() {
 
 
     /**
-     * Created by MJC on 01/07/20.
+     * Created by MJC on 01/08/21.
      */
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +23,7 @@ class IntroActivity : AppCompatActivity() {
 
 
         btn_start.setOnClickListener{
-            startActivity(Intent(this, PatientDetailsActivity::class.java))
+            startActivity(Intent(this, ActivityChooseCategory::class.java))
             overridePendingTransition(R.anim.fadein, R.anim.fadeout)
         }
         btn_export.setOnClickListener{ startActivity(Intent(this, ExportActivity::class.java))}

@@ -4,7 +4,7 @@
     <string name="datetime_format" translatable="false">dd/MM/yyyy HH:mm</string>
     <string name="date_format" translatable="false">dd/MM/yyyy</string>
     <string name="time_format" translatable="false">HH:mm</string>
-    <string name="api_url" translatable="false">https://rbc.gov.rw/community/dev/api/</string>
+    <string name="api_url" translatable="false">https://rbc.gov.rw/community/data-sharing/api/</string>
 
     <string name="phone_start" translatable="false">078 </string>
 

@@ -37,7 +37,7 @@ class PollManager {
             return arrayListOf()
 
         val itemType = object : TypeToken<List<Poll>>() {}.type
-        return Gson().fromJson(json, itemType)
+        return Gson().fromJson(json,itemType)
     }
 
     /***
@@ -50,7 +50,6 @@ class PollManager {
             .putString(PREF_POLLS, Gson().toJson(polls))
             .apply()
     }
-
 
     /***
      * Reset the list of polls

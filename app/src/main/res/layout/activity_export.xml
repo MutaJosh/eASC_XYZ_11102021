@@ -57,6 +57,18 @@
                 android:padding="25dp"
                 style="@style/DefaultText"/>
 
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/testpref"
+                android:padding="25dp"
+                style="@style/DefaultText"/>
+
+
+
+
+
         </LinearLayout>
 
     </ScrollView>

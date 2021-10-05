@@ -20,8 +20,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.betterise.maladiecorona.managers.AgentManager;
 import com.betterise.maladiecorona.managers.QuestionManager;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -41,6 +43,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
     private ImageView btn_back;
     private TextView tvdob;
     private int mYear, mMonth, mDay;
+    private TextView tvindexcode;
     private EditText etfirstname, etlastname, etnational_ID, etpatientgender, etpatienttelephone, etoccupation, etresidence, etnationality, etprovince, etdistrict, etsector, etcell, etvillage;
     private String fn, lastname, national_ID, patientgender, patienttelephone, occupation, residence, province, district, sector, cell, village;
 public static final String PREF_FIRSTNAME = "firstname";
@@ -51,7 +54,13 @@ public static final String PREF_FIRSTNAME = "firstname";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_details);
 
+        tvindexcode=findViewById(R.id.tvindexcode);
 
+        long l = ByteBuffer.wrap(getIntent().getStringExtra("uuid").toString().getBytes()).getLong();
+      String a= Long.toString(l, Character.MAX_RADIX);
+
+        tvindexcode.setTextIsSelectable(true);
+        tvindexcode.setText("Index: "+getIntent().getStringExtra("uuid").toString());
 
         etfirstname=findViewById(R.id.firstname);
         etlastname=findViewById(R.id.etlastname);
@@ -131,7 +140,7 @@ public static final String PREF_FIRSTNAME = "firstname";
         });
         btn_next = findViewById(R.id.btn_next);
         btn_next.setOnClickListener(this);
-        btn_back = findViewById(R.id.btn_backe);
+        btn_back = findViewById(R.id.btn_backpat);
         btn_back.setOnClickListener(this);
 
     }
@@ -206,6 +215,7 @@ public static final String PREF_FIRSTNAME = "firstname";
                 }else {
 
 
+                    new AgentManager().savecategory(this,getIntent().getStringExtra("category"));
 
 
                     Intent intent = new Intent(PatientDetailsActivity.this, QuestionActivity.class);
@@ -227,12 +237,13 @@ public static final String PREF_FIRSTNAME = "firstname";
 
                     startActivity(intent);
                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                    finish();
+                   // finish();
                 }
                 break;
 
             case R.id.btn_back:
-                overridePendingTransition(R.anim.fadeout, R.anim.fadein);
+               // startActivity(new Intent(PatientDetailsActivity.this,ActivityChooseCategory.class));
+                //overridePendingTransition(R.anim.fadeout, R.anim.fadein);
                 finish();
                 break;
 

@@ -12,17 +12,20 @@ import java.util.*
 import android.content.Context.MODE_PRIVATE
 
 import android.content.SharedPreferences
+import android.widget.Toast
 import com.betterise.maladiecorona.PatientDetailsActivity
 
 
 /**
- * Created by mjc on 24/06/20.
+ * Created by mjc on 29/08/21.
  */
 class QuestionManager(
     private var questions: Array<String>,
     private var choices: Array<String>,
     private var types: Array<String>
-) {
+)
+
+{
 
     companion object {
         const val IMC_LIMIT = 30
@@ -84,7 +87,7 @@ class QuestionManager(
         var poll = Poll()
 
         // Poll's id
-        poll.pollId = 1
+       // poll.pollId = 1
 
         // Poll's date
         var dateFormat = context.getString(R.string.datetime_format)
@@ -113,7 +116,8 @@ class QuestionManager(
         poll.cell=AgentManager().getCell(context)
         poll.village=AgentManager().getVillage(context)
         poll.rdt_result=AgentManager().getrdt_result(context)
-
+        poll.Index=AgentManager().getindexcode(context)
+        poll.category=AgentManager().getcategory(context)
 
         // Poll's result
         var result = getResults()
@@ -153,6 +157,8 @@ class QuestionManager(
             }
 
             poll.ASCOV_answers.add(pollAnswer)
+
+
         }
 
         return poll

@@ -118,11 +118,14 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_start"
+        style="@style/BottomButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="@string/start_test"
-        style="@style/BottomButton"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/start_test" />
 
 </RelativeLayout>

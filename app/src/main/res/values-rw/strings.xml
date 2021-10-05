@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">e-ASCOV</string>
-
     <string name="informations">Amakuru</string>
     <string name="intro">Ikaze kuri e-Ascov. Kanda ahanditse Tangiza ikizamini  </string>
     <string name="start_test">Tangira Ikizamini</string>

@@ -12,7 +12,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TestRDTActivity"></activity>
+        <activity
+            android:name=".ActivityChooseCategory"
+            android:exported="true" />
+        <activity
+            android:name=".ChooseCategoryActivity"
+            android:exported="true" />
+        <activity android:name=".TestRDTActivity" />
         <activity android:name=".IntroActivity" />
         <activity
             android:name=".PatientDetailsActivity"

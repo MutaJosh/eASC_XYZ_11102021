@@ -99,7 +99,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Chw names"
+                    android:text="CHW names"
                     android:fontFamily="sans-serif-medium"
                     android:layout_marginTop="20dp"
                     android:padding="5dp"

@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.question_digit.view.unity
 import kotlinx.android.synthetic.main.question_digit.view.value
 import kotlinx.android.synthetic.main.question_digit_forced.view.*
 import kotlinx.android.synthetic.main.question_tel.view.*
+import java.util.*
 
 /**
  * Created by MJC on 01/07/20.
@@ -118,10 +119,9 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                 loadQuestion()
             } else {
 
-                var poll = questionManager!!.createPoll(this)
+              var poll = questionManager!!.createPoll(this)
 
-                PollManager().addPoll(this, poll)
-
+              PollManager().addPoll(this, poll)
 
                 var result = questionManager!!.getResults()
                 val intenti = Intent(this, ResultActivity::class.java)
@@ -143,10 +143,9 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
                 intenti.putExtra(ResultActivity.EXTRA_RESULT, result)
 
-
            startActivity(intenti)
        overridePendingTransition(R.anim.fadein,R.anim.fadeout);
-    finish()
+   // finish()
 
             }
         }

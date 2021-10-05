@@ -408,15 +408,18 @@
 
     <Button
         android:id="@+id/btn_proceedtest"
-        android:layout_above="@id/btn_start"
+        style="@style/BottomButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:onClick="simulateTestRequest"
+        android:layout_above="@id/btn_start"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         android:background="@drawable/edit_bg_error"
+        android:onClick="simulateTestRequest"
         android:text="Proceed to RDT"
-        android:textColor="#000"
-        style="@style/BottomButton"/>
+        android:textColor="#000" />
 
 
     <androidx.appcompat.widget.AppCompatButton
