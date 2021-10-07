@@ -136,4 +136,7 @@
     <string name="Sector">Sector</string>
     <string name="Cell">Cell</string>
     <string name="Village">Village</string>
+    <string name="sync_data">Sync Data</string>
+    <string name="screening_test_sessions">Screening Test Sessions</string>
+    <string name="contact_support">Contact Support</string>
 </resources>

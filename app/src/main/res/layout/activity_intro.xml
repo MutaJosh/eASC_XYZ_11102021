@@ -10,54 +10,55 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:background="@color/white">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btn_agent"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:layout_marginStart="22dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/btn_agent"/>
+            android:src="@drawable/btn_agent"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:layout_toStartOf="@+id/btn_export"
             android:layout_toEndOf="@+id/btn_agent"
-            android:layout_toStartOf="@+id/btn_export">
+            android:gravity="center_horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/shape_bullet"
-                android:textColor="@color/white"
-                android:text="1"/>
+                android:text="1"
+                android:textColor="@color/white" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title"
+                style="@style/TitleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                style="@style/TitleText"
-                android:text="@string/informations"
+                android:paddingStart="10dp"
                 android:paddingTop="30dp"
                 android:paddingBottom="30dp"
-                android:paddingStart="10dp" />
+                android:text="@string/informations" />
 
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/btn_export"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="22dp"
-            android:src="@drawable/btn_export"/>
+            android:src="@drawable/ic_baseline_menu_24" />
 
     </RelativeLayout>
 

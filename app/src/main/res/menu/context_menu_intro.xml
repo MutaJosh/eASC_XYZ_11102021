@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/sync_data"
+        android:title="@string/sync_data"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/test_sessions"
+        android:title="@string/screening_test_sessions"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/contact_support"
+        android:title="@string/contact_support"
+        app:showAsAction="never"/>
+</menu>

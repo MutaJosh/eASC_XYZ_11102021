@@ -36,6 +36,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
      * Created by MJC on 01/07/20.
      */
 
+
     private Spinner sp_gender, sp_nationality, sp_residence;
     private String nationality, gender, yearr, month, date, residency, dob;
     private ImageButton btndatepicker;
@@ -53,6 +54,7 @@ public static final String PREF_FIRSTNAME = "firstname";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_details);
+
 
         tvindexcode=findViewById(R.id.tvindexcode);
 

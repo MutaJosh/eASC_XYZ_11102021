@@ -171,5 +171,8 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="Invalid_code">Invalid Case Index code</string>
+    <string name="sync_data">Sync Data</string>
+    <string name="screening_test_sessions">Screening Test Sessions</string>
+    <string name="contact_support">Contact Support</string>
 
 </resources>

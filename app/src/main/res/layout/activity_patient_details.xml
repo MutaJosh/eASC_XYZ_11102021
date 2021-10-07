@@ -69,33 +69,39 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
                 android:orientation="horizontal"
-                >
+                android:paddingBottom="10dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/case_index"
-                    />
+                    android:layout_marginTop="6dp"
+                    android:text="@string/case_index" />
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/edit_bg"
-                    >
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/edit_bg">
 
-            <androidx.appcompat.widget.AppCompatTextView
-                style="@style/AnswerTitleText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:paddingBottom="10dp"
-                android:textColor="#000"
-                android:id="@+id/tvindexcode"
-                android:fontFamily="sans-serif-medium"
-                android:textStyle="bold" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvindexcode"
+                        style="@style/AnswerTitleText"
+                        android:layout_width="246dp"
+                        android:layout_height="34dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="AB09-RT67"
+                        android:textColor="#000"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -140,8 +146,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="5dp"
                         android:fontFamily="sans-serif-medium"
+                        android:paddingBottom="5dp"
                         android:text="@string/Lastname" />
 
                     <EditText
@@ -167,8 +173,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
                     android:fontFamily="sans-serif-medium"
+                    android:paddingBottom="5dp"
                     android:text="@string/nid" />
 
                 <EditText
@@ -198,9 +204,9 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:fontFamily="sans-serif-medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
                         android:text="@string/Gender" />
 
                     <Spinner
@@ -224,9 +230,9 @@
                     android:paddingLeft="10dp">
 
                     <TextView
-                        android:fontFamily="sans-serif-medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
                         android:text="@string/Telephone" />
 
                     <EditText
@@ -261,9 +267,9 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:fontFamily="sans-serif-medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
                         android:paddingBottom="5dp"
                         android:text="@string/dob" />
 
@@ -302,9 +308,9 @@
                     android:paddingLeft="10dp">
 
                     <TextView
-                        android:fontFamily="sans-serif-medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
                         android:paddingBottom="5dp"
                         android:text="@string/Occupation" />
 
@@ -337,9 +343,9 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:fontFamily="sans-serif-medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
                         android:paddingBottom="5dp"
                         android:text="@string/Nationality" />
 
@@ -363,9 +369,9 @@
                     android:paddingLeft="10dp">
 
                     <TextView
-                        android:fontFamily="sans-serif-medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
                         android:paddingBottom="5dp"
                         android:text="@string/Residence" />
 
@@ -384,9 +390,10 @@
 
 
             <TextView
-                android:fontFamily="sans-serif-medium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="20dp"
                 android:paddingBottom="15dp"
                 android:text="@string/Address"
                 android:textStyle="bold" />
@@ -405,9 +412,9 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:fontFamily="sans-serif-medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
                         android:paddingBottom="5dp"
                         android:text="@string/Province" />
 
@@ -431,9 +438,9 @@
                     android:paddingLeft="10dp">
 
                     <TextView
-                        android:fontFamily="sans-serif-medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
                         android:paddingBottom="5dp"
                         android:text="@string/District" />
 
@@ -464,9 +471,9 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:fontFamily="sans-serif-medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
                         android:paddingBottom="5dp"
                         android:text="@string/Sector" />
 
@@ -492,8 +499,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="5dp"
                         android:fontFamily="sans-serif-medium"
+                        android:paddingBottom="5dp"
                         android:text="@string/Cell" />
 
                     <EditText
@@ -525,8 +532,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="5dp"
                         android:fontFamily="sans-serif-medium"
+                        android:paddingBottom="5dp"
                         android:text="@string/Village" />
 
                     <EditText

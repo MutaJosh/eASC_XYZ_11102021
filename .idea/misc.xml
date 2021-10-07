@@ -7,18 +7,30 @@
         <entry key="app/src/main/res/drawable/edit_bg.xml" value="0.19739583333333333" />
         <entry key="app/src/main/res/drawable/edit_bg_error.xml" value="0.19739583333333333" />
         <entry key="app/src/main/res/drawable/edit_bg_focused.xml" value="0.19739583333333333" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.1537037037037037" />
+        <entry key="app/src/main/res/drawable/shape_bullet.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/drawable/shape_button.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/drawable/shape_button_form.xml" value="0.21770833333333334" />
         <entry key="app/src/main/res/drawable/shape_button_white.xml" value="0.19739583333333333" />
+        <entry key="app/src/main/res/drawable/shape_radio.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/drawable/shape_radio_off.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/drawable/shape_radio_on.xml" value="0.21770833333333334" />
+        <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.21770833333333334" />
         <entry key="app/src/main/res/layout/activity_agent.xml" value="0.18958333333333333" />
         <entry key="app/src/main/res/layout/activity_choose_category.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_export.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_intro.xml" value="0.15670289855072464" />
-        <entry key="app/src/main/res/layout/activity_patient_details.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_results.xml" value="0.1952191235059761" />
+        <entry key="app/src/main/res/layout/activity_intro.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_patient_details.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_question.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_results.xml" value="0.375" />
         <entry key="app/src/main/res/layout/item_bsvalidatecode.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/layout/question_bullet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/question_city.xml" value="0.228125" />
         <entry key="app/src/main/res/layout/question_digit.xml" value="0.14739583333333334" />
         <entry key="app/src/main/res/layout/question_digit_forced.xml" value="0.13072916666666667" />
+        <entry key="app/src/main/res/layout/question_edit.xml" value="0.2015625" />
+        <entry key="app/src/main/res/layout/question_tel.xml" value="0.2015625" />
+        <entry key="app/src/main/res/menu/context_menu_intro.xml" value="0.2015625" />
       </map>
     </option>
   </component>
