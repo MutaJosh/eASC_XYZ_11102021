@@ -105,7 +105,7 @@ class ResultActivity : AppCompatActivity() {
             .setFlavorTwo(nid) //.setClassifierBehavior(ClassifierMode.CHECK_YOUR_WORK)
             .setInTestQaMode() //.setSecondaryCaptureRequirements("capture_windowed")
             .setSubmitAllImagesToCloudworks(true)
-            .setCloudworksBackend("https://vmi651800.contaboserver.net/./"+intent.getStringExtra("firstname")+intent.getStringExtra("lastname"), nid) // DSN Config
+            .setCloudworksBackend("https://vmi682749.contaboserver.net/./"+intent.getStringExtra("firstname")+intent.getStringExtra("lastname"), nid) // DSN Config
 
             // .setCallingPackage()
                .setReturnApplication(this)
