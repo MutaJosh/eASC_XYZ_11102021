@@ -118,4 +118,22 @@
     <string name="results_example">Votre situation peut relever d’un COVID-19. A adresser au centre de santé pour évaluation par un(e) infirmier(e).</string>
     <string name="Invalid_code">Invalid Case Index code</string>
 
+
+
+    <string name="case_index" >Case Index </string>
+    <string name="Firstname" >First name</string>
+    <string name="Lastname">Last name</string>
+    <string name="nid">National ID / Passport</string>
+    <string name="Gender">Gender</string>
+    <string name="Telephone">Telephone</string>
+    <string name="dob">Date of Birth</string>
+    <string name="Occupation">Occupation</string>
+    <string name="Nationality">Nationality</string>
+    <string name="Residence">Residence</string>
+    <string name="Address">Address</string>
+    <string name="Province">Intara</string>
+    <string name="District">District</string>
+    <string name="Sector">Sector</string>
+    <string name="Cell">Cell</string>
+    <string name="Village">Village</string>
 </resources>

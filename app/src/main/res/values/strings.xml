@@ -46,7 +46,27 @@
     <string name="age_error">Nyamuneka hitamo umwaka uri hagati ya 0 na 120</string>
     <string name="height_error">Nyaminuneka hitamo indeshyo iri hagati ya 30 na 220 cm</string>
     <string name="weight_error">Nyamuneka hitamo ibiro biri hagati ya 30 na 220 kg</string>
-    Z
+
+
+    <string name="case_index" >Case Index </string>
+    <string name="Firstname" >First name</string>
+    <string name="Lastname">Last name</string>
+    <string name="nid">National ID / Passport</string>
+    <string name="Gender">Gender</string>
+    <string name="Telephone">Telephone</string>
+    <string name="dob">Date of Birth</string>
+    <string name="Occupation">Occupation</string>
+    <string name="Nationality">Nationality</string>
+    <string name="Residence">Residence</string>
+    <string name="Address">Address</string>
+    <string name="Province">Province</string>
+    <string name="District">District</string>
+    <string name="Sector">Sector</string>
+    <string name="Cell">Cell</string>
+    <string name="Village">Village</string>
+
+
+
     <string-array name="questions">
         <!--        <item>Nimero ya telephoni y\'ingingo ?</item>-->
         <!--        <item>Ni uwuhe mujyi w\'ingingo ?</item>-->

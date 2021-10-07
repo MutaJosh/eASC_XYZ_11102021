@@ -75,7 +75,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Case Index: "
+                    android:text="@string/case_index"
                     />
                 <LinearLayout
                     android:layout_width="0dp"
@@ -116,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-medium"
                         android:paddingBottom="5dp"
-                        android:text="First name" />
+                        android:text="@string/Firstname" />
 
                     <EditText
                         android:id="@+id/firstname"
@@ -142,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
                         android:fontFamily="sans-serif-medium"
-                        android:text="Last name" />
+                        android:text="@string/Lastname" />
 
                     <EditText
                         android:id="@+id/etlastname"
@@ -169,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="5dp"
                     android:fontFamily="sans-serif-medium"
-                    android:text="National ID / Passport" />
+                    android:text="@string/nid" />
 
                 <EditText
                     android:id="@+id/national_ID"
@@ -201,7 +201,7 @@
                         android:fontFamily="sans-serif-medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Gender" />
+                        android:text="@string/Gender" />
 
                     <Spinner
                         android:id="@+id/sp_gender"
@@ -227,7 +227,7 @@
                         android:fontFamily="sans-serif-medium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Telephone" />
+                        android:text="@string/Telephone" />
 
                     <EditText
                         android:id="@+id/patient_telephone"
@@ -265,7 +265,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
-                        android:text="Date of Birth" />
+                        android:text="@string/dob" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -306,7 +306,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
-                        android:text="Occupation" />
+                        android:text="@string/Occupation" />
 
                     <EditText
                         android:id="@+id/etoccupation"
@@ -341,7 +341,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
-                        android:text="Nationality" />
+                        android:text="@string/Nationality" />
 
                     <Spinner
                         android:id="@+id/sp_nationality"
@@ -367,7 +367,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
-                        android:text="Residence" />
+                        android:text="@string/Residence" />
 
                     <Spinner
                         android:id="@+id/spresidence"
@@ -388,7 +388,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingBottom="15dp"
-                android:text="Address"
+                android:text="@string/Address"
                 android:textStyle="bold" />
 
 
@@ -409,7 +409,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
-                        android:text="Province" />
+                        android:text="@string/Province" />
 
                     <EditText
                         android:id="@+id/etprovince"
@@ -435,7 +435,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
-                        android:text="District" />
+                        android:text="@string/District" />
 
                     <EditText
                         android:id="@+id/etdistrict"
@@ -468,7 +468,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
-                        android:text="Sector" />
+                        android:text="@string/Sector" />
 
                     <EditText
                         android:id="@+id/etsector"
@@ -494,7 +494,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
                         android:fontFamily="sans-serif-medium"
-                        android:text="Cell" />
+                        android:text="@string/Cell" />
 
                     <EditText
                         android:id="@+id/etcell"
@@ -527,7 +527,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="5dp"
                         android:fontFamily="sans-serif-medium"
-                        android:text="Village" />
+                        android:text="@string/Village" />
 
                     <EditText
                         android:id="@+id/etvillage"

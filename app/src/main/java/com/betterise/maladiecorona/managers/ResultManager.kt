@@ -120,7 +120,6 @@ class ResultManager {
                 answers[RESPIRATORY_DISEASE].value == 1 &&
                 answers[PREGNANT].value == 1
 
-
         ){
 
           //  POSITIVE as the screening outcome

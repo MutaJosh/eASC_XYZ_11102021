@@ -12,7 +12,7 @@
         <entry key="app/src/main/res/layout/activity_choose_category.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_export.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.15670289855072464" />
-        <entry key="app/src/main/res/layout/activity_patient_details.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_patient_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_results.xml" value="0.1952191235059761" />
         <entry key="app/src/main/res/layout/item_bsvalidatecode.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/layout/question_bullet.xml" value="0.25" />

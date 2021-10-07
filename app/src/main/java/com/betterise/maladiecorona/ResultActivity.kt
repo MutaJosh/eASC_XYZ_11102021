@@ -92,7 +92,7 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
-
+    // Starting the RDT activity - Test Provisioning
     fun simulateTestRequest(view: View?) {
 //        val a=intent.getStringExtra("national_ID").substring(5,9)
 //        val b=intent.getStringExtra("patienttelephone").substring(0,5)
@@ -108,7 +108,10 @@ class ResultActivity : AppCompatActivity() {
             .setSubmitAllImagesToCloudworks(true)
             .setCloudworksBackend("https://vmi651800.contaboserver.net/.../"+intent.getStringExtra("firstname")+intent.getStringExtra("lastname"), nid) // DSN Config
             // .setCallingPackage()
+
+            // This takes you back to initial app, After capturing and recording the results
                .setReturnApplication(this)
+
             .setIndeterminateResultsAllowed(true)
            .build()
 
