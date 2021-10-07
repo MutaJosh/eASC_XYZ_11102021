@@ -494,7 +494,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
     private fun validateDigitForced(): Boolean {
 
-        if (questionManager?.getCurrentIndex() == Question.TEMPERATURE3) {
+        if (questionManager?.getCurrentIndex() == Question.TEMPERATURE) {
 
             if (testRange(0, 35)) {
                 questionManager?.setAnswer(group?.value?.text.toString().toInt())

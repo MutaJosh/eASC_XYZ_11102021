@@ -65,25 +65,25 @@
 
 
     <string-array name="choices">
-        <item>Yego|Oya</item>
-        <item>Yego|Oya</item>
-        <item>Yego|Oya</item>
+        <item>Yes|NO</item>
+        <item>Yes|NO</item>
+        <item>Yes|NO</item>
         <item>&lt; 38°|≥ 38°</item>
-        <item>Iminsi</item>
-        <item>Yego|Oya</item>
-        <item>Yego|Oya</item>
-        <item>Yego|Oya</item>
-        <item>Yego|Oya</item>
-        <item>Yego|Oya</item>
-        <item>Yego|Oya</item>
-        <item>Yego|Oya</item>
-        <item>Kg|Simbizi</item>
-        <item>Cm|Simbizi</item>
-        <item>Yego|Oya|Simbizi</item>
-        <item>Yego|Oya</item>
-        <item>Yego|Oya</item>
-        <item>Yego|Oya</item>
-        <item>Yego|Oya|Ntibikurikizwa</item>
+        <item>Days</item>
+        <item>Yes|NO</item>
+        <item>Yes|NO</item>
+        <item>Yes|NO</item>
+        <item>Yes|NO</item>
+        <item>Yes|NO</item>
+        <item>Yes|No</item>
+        <item>Yes|No</item>
+        <item>Kg|Do not know</item>
+        <item>Cm|Do not know</item>
+        <item>Yes|No|Do not know</item>
+        <item>Yes|No</item>
+        <item>Yes|No</item>
+        <item>Yes|No</item>
+        <item>Yes|No|No applicable</item>
     </string-array>
 
     <string-array name="question_types">
