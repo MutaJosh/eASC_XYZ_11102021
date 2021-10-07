@@ -36,42 +36,37 @@
     <string name="days_error">Nyamuneka Hitamo umubare uri hagati y’iminsi 0 na 35</string>
     <string name="age_error">Nyamuneka hitamo umwaka uri hagati ya 0 na 120</string>
     <string name="height_error">Nyaminuneka hitamo indeshyo iri hagati ya 30 na 220 cm</string>
-    <string name="weight_error">Nyamuneka hitamo ibiro biri hagati ya 30 na 220 kg</string>
+    <string name="weight_error">Nyamuneka hitamo ibiro biri hagati ya 20 na 220 kg</string>
 
     <string-array name="questions">
-        <item>Isomo ryagiye mu gihugu cyangwa mukarere hamweno kwanduza abaturage covid-19 mu minsi 14 mbere y\'uko ibimenyetso bitangira?</item>
-        <item>Iyi ngingo yaba yarahuye n\'muntu ushobora kuba ukekwaho coronavirus wanduye mu minsi 14 ishize mbere y\'uko ibimenyetso bitangira ?</item>
-        <item>Ingingo ivuga ko yari afite umuriro?</item>
-        <item>Ni ubuhe bushyuhe bw\'ingingo bupimwe ku bwe cyangwa ko upima mu gihe cyo kubazwa ?</item>
-        <item>Igihe kingana iki ingingo ifite umuriro?</item>
-        <item>Ese ingingo ifite inkorora isanzwe cyangwa kwiyongera kwinkorora mu minsi yashize?</item>
-        <item>Ingingo yaba idashobora kurya cyangwa kunywa mu masaha 24 cyangwa arenga ?</item>
-        <item>Mu masaha 24 ashize ingingo\n Yabonye impinduka mu guhumeka bidasanzwe mugihe avuga cyangwa ugerageje gushiramo imbaraga nke?</item>
-        <item>Iyi n ginngo yaba yaragize ububabare mu guhumeka mu minsi ishize?</item>
-        <item>Ingingo yabonye igabanuka rikabije ry\'uburyohe cyangwa impumuro mbi mu minsi yashize ?</item>
-        <item>Ingingo hari ububabare ryagize budasanzwe bw\'imitsi cyangwa ububabare mu minsi yashize?</item>
-        <item>Ingingo yagize impiswi mu masaha 24 ashize (byibuze intebe 3 zidakabije) ?</item>
-        <item>Ingingo ifite imyaka ingahe?</item>
-        <item>N imyaka ingahe y\'isomo ?</item>
-        <item>Ni ubuhe bwoko bw\’ingingo?</item>
-        <item>Ingingo ifite ifite ibiro bingahe?</item>
-        <item>Ingingo ingana gute ?</item>
-        <item>Ingingo ifite umuvuduko ukabije w\'amaraso? Cyangwa afite umutima cyangwa indwara y amaraso? Ingingo yivuza umutima ?</item>
-        <item>Ingingo yaba afite ikibazo cy\'umutima ?</item>
-        <item>Ingingo yarwaye kanseri mu myaka 3 ishize?</item>
-        <item>Ese ingingo ifite uburwayi bw\' ubuhumekero buzwi?</item>
-        <item>Ese yaba atwite ?</item>
+        <item>Yaba yaragiye mu gihugu cyangwa ahantu hagaragaye COVID-19 mbere y’uko agaragaza ibimenyetso?</item>
+        <item>Yaba yarahuye n’ushobora cyangwa ukekwa kuba yararwaye COVID-19 mu minsi 14 ishize mbere y’uko agaragaza ibimenyetso?</item>
+        <item>Yaba yaragize umuriro udasanzwe?</item>
+        <item>Afite umuriro ungana iki?</item>
+        <item>Yaba amaranye umuriro igihe kingana iki?</item>
+        <item>Yaba yaragize inkorora idasanzwe mu munsi ishize?</item>
+        <item>Yaba yananiwe kurya cyangwa kunywa mu masaha 24 ashize cg arenga?</item>
+        <item>Mu masaha 24 ashize, yaba ikibazo cy’umwuka muke ari kuvuga cyangwa ari mumirimo isanzwe?</item>
+        <item>Yaba yaragize kubabara mumuhogo muminsi ishize?</item>
+        <item>Yaba yaragize kubura impumuro cyangwa kuryoherwa mu minsi ishize?</item>
+        <item>Yaba yaragize ububabare bw’imitsi cyangwa mu ngingo mu minsi ishize?</item>
+        <item>Yaba yagize impiswi mu masaha 24 ashize? (Byibura 3)?</item>
+        <item>Afite ibiro bingahe?</item>
+        <item>Afite uburebure bungana iki?</item>
+        <item>Yaba afite umuvuduko w’amaraso ukabije? Cyangwa yaba afite indwara z’umutima? Cyangwa yaba afata imiti y’indwara z’umutima?</item>
+        <item>Yaba arwaye diyabete?</item>
+        <item>Yaba yararwaye kanseri mu myaka itatu ishize? </item>
+        <item>Yaba afite indwara z’ubuhumekero zizwi?</item>
+        <item>Ese uyu muntu aratwite?</item>
     </string-array>
 
 
     <string-array name="choices">
-        <item></item>
-        <item></item>
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
         <item>&lt; 38°|≥ 38°</item>
-        <item>iminsi</item>
+        <item>Iminsi</item>
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
@@ -79,11 +74,8 @@
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
-        <item>&lt; 50 imyaka|50-69 imyaka|70 imyaka</item>
-        <item>imyaka</item>
-        <item>Umugore|Umugabo</item>
         <item>Kg|Simbizi</item>
-        <item>cm|Simbizi</item>
+        <item>Cm|Simbizi</item>
         <item>Yego|Oya|Simbizi</item>
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
@@ -92,8 +84,7 @@
     </string-array>
 
     <string-array name="question_types">
-        <item>tel</item>
-        <item>city</item>
+
         <item>binary</item>
         <item>binary</item>
         <item>binary</item>
@@ -106,9 +97,6 @@
         <item>binary</item>
         <item>binary</item>
         <item>binary</item>
-        <item>ternary</item>
-        <item>digit_forced</item>
-        <item>double</item>
         <item>digit</item>
         <item>digit</item>
         <item>ternary</item>
@@ -118,12 +106,12 @@
         <item>ternary</item>
     </string-array>
 
-    <string name="result1">Ibintu birashoboka ko atari inshingano za covid-19 saba ingingo kugaruka ku kureba niba ibimenyetso bishya bigaragar.</string>
-    <string name="result2">Ohereza ingingo ku kigo nderabuzima kugirango isuzumwe n umuforomo.</string>
-    <string name="result3">Ibintu birashoboka kuvuka kuri COVID-19. Ohereza ingingo kubigo nderabuzima kugirango bisuzumwe n umuforomo.</string>
-    <string name="result3bis">Ibintu birashoboka kuvuka kuri COVID-19. Ngana ibitaro by\'Akarerekubera ikimenyetso cy\'ingufu zijyanye.</string>
-    <string name="result4">Ibintu birashokoka kuvuka kuri COVID-19. Ngana ku kigo nderabuzima kugirango bisuzumwe n\'umuforomo.</string>
-    <string name="result5">Ohereza ingingo byihutirwa mu bitaro by’Akarere kugirango asuzumwe na muganga.</string>
+    <string name="result1">Biragaragara ko ashobora kuba nta coronavirusi afite. Musabe kugaruka kwisuzumisha mugihe abonye ibimenyetso bindi</string>
+    <string name="result2">Mwohereze gukoresha i.</string>
+    <string name="result3">The situation may fall under COVID-19. Send the subject to the health center for evaluation by a nurse.</string>
+    <string name="result3bis">The situation may fall under COVID-19. Address the subject to the district hospital because sign of gravity associated.</string>
+    <string name="result4">The situation may fall under COVID-19. Address the subject to the Health center for evaluation by a nurse.</string>
+    <string name="result5">Address the subject urgently to the district hospital for assessment by a doctor. COVID-19.</string>
 
     <string name="question_example">Avez-vous de l’hypertension artérielle mal équilibrée ? Ou avez-vous une maladie cardiaque ou vasculaire ? Prenez-vous un traitement pour le cœur ? </string>
     <string name="export_example">Vous êtes sur le point d’exporter les 213 précédents diagnostics effectués.\n\nLe dernière export date du 21/06/20, à 21h15.</string>

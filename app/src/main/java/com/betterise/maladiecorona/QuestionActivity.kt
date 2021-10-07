@@ -309,6 +309,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             group?.value!!.setText(answer.value.toString())
             group?.not_known?.setImageResource(R.drawable.shape_radio_off)
             group?.not_known?.tag = answer.value
+
         } else if (answer.value == 1) {
             group?.not_known?.tag = 1
             group?.not_known?.setImageResource(R.drawable.shape_radio_on)

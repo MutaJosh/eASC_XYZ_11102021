@@ -61,10 +61,10 @@ public static final String PREF_FIRSTNAME = "firstname";
 
         tvindexcode.setTextIsSelectable(true);
         if (getIntent().getStringExtra("category").equals("contact")){
-            tvindexcode.setText(getIntent().getStringExtra("indexcodee"));
+            tvindexcode.setText(getIntent().getStringExtra("indexcodee").toUpperCase());
         }else{
             String x=getIntent().getStringExtra("uuid");
-            tvindexcode.setText(x);
+            tvindexcode.setText(x.toUpperCase());
         }
 
 
@@ -195,6 +195,7 @@ public static final String PREF_FIRSTNAME = "firstname";
 
                             }
                         }, mYear, mMonth, mDay);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                 datePickerDialog.show();
 
 

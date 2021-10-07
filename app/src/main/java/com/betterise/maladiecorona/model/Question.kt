@@ -21,15 +21,13 @@ class Question {
         const val TASTE                     = 8
         const val SORE                      = 9
         const val DIARRHEA                  = 10
-        const val AGE                       = 11
-        const val AGE2                      = 12
-        const val WEIGHT                    = 13
-        const val HEIGHT                    = 14
-        const val TENSION                   = 15
-        const val DIABETES                  = 16
-        const val CANCER                    = 17
-        const val RESPIRATORY_DISEASE       = 18
-        const val PREGNANT                  = 19
+        const val WEIGHT                    = 11
+        const val HEIGHT                    = 12
+        const val TENSION                   = 13
+        const val DIABETES                  = 14
+        const val CANCER                    = 15
+        const val RESPIRATORY_DISEASE       = 16
+        const val PREGNANT                  = 17
 
     }
 }

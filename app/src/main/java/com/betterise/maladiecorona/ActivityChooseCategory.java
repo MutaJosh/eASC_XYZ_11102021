@@ -153,7 +153,7 @@ private TextView errorBulletcate;
                                 new AgentManager().saveindexcode(getBaseContext(),eTindexcode.getText().toString().trim());
                                 startActivity(intt);
                             }else{
-                                Toast.makeText(ActivityChooseCategory.this, R.string.Invalid_code, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityChooseCategory.this, "Invalid index contact code", Toast.LENGTH_SHORT).show();
                             }
 
                         }else{

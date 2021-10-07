@@ -46,7 +46,7 @@
     <string name="age_error">Nyamuneka hitamo umwaka uri hagati ya 0 na 120</string>
     <string name="height_error">Nyaminuneka hitamo indeshyo iri hagati ya 30 na 220 cm</string>
     <string name="weight_error">Nyamuneka hitamo ibiro biri hagati ya 30 na 220 kg</string>
-
+    Z
     <string-array name="questions">
         <!--        <item>Nimero ya telephoni y\'ingingo ?</item>-->
         <!--        <item>Ni uwuhe mujyi w\'ingingo ?</item>-->

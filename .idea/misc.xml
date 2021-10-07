@@ -17,6 +17,8 @@
         <entry key="app/src/main/res/layout/item_bsvalidatecode.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/layout/question_bullet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/question_city.xml" value="0.228125" />
+        <entry key="app/src/main/res/layout/question_digit.xml" value="0.14739583333333334" />
+        <entry key="app/src/main/res/layout/question_digit_forced.xml" value="0.13072916666666667" />
       </map>
     </option>
   </component>

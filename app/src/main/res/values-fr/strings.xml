@@ -41,63 +41,57 @@
     <string name="weight_error">Veuillez renseigner un poids entre 30 et 220 kg</string>
 
     <string-array name="questions">
-<!--        <item>Quel est le numéro de téléphone du sujet ?</item>-->
-<!--        <item>Quelle est la ville de résidence du sujet ?</item>-->
-        <item>Le sujet a-t-il voyagé dans un pays ou une région ayant une transmission communautaire du Covid-19 dans les 14 jours précédant l\' apparition des symptômes ?</item>
-        <item>Le sujet a-t-il été en contact avec une personne suspecte, probable ou contrôlée positive au Coronavirus dans les 14 derniers jours avant l\'apparition des symptômes ?</item>
-        <item>Le sujet déclare-t-il avoir eu de la fièvre ?</item>
-        <item>Quelle est la température du sujet, mesurée par le sujet lui-même ou que vous mesurez lors de l\'entretien ?</item>
-        <item>Depuis combien de temps le sujet a-t-il de la fièvre ?</item>
-        <item>Le sujet a-t-il une toux ou une augmentation de sa toux habituelle ces derniers jours ?</item>
-        <item>Le sujet est-il dans l\'impossibilité de s\'alimenter ou de boire depuis 24 heures ou plus ?</item>
-        <item>Dans les dernières 24 heures, le sujet a-t-il noté un manque de souffle inhabituel lorsqu\'il parle ou fait un petit effort ?</item>
-        <item>Le sujet a-t-il noté un mal de gorge ces derniers jours ?</item>
-        <item>Le sujet a-t-il noté une forte diminution de son goût ou de son odorat ces derniers jours ?</item>
-        <item>Le sujet a-t-il des douleurs musculaires ou des courbatures inhabituelles ces derniers jours ?</item>
-        <item>Le sujet a-t-il de la diarrhée ces dernières 24 heures (au moins 3 selles molles) ?</item>
-        <item>Quel est l\'âge du sujet ?</item>
-        <item>Quel est l\'âge précis du sujet ?</item>
-        <item>Quel est le genre du sujet ?</item>
-        <item>Quel est le poids du sujet ?</item>
-        <item>Quelle est la taille du sujet ?</item>
-        <item>Le sujet a-t-il de l\'hypertension artérielle mal équilibrée ? Ou a-t-il une maladie cardiaque ou vasculaire ? Le sujet prend-il un traitement pour le cœur ?</item>
-        <item>Le sujet est-il diabétique ?</item>
-        <item>Le sujet a-t-il eu un cancer dans les 3 dernières années ?</item>
-        <item>Le sujet a-t-il une maladie respiratoire connue ?</item>
-        <item>Le sujet est-il enceinte ?</item>
+
+        <item>Has the subject traveled to a country or region with community transmission of covid-19 in the prior to the onset symptoms?</item>
+        <item>Has the subject been in contact with a probable or suspect coronavirus positive person in the last 14 days before the onset of symptoms?</item>
+        <item>Does the subject says he had fever?</item>
+        <item>What is the temperature of the subject measured by the subject himself or that you measure during the interview?</item>
+        <item>How long does the subject has fever?</item>
+        <item>Does the subject have a usual cough or increase in cough in recent days?</item>
+        <item>Is the subject unable to eat or drink for 24 hours or more?</item>
+        <item>In the past 24 hours, has the subject noticed an usual shortness of breath when speaking or making a small effort?</item>
+        <item>Has the subject noticed a sore throat in recent days?</item>
+        <item>Has the subject noticed a sharp decrease in his taste or smell in recent days?</item>
+        <item>Does the subject have any unusual muscle pain or aches in the past few days ?</item>
+        <item>Has the subject had diarrhea in the past 24 hours (at least 3 loose stools)?</item>
+        <item>What is the weight of the subject?</item>
+        <item>What is the height of the subject?</item>
+        <item>Does the subject have unbalanced high blood pressure? Or does he have a heart or vascular disease ? Does the subject take treatment for the heart?</item>
+        <item>Is the subject diabetic?</item>
+        <item>Has the subject had a cancer in the past 3 years?</item>
+        <item>Does the subject have a known respiratory illness?</item>
+        <item>Is the subject pregnant?</item>
     </string-array>
 
 
     <string-array name="choices">
-<!--        <item></item>-->
-<!--        <item></item>-->
-        <item>Oui|Non</item>
-        <item>Oui|Non</item>
-        <item>Oui|Non</item>
+        <!--        <item></item>-->
+        <!--        <item></item>-->
+        <item>Yes|No</item>
+        <item>Yes|No</item>
+        <item>Yes|No</item>
         <item>&lt; 38°|≥ 38°</item>
-        <item>jours</item>
-        <item>Oui|Non</item>
-        <item>Oui|Non</item>
-        <item>Oui|Non</item>
-        <item>Oui|Non</item>
-        <item>Oui|Non</item>
-        <item>Oui|Non</item>
-        <item>Oui|Non</item>
-        <item>&lt; 50 ans|50-69 ans|70 ans ou plus</item>
-        <item>ans</item>
-        <item>Femme|Homme</item>
-        <item>kg|Ne sait pas</item>
-        <item>cm|Ne sait pas</item>
-        <item>Oui|Non|Ne sait pas</item>
-        <item>Oui|Non</item>
-        <item>Oui|Non</item>
-        <item>Oui|Non</item>
-        <item>Oui|Non|Non applicable</item>
+        <item>days</item>
+        <item>Yes|No</item>
+        <item>Yes|No</item>
+        <item>Yes|No</item>
+        <item>Yes|No</item>
+        <item>Yes|No</item>
+        <item>Yes|No</item>
+        <item>Yes|No</item>
+        <item>&lt; 50 years|50-69 years|70 years or more</item>
+        <item>years</item>
+        <item>Female|Male</item>
+        <item>Kg|Do not know</item>
+        <item>cm|Do not know</item>
+        <item>Yes|No|Do not know</item>
+        <item>Yes|No</item>
+        <item>Yes|No</item>
+        <item>Yes|No</item>
+        <item>Yes|No|Not applicable</item>
     </string-array>
 
     <string-array name="question_types">
-<!--        <item>tel</item>-->
-<!--        <item>city</item>-->
         <item>binary</item>
         <item>binary</item>
         <item>binary</item>
@@ -110,9 +104,6 @@
         <item>binary</item>
         <item>binary</item>
         <item>binary</item>
-        <item>ternary</item>
-        <item>digit_forced</item>
-        <item>double</item>
         <item>digit</item>
         <item>digit</item>
         <item>ternary</item>
@@ -121,7 +112,6 @@
         <item>binary</item>
         <item>ternary</item>
     </string-array>
-
     <string name="result1">La situation ne relève probablement pas du COVID-19. Demandez au sujet de revenir vous voir si de nouveaux symptômes apparaissent.</string>
     <string name="result2">Adressez le sujet au centre de santé pour évaluation par un(e) infirmier(e).</string>
     <string name="result3">La situation peut relever d\'un COVID-19. Adressez le sujet au centre de santé pour évaluation par un(e) infirmier(e).</string>

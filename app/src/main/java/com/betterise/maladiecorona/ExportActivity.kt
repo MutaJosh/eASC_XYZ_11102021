@@ -32,6 +32,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
         const val PRIVATE_MODE = 0
         const val prefs = "PREFS"
         const val prefLastExport = "prefLastExport"
+        const val PREF_RDT = "rdt_results"
 
     }
 
@@ -76,9 +77,10 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
        // progressDialog.setCanceledOnTouchOutside(false)
         progressDialog.show()
 
-        val sharedPreferences: SharedPreferences =
-            baseContext.getSharedPreferences(prefs, MODE_PRIVATE)
-        val allEntries = sharedPreferences.all
+      //  val sharedPreferences: SharedPreferences = baseContext.getSharedPreferences(prefs, MODE_PRIVATE)
+        val sharedPreferences2: SharedPreferences = baseContext.getSharedPreferences(PREF_RDT, MODE_PRIVATE)
+        val allEntries = sharedPreferences2.all
+
         for ((key, value1) in allEntries) {
             val value = value1!!
             Log.d("Data from Storage", "$key: $value")

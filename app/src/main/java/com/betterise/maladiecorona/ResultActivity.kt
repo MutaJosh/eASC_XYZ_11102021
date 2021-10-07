@@ -33,6 +33,16 @@ import java.util.regex.Pattern
  */
 class ResultActivity : AppCompatActivity() {
 
+    private val SPLASH_TIME_OUT = 2000
+    private val ACTIVITY_PROVISION = 1
+
+    var questionManager: QuestionManager? = null
+    private val answers: MutableList<Answer> = arrayListOf()
+//    private val binding: ActivityRdtBinding? = null
+
+
+    fun getResults() = ResultManager().getResults(answers)
+
     companion object {
         const val EXTRA_RESULT = "EXTRA_RESULT"
 
@@ -42,7 +52,6 @@ class ResultActivity : AppCompatActivity() {
         const val PREF_POLLS = "patient_data"
     }
 
-    var qm: QuestionManager? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,18 +82,14 @@ class ResultActivity : AppCompatActivity() {
                 ResultType.CASE5 -> R.string.result5 })
         result_rdtresult.setText("No RDT result available yet")
 
+
+
         btn_start.setOnClickListener {
 
             startActivity(Intent(this, IntroActivity::class.java))
                 overridePendingTransition(R.anim.fadein, R.anim.fadeout)
              finish()
         }
-        qm = QuestionManager(
-            resources.getStringArray(R.array.questions),
-            resources.getStringArray(R.array.choices),
-            resources.getStringArray(R.array.question_types)
-        )
-
     }
 
 
@@ -94,54 +99,39 @@ class ResultActivity : AppCompatActivity() {
 
         val nid:String=intent.getStringExtra("nid")
         val i = RdtIntentBuilder.forProvisioning()
-            .setSessionId(intent.getStringExtra("firstname")+" "+intent.getStringExtra("firstname")+"-"+nid) //.requestTestProfile("debug_mal_pf_pv")
+            .setSessionId(intent.getStringExtra("firstname")+intent.getStringExtra("lastname")+","+nid) //.requestTestProfile("debug_mal_pf_pv")
             //.requestTestProfile("sd_bioline_mal_pf_pv")
-            .requestProfileCriteria(
-                "sars_cov2",
-                ProvisionMode.CRITERIA_SET_AND
-            ) //.requestProfileCriteria("sd_bioline_mal_pf_pv carestart_mal_pf_pv", ProvisionMode.CRITERIA_SET_OR)
-            //.requestProfileCriteria("fake", ProvisionMode.CRITERIA_SET_OR)
+            .requestProfileCriteria("sars_cov2", ProvisionMode.CRITERIA_SET_AND) //.requestProfileCriteria("sd_bioline_mal_pf_pv carestart_mal_pf_pv", ProvisionMode.CRITERIA_SET_OR)
             .setFlavorOne(intent.getStringExtra("firstname") + " " + intent.getStringExtra("lastname"))
             .setFlavorTwo(nid) //.setClassifierBehavior(ClassifierMode.CHECK_YOUR_WORK)
             .setInTestQaMode() //.setSecondaryCaptureRequirements("capture_windowed")
             .setSubmitAllImagesToCloudworks(true)
-            .setCloudworksBackend("https://vmi682749.contaboserver.net/./"+intent.getStringExtra("firstname")+intent.getStringExtra("lastname"), nid) // DSN Config
-
+            .setCloudworksBackend("https://vmi651800.contaboserver.net/.../"+intent.getStringExtra("firstname")+intent.getStringExtra("lastname"), nid) // DSN Config
             // .setCallingPackage()
                .setReturnApplication(this)
             .setIndeterminateResultsAllowed(true)
-            .build()
+           .build()
 
-       //   RdtIntentBuilder.forCapture().setSessionId(nid) //Populated during provisioning callout, or result
 
         this.startActivityForResult(i, 1)
 
-        Handler().postDelayed({
-            val iz = RdtIntentBuilder.forCapture()
-                .setSessionId(intent.getStringExtra("nid")) //Populated during provisioning callout, or result
-                .build()
-            this.startActivityForResult(iz, 2)
-        }, 1000)
+
+
+    }
+
+    fun gettestresults(view: View?) {
+        val iz = RdtIntentBuilder.forCapture()
+            .setSessionId(intent.getStringExtra("firstname")+intent.getStringExtra("lastname")+","+intent.getStringExtra("nid")) //Populated during provisioning callout, or result
+            .build()
+        this.startActivityForResult(iz, 2)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 7 && resultCode == RESULT_OK) {
-            val session = getRdtSession(data!!)
-            println(
-                String.format(
-                    "Test will be available to read at %s",
-                    session!!.timeResolved.toString()
-                )
-            )
-            Toast.makeText(this, "RDT-Result: " + session.timeResolved.toString(),
-                Toast.LENGTH_LONG
-            ).show()
-        } else if (requestCode == 2 && resultCode == RESULT_OK) {
+         if (requestCode == 1 && resultCode == RESULT_OK) {
             val sess = getRdtSession(data!!)
             val result: TestSession.TestResult? = sess!!.result
             val red = String.format("result is  %s", sess.result.toString())
-
 
             Toast.makeText(this, "RDT-Result: " + sess.sessionId.toString(), Toast.LENGTH_LONG).show()
 
