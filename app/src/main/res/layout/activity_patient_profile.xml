@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PatientProfileActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:layout_alignParentTop="true">
+
+
+        <ImageView
+            android:id="@+id/btn_backprofile"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="22dp"
+            app:srcCompat="@drawable/arrow_back_white"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                style="@style/TitleText"
+                android:text="@string/subject_profile"
+                android:paddingTop="20dp"
+                android:textColor="#fff"
+                android:paddingBottom="20dp"
+                android:paddingStart="10dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="6dp"
+            >
+
+
+            <LinearLayout
+                android:id="@+id/lau"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="33dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvcategory"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvcaseindex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layNames"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/lau"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+
+                <TextView
+                    style="@style/DefaultText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Names:" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_namesprofile"
+                    style="@style/DefaultText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layGender"
+                android:padding="15dp"
+                android:layout_below="@id/layNames"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Gender:"
+                    style="@style/DefaultText"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_genderprofile"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layTel"
+                android:padding="15dp"
+                android:layout_below="@id/layGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Telephone:"
+                    style="@style/DefaultText"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_telephoneprofile"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layDob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layTel"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/DefaultText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Date of Birth:" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_dobprofile"
+                    style="@style/DefaultText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layNationalid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layDob"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/DefaultText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="National ID:" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_nidprofile"
+                    style="@style/DefaultText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layNationality"
+                android:padding="15dp"
+                android:layout_below="@id/layNationalid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Nationality:"
+                    style="@style/DefaultText"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_nationalityprofile"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layAddress"
+                android:padding="15dp"
+                android:layout_below="@id/layNationality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:text="@string/Address"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+
+                    style="@style/DefaultText"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_addressprofile"
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layresults_ascov"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_below="@id/layAddress"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/DefaultText"
+                    android:layout_width="0dp"
+                    android:text="Results with e-ascov"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_ascovprofile"
+                    style="@style/DefaultText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layrdttitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layresults_ascov"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/DefaultText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:layout_marginRight="15dp"
+                    android:text="RDT Toolkit test type:" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_rdttype"
+                    style="@style/DefaultText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="COVID-19 Ag Test"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layrdtresulttype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layrdttitle"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/DefaultText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1.5"
+                    android:text="Results with RDT Toolkit:" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_rdtresulti"
+                    style="@style/DefaultText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="4dp"
+                android:layout_below="@id/layrdtresulttype"
+                android:layout_margin="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/result_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    style="@style/DefaultText"/>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
+    <Button
+        android:id="@+id/btn_startprofile"
+        style="@style/BottomButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/go_back" />
+
+
+
+
+</RelativeLayout>

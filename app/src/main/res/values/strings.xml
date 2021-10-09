@@ -48,8 +48,8 @@
     <string name="weight_error">Nyamuneka hitamo ibiro biri hagati ya 30 na 220 kg</string>
 
 
-    <string name="case_index" >Case Index </string>
-    <string name="Firstname" >First name</string>
+    <string name="case_index">Case Index </string>
+    <string name="Firstname">First name</string>
     <string name="Lastname">Last name</string>
     <string name="nid">National ID / Passport</string>
     <string name="Gender">Gender</string>
@@ -64,7 +64,6 @@
     <string name="Sector">Sector</string>
     <string name="Cell">Cell</string>
     <string name="Village">Village</string>
-
 
 
     <string-array name="questions">
@@ -174,5 +173,8 @@
     <string name="sync_data">Sync Data</string>
     <string name="screening_test_sessions">Screening Test Sessions</string>
     <string name="contact_support">Contact Support</string>
+    <string name="sessions">Sessions</string>
+    <string name="subject_profile">Subject Profile</string>
+    <string name="go_back">Go Back</string>
 
 </resources>

@@ -48,7 +48,7 @@ class ResultActivity : AppCompatActivity() {
 
         const val PRIVATE_MODE = 0
 
-        const val PREFS = "PREFS"
+
         const val PREF_POLLS = "patient_data"
     }
 

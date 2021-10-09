@@ -49,7 +49,6 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
     private String fn, lastname, national_ID, patientgender, patienttelephone, occupation, residence, province, district, sector, cell, village;
 public static final String PREF_FIRSTNAME = "firstname";
     public static final String PREF_LASTNAME = "lastname";
-    public static final String PREFS="PREFS";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".PatientProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TestSessionsActivity"
+            android:exported="true" />
+        <activity
             android:name=".ActivityChooseCategory"
             android:exported="true" />
         <activity

@@ -78,7 +78,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
         progressDialog.show()
 
       //  val sharedPreferences: SharedPreferences = baseContext.getSharedPreferences(prefs, MODE_PRIVATE)
-        val sharedPreferences2: SharedPreferences = baseContext.getSharedPreferences(PREF_RDT, MODE_PRIVATE)
+        val sharedPreferences2: SharedPreferences = baseContext.getSharedPreferences(prefs, MODE_PRIVATE)
         val allEntries = sharedPreferences2.all
 
         for ((key, value1) in allEntries) {
@@ -87,7 +87,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
 
         //    Toast.makeText(this, "$key: $value",Toast.LENGTH_LONG).show()
 
-            testpref.text="data from SP : "+"$key: $value"
+           // testpref.text="data from SP : "+"$key: $value"
         }
 
         if (polls.size > 0 && !isSending) {

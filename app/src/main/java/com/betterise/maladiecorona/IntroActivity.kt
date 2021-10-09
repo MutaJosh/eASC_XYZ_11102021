@@ -103,18 +103,16 @@ class IntroActivity : AppCompatActivity() {
         menu.add(0, v.id, 0, getString(R.string.screening_test_sessions))
         menu.add(0, v.id, 0, getString(R.string.sync_data))
         menu.add(0, v.id, 0, getString(R.string.contact_support))
-
     }
-
     // menu item select listener
     override fun onContextItemSelected(item: MenuItem): Boolean {
         if (item.getTitle() === getString(R.string.screening_test_sessions)) {
-            Toast.makeText(baseContext,"Test sessions tapped",Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, TestSessionsActivity::class.java))
         } else if (item.getTitle() === getString(R.string.sync_data)) {
             startActivity(Intent(this, ExportActivity::class.java))
         } else if (item.getTitle() === getString(R.string.contact_support)) {
             val builder_main = AlertDialog.Builder(this)
-            builder_main.setTitle("Are you sure ?")
+          //  builder_main.setTitle("Are you sure ?")
             builder_main.setMessage("Do you need to call for more support about using this app."+"\n"+ "if yes, please press Call but if not press cancel button")
             builder_main.setNegativeButton("CANCEL",
                 DialogInterface.OnClickListener { dialog, which -> })

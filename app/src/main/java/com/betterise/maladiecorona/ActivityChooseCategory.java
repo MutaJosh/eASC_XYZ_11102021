@@ -113,7 +113,7 @@ private TextView errorBulletcate;
 
         }
     }
-    // create API   788770808/785543286
+    // create API
     public void callsendcodeapi() {
         // create user body object
         IndexCode index =new IndexCode();
@@ -124,6 +124,7 @@ private TextView errorBulletcate;
         param.put("index", eTindexcode.getText().toString().trim());
         out(param);
     }
+
     private void out(final Map<String, String> user) {
         Call<ResponseBody> request = RESTApiClient.getInstance().getApi().validatecode(user);
 
