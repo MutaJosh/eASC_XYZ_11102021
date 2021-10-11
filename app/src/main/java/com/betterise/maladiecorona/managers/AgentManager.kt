@@ -145,7 +145,7 @@ class AgentManager() {
             .apply()
     }
     fun saverdt_result(context:Context,rdt_result:String){
-        var sharedPrefs = context.getSharedPreferences(PREF_RDT, PRIVATE_MODE)
+        var sharedPrefs = context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE)
         sharedPrefs
             .edit()
             .putString("rdt_result", rdt_result)

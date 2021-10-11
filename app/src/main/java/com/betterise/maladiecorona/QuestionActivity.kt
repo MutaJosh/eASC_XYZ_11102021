@@ -2,9 +2,11 @@ package com.betterise.maladiecorona
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.view.View.INVISIBLE
@@ -14,45 +16,60 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import com.betterise.maladiecorona.managers.*
+import com.betterise.maladiecorona.managers.AgentManager
+import com.betterise.maladiecorona.managers.GeolocManager
+import com.betterise.maladiecorona.managers.PollManager
+import com.betterise.maladiecorona.managers.QuestionManager
 import com.betterise.maladiecorona.model.Question
 import com.betterise.maladiecorona.model.QuestionType
-import kotlinx.android.synthetic.main.activity_agent.*
-import kotlinx.android.synthetic.main.activity_patient_details.*
+import com.betterise.maladiecorona.model.ResultType
 import kotlinx.android.synthetic.main.activity_question.*
-import kotlinx.android.synthetic.main.activity_question.btn_next
-import kotlinx.android.synthetic.main.activity_question.question
 import kotlinx.android.synthetic.main.question_bullet.view.*
 import kotlinx.android.synthetic.main.question_city.view.*
 import kotlinx.android.synthetic.main.question_digit.view.*
 import kotlinx.android.synthetic.main.question_digit.view.unity
 import kotlinx.android.synthetic.main.question_digit.view.value
 import kotlinx.android.synthetic.main.question_digit_forced.view.*
+import kotlinx.android.synthetic.main.question_rdt.view.*
 import kotlinx.android.synthetic.main.question_tel.view.*
+import org.rdtoolkit.support.interop.RdtIntentBuilder
+import org.rdtoolkit.support.interop.RdtUtils
+import org.rdtoolkit.support.interop.getRdtSession
 import java.util.*
 
+
 /**
- * Created by MJC on 01/07/20.
+ * Created by Alexandre on 24/06/20.
  */
 class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManager.GeolocListener {
 
     var questionManager: QuestionManager? = null
     var group: ViewGroup? = null
 
+    private val RDTOOLKIT_ACTIVITY_REQUEST_CODE = 1
+    private val RDTOOLKIT_CAPTURE_RESULT_REQUEST_CODE = 2
+
+    private val ACTIVITY_PROVISION = 1
+    private val ACTIVITY_CAPTURE = 2
+    private val CW_SESSION_ID: String = UUID.randomUUID().toString()
+    private val CLOUDWORKS_DSN = "https://cloudwork.dimagitest.com/ingest/0c30d82c77de611350f7f031b0854258bb64b1a3"
+    private val COVID_TEST_PROFILE = "sd_standard_q_c19"
+    private val RDT_PENDING_STATUS = "pending"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_question)
 
-        AgentManager().savefirstname(this,intent.getStringExtra("firstname"))
+        AgentManager().savefirstname(this, intent.getStringExtra("firstname"))
         AgentManager().savelastname(this,intent.getStringExtra("lastname"))
         AgentManager().savenational_ID(this,intent.getStringExtra("national_ID"))
         AgentManager().savegender(this,intent.getStringExtra("patientgender"))
         AgentManager().savetelephone(this,intent.getStringExtra("patienttelephone"))
         AgentManager().savedob(this,intent.getStringExtra("dob"))
         AgentManager().saveoccupation(this,intent.getStringExtra("occupation"))
-        AgentManager().saveresidence(this,intent.getStringExtra("residence"))
-        AgentManager().savenationality(this,intent.getStringExtra("nationality"))
+        AgentManager().savenationality(this,intent.getStringExtra("residence"))
+        AgentManager().saveresidence(this,intent.getStringExtra("nationality"))
         AgentManager().saveprovince(this,intent.getStringExtra("province"))
         AgentManager().savedistrict(this,intent.getStringExtra("district"))
         AgentManager().savesector(this,intent.getStringExtra("sector"))
@@ -83,7 +100,35 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             super.onBackPressed()
     }
 
+    override fun onClick(view: View) {
+        var result = questionManager?.getResults()
 
+        if (validate()) {
+            if (questionManager!!.hasMoreQuestion()) {
+                questionManager!!.nextQuestion()
+                loadQuestion()
+            } else {
+
+                var user_id = questionManager?.getSpecificAnswer(0)?.text.toString()
+                var rdt_result = questionManager?.getSpecificAnswer(19)?.text.toString()
+
+                var poll = questionManager!!.createPoll(this)
+                PollManager().addPoll(this, poll)
+
+                var result = questionManager!!.getResults()
+                val intent = Intent(this, ResultActivity::class.java)
+                intent.putExtra(ResultActivity.EXTRA_RESULT, result)
+
+
+                intent.putExtra(ResultActivity.EXTRA_USER_ID, user_id)
+                intent.putExtra("patient_phone_number",getIntent().getStringExtra("patienttelephone"))
+                intent.putExtra("Indexi",getIntent().getStringExtra("Indexi"))
+                intent.putExtra(ResultActivity.EXTRA_RDT_RESULT, rdt_result)
+                startActivity(intent)
+                //finish()
+            }
+        }
+    }
 
     private fun loadQuestion() {
 
@@ -97,60 +142,20 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             getString(if (questionManager!!.hasMoreQuestion()) R.string.next_question else R.string.save_and_continue)
         btn_next.isEnabled = false
 
+
         when (questionManager?.getCurrentQuestionType()) {
            // QuestionType.CITY -> loadCity()
             QuestionType.DIGIT -> loadDigitChoice()
             QuestionType.BINARY -> loadYesNo()
             QuestionType.DOUBLE -> loadTwoBullets()
             QuestionType.TERNARY -> loadThreeBullets()
-           // QuestionType.TELEPHONE -> loadTelephone()
+          //  QuestionType.TELEPHONE -> loadTelephone()
             QuestionType.DIGIT_FORCED -> loadDigitForced()
+            QuestionType.RDT -> loadRDT()
         }
 
+
     }
-
-    override fun onClick(view: View) {
-
-        var result = questionManager?.getResults()
-
-        if (validate()) {
-            if (questionManager!!.hasMoreQuestion()) {
-                questionManager!!.nextQuestion()
-                loadQuestion()
-            } else {
-
-              var poll = questionManager!!.createPoll(this)
-
-              PollManager().addPoll(this, poll)
-
-                var result = questionManager!!.getResults()
-                val intenti = Intent(this, ResultActivity::class.java)
-
-                intenti.putExtra("firstname", intent.getStringExtra("firstname").toString())
-                intenti.putExtra("lastname", intent.getStringExtra("lastname").toString())
-                intenti.putExtra("nid", intent.getStringExtra("national_ID").toString())
-                intenti.putExtra("gender",intent.getStringExtra("patientgender"))
-                intenti.putExtra("telephone", intent.getStringExtra("patienttelephone").toString())
-                intenti.putExtra("dob", intent.getStringExtra("dob"))
-                intenti.putExtra("occupation", intent.getStringExtra("occupation").toString())
-                intenti.putExtra("residence", intent.getStringExtra("residence"))
-                intenti.putExtra("nationality",intent.getStringExtra("nationality"))
-                intenti.putExtra("province", intent.getStringExtra("province").toString())
-                intenti.putExtra("district",intent.getStringExtra("district").toString())
-                intenti.putExtra("sector",intent.getStringExtra("sector").toString())
-                intenti.putExtra("cell", intent.getStringExtra("cell").toString())
-                intenti.putExtra("village", intent.getStringExtra("village").toString())
-
-                intenti.putExtra(ResultActivity.EXTRA_RESULT, result)
-
-           startActivity(intenti)
-       overridePendingTransition(R.anim.fadein,R.anim.fadeout);
-   // finish()
-
-            }
-        }
-    }
-
 
 
     private fun goBack(): Boolean {
@@ -164,35 +169,33 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         return false
     }
 
+    private fun loadCity() {
+        answer_container.removeAllViews()
+        group = View.inflate(this, R.layout.question_city, null) as ViewGroup
 
+        val answer = questionManager!!.getAnswer()
+        btn_next.isEnabled = true
 
-//    private fun loadCity() {
-//        answer_container.removeAllViews()
-//        group = View.inflate(this, R.layout.question_city, null) as ViewGroup
-//
-//        val answer = questionManager!!.getAnswer()
-//        btn_next.isEnabled = true
-//
-//        group?.city?.setOnFocusChangeListener { _, hasFocus ->
-//            if (hasFocus)
-//                group?.city?.setBackgroundResource(R.drawable.edit_bg_focused)
-//
-//            btn_next.isEnabled = true
-//            group?.errorCity?.visibility = INVISIBLE
-//            group?.city?.setBackgroundResource(R.drawable.edit_bg_focused)
-//
-//        }
-//        group?.city?.doOnTextChanged { text, _, _, _ ->
-//            btn_next.isEnabled = true
-//            group?.errorCity?.visibility = INVISIBLE
-//            group?.city?.setBackgroundResource(R.drawable.edit_bg_focused)
-//        }
-//
-//        group?.city?.setText(answer.text)
-//
-//        group?.geoloc?.setOnClickListener { requestGeoloc() }
-//        answer_container.addView(group)
-//    }
+        group?.city?.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus)
+                group?.city?.setBackgroundResource(R.drawable.edit_bg_focused)
+
+            btn_next.isEnabled = true
+            group?.errorCity?.visibility = INVISIBLE
+            group?.city?.setBackgroundResource(R.drawable.edit_bg_focused)
+
+        }
+        group?.city?.doOnTextChanged { text, _, _, _ ->
+            btn_next.isEnabled = true
+            group?.errorCity?.visibility = INVISIBLE
+            group?.city?.setBackgroundResource(R.drawable.edit_bg_focused)
+        }
+
+        group?.city?.setText(answer.text)
+
+        group?.geoloc?.setOnClickListener { requestGeoloc() }
+        answer_container.addView(group)
+    }
 
     private fun loadYesNo() {
         group = View.inflate(this, R.layout.question_bullet, null) as ViewGroup?
@@ -258,17 +261,23 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         group = View.inflate(this, R.layout.question_bullet, null) as ViewGroup?
         var choices = questionManager?.getChoices()
 
-        group?.radio1?.text = choices!![0]
-        group?.radio2?.text = choices!![1]
-        group?.radio3?.text = choices!![2]
+            group?.radio1?.text = choices!![0]
+            group?.radio2?.text = choices!![1]
+            group?.radio3?.text = choices!![2]
 
         var answer = questionManager!!.getAnswer()
         btn_next.isEnabled = true
 
-        when (answer.value) {
-            1 -> group?.radio1?.isChecked = true
-            2 -> group?.radio2?.isChecked = true
-            3 -> group?.radio3?.isChecked = true
+            when (answer.value) {
+                1 -> group?.radio1?.isChecked = true
+                2 -> group?.radio2?.isChecked = true
+                3 -> group?.radio3?.isChecked = true }
+
+
+        if (intent.getStringExtra("patientgender").equals("Male")) {
+            group?.radio1?.visibility= INVISIBLE
+            group?.radio2?.visibility= INVISIBLE
+
         }
 
         group?.radio1?.setOnClickListener {
@@ -309,7 +318,6 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             group?.value!!.setText(answer.value.toString())
             group?.not_known?.setImageResource(R.drawable.shape_radio_off)
             group?.not_known?.tag = answer.value
-
         } else if (answer.value == 1) {
             group?.not_known?.tag = 1
             group?.not_known?.setImageResource(R.drawable.shape_radio_on)
@@ -348,36 +356,36 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         answer_container.addView(group)
     }
 
-//    private fun loadTelephone() {
-//        answer_container.removeAllViews()
-//        group = View.inflate(this, R.layout.question_tel, null) as ViewGroup?
-//        val answer = questionManager!!.getAnswer()
-//        btn_next.isEnabled = true
-//
-//        group?.phone?.setOnFocusChangeListener { v, hasFocus ->
-//            if (hasFocus)
-//                group?.phone?.setBackgroundResource(R.drawable.edit_bg_focused)
-//            btn_next.isEnabled = true
-//            group?.error?.visibility = INVISIBLE
-//            group?.phone?.setBackgroundResource(R.drawable.edit_bg_focused)
-//        }
-//
-//
-//        group?.phone?.doOnTextChanged { _, _, _, _ ->
-//            btn_next.isEnabled = true
-//            group?.error?.visibility = INVISIBLE
-//            group?.phone?.setBackgroundResource(R.drawable.edit_bg_focused)
-//        }
-//
-//        if (answer.text.isNotEmpty())
-//            group?.phone?.setText(answer.text)
-//        else {
-//            group?.phone?.setText(getString(R.string.phone_start) + " ")
-//            group?.phone?.setSelection(4)
-//        }
-//
-//        answer_container.addView(group)
-//    }
+    private fun loadTelephone() {
+        answer_container.removeAllViews()
+        group = View.inflate(this, R.layout.question_tel, null) as ViewGroup?
+        val answer = questionManager!!.getAnswer()
+        btn_next.isEnabled = true
+
+        group?.phone?.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus)
+                group?.phone?.setBackgroundResource(R.drawable.edit_bg_focused)
+            btn_next.isEnabled = true
+            group?.error?.visibility = INVISIBLE
+            group?.phone?.setBackgroundResource(R.drawable.edit_bg_focused)
+        }
+
+
+        group?.phone?.doOnTextChanged { _, _, _, _ ->
+            btn_next.isEnabled = true
+            group?.error?.visibility = INVISIBLE
+            group?.phone?.setBackgroundResource(R.drawable.edit_bg_focused)
+        }
+
+        if (answer.text.isNotEmpty())
+            group?.phone?.setText(answer.text)
+        else {
+            group?.phone?.setText(getString(R.string.phone_start) + " ")
+            group?.phone?.setSelection(4)
+        }
+
+        answer_container.addView(group)
+    }
 
     private fun loadDigitForced() {
         answer_container.removeAllViews()
@@ -385,6 +393,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
         val choices = questionManager?.getChoices()
         group?.unity?.text = choices!![0]
+
 
         val answer = questionManager!!.getAnswer()
         btn_next.isEnabled = true
@@ -409,13 +418,45 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         answer_container.addView(group)
     }
 
+    private fun loadRDT() {
+        answer_container.removeAllViews()
+        group = View.inflate(this, R.layout.question_rdt, null) as ViewGroup
+
+        val answer = questionManager!!.getAnswer()
+        btn_next.isEnabled = true
+
+
+        if ((answer.text.isNotEmpty()) and (answer.text != RDT_PENDING_STATUS)) {
+            group?.rdt_result?.setText(answer.text)
+            group?.rdt_result_label2?.visibility = VISIBLE
+            group?.rdt_result?.visibility = VISIBLE
+            group?.rdt_action?.isEnabled = false
+            group?.rdt_action?.setBackgroundColor(getResources().getColor(R.color.grey_9f9f9f))
+        }
+
+        if (answer.text == RDT_PENDING_STATUS) {
+            group?.rdt_action?.setText(getString(R.string.capture_result))
+            group?.countdownTimer?.visibility = VISIBLE
+            group?.rdt_result?.setText(answer.text)
+        }
+
+        group?.rdt_result?.doOnTextChanged { _, _, _, _ ->
+            btn_next.isEnabled = true
+            group?.errorRDT?.visibility = INVISIBLE
+        }
+
+        group?.rdt_action?.setOnClickListener { lunchRDTapp() }
+        answer_container.addView(group)
+    }
+
     private fun validate() = when (questionManager?.getCurrentQuestionType()) {
-      //  QuestionType.CITY -> validateCity()
+        //QuestionType.CITY -> validateCity()
         QuestionType.DIGIT -> validateDigit()
         QuestionType.DOUBLE -> validate2Bullets()
         QuestionType.TERNARY -> validate3Bullets()
-       // QuestionType.TELEPHONE -> validateTelephone()
+      //  QuestionType.TELEPHONE -> validateTelephone()
         QuestionType.DIGIT_FORCED -> validateDigitForced()
+        QuestionType.RDT -> validateRDT()
         else -> validate2Bullets()
     }
 
@@ -470,27 +511,38 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         return false
     }
 
-//    private fun validateTelephone(): Boolean {
-//        questionManager!!.setTextAnswer(group?.phone?.text.toString())
-//        if (group?.phone?.text?.toString()?.replace(" ", "")?.length == 10)
-//            return true
-//
-//        group?.error?.visibility = View.VISIBLE
-//        group?.phone?.setBackgroundResource(R.drawable.edit_bg_error)
-//        btn_next.isEnabled = false
-//        return false
-//    }
-//
-//    private fun validateCity(): Boolean {
-//        questionManager!!.setTextAnswer(group?.city?.text.toString())
-//        if (!group?.city?.text.isNullOrEmpty())
-//            return true
-//
-//        group?.city?.setBackgroundResource(R.drawable.edit_bg_error)
-//        group?.errorCity?.visibility = VISIBLE
-//        btn_next.isEnabled = false
-//        return false
-//    }
+    private fun validateTelephone(): Boolean {
+        questionManager!!.setTextAnswer(group?.phone?.text.toString())
+
+        if (group?.phone?.text?.toString()?.replace(" ", "")?.length == 10)
+            return true
+
+        group?.error?.visibility = View.VISIBLE
+        group?.phone?.setBackgroundResource(R.drawable.edit_bg_error)
+        btn_next.isEnabled = false
+        return false
+    }
+
+    private fun validateCity(): Boolean {
+        questionManager!!.setTextAnswer(group?.city?.text.toString())
+        if (!group?.city?.text.isNullOrEmpty())
+            return true
+
+        group?.city?.setBackgroundResource(R.drawable.edit_bg_error)
+        group?.errorCity?.visibility = VISIBLE
+        btn_next.isEnabled = false
+        return false
+    }
+
+    private fun validateRDT(): Boolean {
+        questionManager!!.setTextAnswer(group?.rdt_result?.text.toString())
+        if ((!group?.rdt_result?.text.isNullOrEmpty()) and (group?.rdt_result?.text.toString() != RDT_PENDING_STATUS))
+            return true
+
+        group?.errorRDT?.visibility = VISIBLE
+        btn_next.isEnabled = false
+        return false
+    }
 
     private fun validateDigitForced(): Boolean {
 
@@ -537,6 +589,114 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         }
     }
 
+    private fun lunchRDTapp(){
+        if (group?.rdt_result?.text.toString() == RDT_PENDING_STATUS){
+            captureRDTResults()
+        } else {
+            requestRDTScan()
+        }
+    }
+
+    private fun requestRDTScan() {
+        try {
+            val intent = RdtIntentBuilder.forProvisioning()
+                .setSessionId(CW_SESSION_ID)
+                .setFlavorOne(getIntent().getStringExtra("firstname")+" "+getIntent().getStringExtra("lastname"))
+                .setFlavorTwo(getIntent().getStringExtra("national_ID"))
+                .setCloudworksBackend(CLOUDWORKS_DSN)
+                .requestTestProfile(COVID_TEST_PROFILE)
+                .setSecondaryCaptureRequirements("capture_windowed")
+                .setInTestQaMode()
+                .build();
+
+            startActivityForResult(intent, RDTOOLKIT_ACTIVITY_REQUEST_CODE)
+        } catch (e: java.lang.Exception) {
+            Log.e(this.localClassName, e.message)
+        }
+    }
+
+    private fun captureRDTResults() {
+        try {
+            val intent = RdtIntentBuilder.forCapture()
+                .setSessionId(CW_SESSION_ID)
+                .build()
+
+            startActivityForResult(intent, RDTOOLKIT_CAPTURE_RESULT_REQUEST_CODE)
+        } catch (e: java.lang.Exception) {
+            Log.e(this.localClassName, e.message)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == ACTIVITY_PROVISION && resultCode == RESULT_OK) {
+            group?.rdt_action?.setText(getString(R.string.capture_result))
+            val session = data?.getRdtSession()
+            val timeStarted = session?.timeStarted
+            val timeResolved = session?.timeResolved
+            val timeExpired = session?.timeExpired
+
+            val startedResolvedDifference: Long = timeResolved!!.getTime() - timeStarted!!.getTime()
+            val resolvedExpiredDifference: Long = timeExpired!!.getTime() - timeResolved!!.getTime()
+            group?.rdt_result?.setText(RDT_PENDING_STATUS)
+            group?.countdownTimer?.visibility = VISIBLE
+            validate()
+            startResultCaptureTimer(startedResolvedDifference, resolvedExpiredDifference)
+        }
+        if (requestCode == ACTIVITY_CAPTURE && resultCode == RESULT_OK) {
+            val session = RdtUtils.getRdtSession(data!!);
+            val result = session?.result
+
+            group?.rdt_result?.text = getString(
+                when (result?.results.toString()) {
+                    "{sars_cov2=sars_cov2_pos}" -> R.string.rdt_result_pos
+                    "{sars_cov2=sars_cov2_neg}" -> R.string.rdt_result_neg
+                    else -> R.string.rdt_result_invalid
+                }
+            )
+
+            group?.rdt_result_label2?.visibility = VISIBLE
+            group?.rdt_result?.visibility = VISIBLE
+            group?.rdt_action?.isEnabled = false
+            group?.rdt_action?.setBackgroundColor(getResources().getColor(R.color.grey_9f9f9f))
+            group?.countdownTimer?.visibility = INVISIBLE
+            validate()
+        }
+    }
+
+    private fun startResultCaptureTimer(startedResolvedDifference: Long, resolvedExpiredDifference: Long) {
+        object : CountDownTimer(startedResolvedDifference, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val formatedTime = formatCountdownTime(millisUntilFinished)
+                group?.countdownTimer?.setText(getString(R.string.time_remaining) + "\n" + formatedTime)
+            }
+
+            override fun onFinish() {
+                group?.countdownTimer?.setTextColor(getResources().getColor(R.color.green))
+                group?.rdt_action?.setBackgroundColor(getResources().getColor(R.color.green))
+                object : CountDownTimer(resolvedExpiredDifference, 1000) {
+                    override fun onTick(millisUntilFinished: Long) {
+                        val formatedTime = formatCountdownTime(millisUntilFinished)
+                        group?.countdownTimer?.setText(getString(R.string.reults_valid_for)+ "\n" + formatedTime)
+                    }
+
+                    override fun onFinish() {
+                        group?.countdownTimer?.setTextColor(Color.RED)
+                        group?.countdownTimer?.setText(getString(R.string.results_expired))
+                    }
+                }.start()
+            }
+        }.start()
+    }
+
+    private fun formatCountdownTime(millisUntilFinished: Long): String {
+        val seconds = millisUntilFinished / 1000
+        val p1: Long = seconds % 60
+        var p2: Long = seconds / 60
+        val p3 = p2 % 60
+        return "${p3}m:${p1}s"
+    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -551,7 +711,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                     if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                         requestGeoloc()
                     } else {
-                        Log.e(this.localClassName, "Sorry, Permission geolocation is not granted");
+                        Log.e(this.localClassName, "Permission geoloc not granted");
                     }
                 }
 

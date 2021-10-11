@@ -50,7 +50,6 @@ class PollManager {
             .putString(PREF_POLLS, Gson().toJson(polls))
             .apply()
     }
-
     /***
      * Reset the list of polls
      */

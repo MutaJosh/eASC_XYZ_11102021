@@ -242,10 +242,13 @@ public static final String PREF_FIRSTNAME = "firstname";
                     intent.putExtra("cell", cell);
                     intent.putExtra("village", village);
                     intent.putExtra("rdt_result","null");
+                    intent.putExtra("Indexi",tvindexcode.getText().toString().trim());
 
                     startActivity(intent);
                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                    // finish();
+
+
                 }
                 break;
 

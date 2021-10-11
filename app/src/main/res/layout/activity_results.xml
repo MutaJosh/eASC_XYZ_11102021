@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/grey_f8f8f8"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,24 +11,20 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/blue"
+        android:background="@color/white"
         android:layout_alignParentTop="true">
-
-
-        <ImageView
-            android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="20dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="22dp"
-            app:srcCompat="@drawable/arrow_back_white"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal">
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/shape_bullet"
+                android:textColor="@color/white"
+                android:text="3"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title"
@@ -35,403 +32,103 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 style="@style/TitleText"
-                android:text="Subject Profile"
-                android:paddingTop="20dp"
-                android:textColor="#fff"
-                android:paddingBottom="20dp"
+                android:text="@string/results"
+                android:paddingTop="30dp"
+                android:paddingBottom="30dp"
                 android:paddingStart="10dp" />
 
         </LinearLayout>
 
     </RelativeLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/btn_proceedtest"
-        android:layout_below="@+id/toolbar">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="6dp"
-            >
-
-
-            <LinearLayout
-                android:id="@+id/lau"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="33dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Status"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Not synced"
-                    android:textColor="@color/red"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layNames"
-                android:padding="15dp"
-                android:layout_below="@id/lau"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Names:"
-                    style="@style/DefaultText"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/result_names"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    style="@style/DefaultText"/>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layGender"
-                android:padding="15dp"
-                android:layout_below="@id/layNames"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Gender:"
-                    style="@style/DefaultText"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/result_gender"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    style="@style/DefaultText"/>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layTel"
-                android:padding="15dp"
-                android:layout_below="@id/layGender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Telephone:"
-                    style="@style/DefaultText"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/result_telephone"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    style="@style/DefaultText"/>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layDob"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/layTel"
-                android:orientation="horizontal"
-                android:padding="15dp">
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/DefaultText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Date of Birth:" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/result_dob"
-                    style="@style/DefaultText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"/>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layNationalid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/layDob"
-                android:orientation="horizontal"
-                android:padding="15dp">
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/DefaultText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="National ID:" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/result_nid"
-                    style="@style/DefaultText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2" />
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/layNationality"
-                android:padding="15dp"
-                android:layout_below="@id/layNationalid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Nationality:"
-                    style="@style/DefaultText"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/result_nationality"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-
-                    style="@style/DefaultText"/>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layAddress"
-                android:padding="15dp"
-                android:visibility="gone"
-                android:layout_below="@id/layNationality"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-
-                    style="@style/DefaultText"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/result_address"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    style="@style/DefaultText"/>
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/layresults_ascov"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/layAddress"
-                android:orientation="horizontal"
-                android:padding="15dp">
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/DefaultText"
-                    android:layout_width="0dp"
-                    android:text="Results with e-ascov"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/result_ascov"
-                    style="@style/DefaultText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2" />
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/layrdttitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/layresults_ascov"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:padding="15dp">
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/DefaultText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.5"
-                    android:layout_marginRight="15dp"
-                    android:text="RDT Toolkit test type:" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/result_rdttype"
-                    style="@style/DefaultText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:text="COVID-19 Ag Test"
-                    android:textStyle="bold" />
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/layrdtresulttype"
-                android:padding="15dp"
-                android:layout_below="@id/layrdttitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1.5"
-                    android:layout_height="wrap_content"
-                    android:text="Results with RDT Toolkit:"
-                    android:layout_marginRight="15dp"
-                    style="@style/DefaultText"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/result_rdtresult"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    style="@style/DefaultText"/>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:padding="4dp"
-                android:layout_below="@id/lau"
-                android:layout_margin="4dp"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/result_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                style="@style/DefaultText"/>
-
-
-                <LinearLayout
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    >
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/result2_text1"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
-                    android:background="@color/white"
-                    style="@style/DefaultText"/>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/result2_text2"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:background="@color/white"
-                        style="@style/DefaultText"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-
-    </ScrollView>
-
-    <Button
-        android:id="@+id/btn_proceedtest"
-        style="@style/BottomButton"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btn_start"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/edit_bg_error"
-        android:onClick="simulateTestRequest"
-        android:text="Proceed to RDT"
-        android:textColor="#000" />
+        android:layout_above="@+id/btn_start"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/white">
 
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rdt_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:text="@string/rdt_result_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rdt_result_label"
+            tools:layout_conversion_absoluteHeight="0dp"
+            tools:layout_conversion_absoluteWidth="0dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/rdt_result_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:text="@string/rdt_result_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/result_text"
+            tools:layout_conversion_absoluteHeight="0dp"
+            tools:layout_conversion_absoluteWidth="0dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/user_id_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:text="@string/user_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.252"
+            app:layout_constraintStart_toEndOf="@+id/user_id_label"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="0dp"
+            tools:layout_conversion_absoluteWidth="0dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/user_id_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="88dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:text="@string/index_code"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="0dp"
+            tools:layout_conversion_absoluteWidth="0dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="25dp"
+            android:text="@string/results_example"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_id_text"
+            tools:layout_conversion_absoluteHeight="0dp"
+            tools:layout_conversion_absoluteWidth="0dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_start"
-        style="@style/BottomButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:text="Go Home" />
-
+        android:layout_margin="20dp"
+        android:text="@string/restart"
+        style="@style/BottomButton"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

@@ -98,7 +98,7 @@ class IntroActivity : AppCompatActivity() {
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
         // you can set menu header with title icon etc
-        menu.setHeaderTitle("Choose Action")
+       // menu.setHeaderTitle("Choose Action")
         // add menu items
         menu.add(0, v.id, 0, getString(R.string.screening_test_sessions))
         menu.add(0, v.id, 0, getString(R.string.sync_data))

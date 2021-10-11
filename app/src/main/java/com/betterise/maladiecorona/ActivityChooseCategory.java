@@ -170,7 +170,6 @@ private TextView errorBulletcate;
                         Toast.makeText(ActivityChooseCategory.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
-
                 }else{
                     progressDialog.dismiss();
                     Toast.makeText(ActivityChooseCategory.this, "error ", Toast.LENGTH_SHORT).show();

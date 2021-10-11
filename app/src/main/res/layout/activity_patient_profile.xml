@@ -301,6 +301,7 @@
                 android:layout_below="@id/layresults_ascov"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:padding="15dp">
 
 
@@ -331,6 +332,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/layrdttitle"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:padding="15dp">
 
 
@@ -384,7 +386,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:visibility="gone"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
@@ -393,5 +394,21 @@
 
 
 
+    <Button
+        android:id="@+id/btn_startRdt"
+        style="@style/BottomButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:visibility="gone"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/proceed_to_rdt_test" />
+
+
+
 
 </RelativeLayout>
+

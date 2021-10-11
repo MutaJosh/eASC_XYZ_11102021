@@ -10,4 +10,5 @@ enum class QuestionType {
     DIGIT,
     DIGIT_FORCED,
     DOUBLE,
+    RDT
 }

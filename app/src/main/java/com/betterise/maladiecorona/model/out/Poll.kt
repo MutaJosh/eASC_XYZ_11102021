@@ -5,7 +5,7 @@ package com.betterise.maladiecorona.model.out
  */
 class Poll {
 
-  // var pollId : Int = 1
+    var pollId : Int = 0
     var date : String = ""
     var CHW_phone : String = ""
     var CHW_name:String=""

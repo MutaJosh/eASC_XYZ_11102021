@@ -1,10 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.dimagi:rd-toolkit:0.9.3@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/049a5d29e3097a89b99147109b2c4a55/jetified-rd-toolkit-0.9.3/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6f968807a912e03faf2eb876ff9536ea/jetified-rd-toolkit-0.9.3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6f968807a912e03faf2eb876ff9536ea/jetified-rd-toolkit-0.9.3/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6f968807a912e03faf2eb876ff9536ea/jetified-rd-toolkit-0.9.3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6f968807a912e03faf2eb876ff9536ea/jetified-rd-toolkit-0.9.3/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -3,12 +3,19 @@ package com.betterise.maladiecorona;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.rdtoolkit.support.interop.RdtIntentBuilder;
+import org.rdtoolkit.support.model.session.ProvisionMode;
+import org.rdtoolkit.support.model.session.TestSession;
+
+import java.util.UUID;
 
 public class PatientProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,6 +25,7 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
 
     private TextView tvcaseindex,tvcategory;
     private ImageView btn_backprofile;
+    private String databaseId,patientName,patientID;
     private Button btn_startprofile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,10 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
         result_addressprofile=findViewById(R.id.result_addressprofile);
         result_ascovprofile=findViewById(R.id.result_ascovprofile);
         result_rdtresultprofile=findViewById(R.id.result_rdtresulti);
+
+        patientID=getIntent().getStringExtra("national_ID");
+        patientName=getIntent().getStringExtra("firstname")+getIntent().getStringExtra("lastname");
+        databaseId= UUID.randomUUID().toString();
 
 
         result_namesprofile.setText(getIntent().getStringExtra("firstname")+getIntent().getStringExtra("lastname"));
@@ -65,4 +77,26 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
             case R.id.btn_startprofile:  finish();break;
         }
     }
+
+    // Starting the RDT activity - Test Provisioning
+    public void openrdttest(View view) {
+
+        Intent i = RdtIntentBuilder.forProvisioning()
+                .setSessionId(databaseId) // Explicitly declare an ID for the session
+                .requestProfileCriteria("sars_cov2", ProvisionMode.CRITERIA_SET_AND) //.requestProfileCriteria("sd_bioline_mal_pf_pv carestart_mal_pf_pv", ProvisionMode.CRITERIA_SET_OR)
+                .setFlavorOne(patientName) // Text to differentiate running tests
+                .setFlavorTwo(patientID) // Text to differentiate running tests
+                .build();
+
+
+    }
+
+
+
+
+
+
+
+
+
 }

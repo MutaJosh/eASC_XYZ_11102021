@@ -71,6 +71,18 @@ dependencies {
     implementation 'com.github.aabhasr1:OtpView:v1.1.2'
 
 
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
+
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_rxjava_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_gson_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_interceptor_version"
+    implementation 'com.github.dimagi:rd-toolkit:0.9.3'
+
+
 
     implementation 'com.squareup.retrofit2:retrofit:2.7.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.0.2'

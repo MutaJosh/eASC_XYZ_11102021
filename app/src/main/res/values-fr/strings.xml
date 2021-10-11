@@ -61,6 +61,7 @@
         <item>Has the subject had a cancer in the past 3 years?</item>
         <item>Does the subject have a known respiratory illness?</item>
         <item>Is the subject pregnant?</item>
+        <item></item>
     </string-array>
 
 
@@ -84,11 +85,12 @@
         <item>Female|Male</item>
         <item>Kg|Do not know</item>
         <item>cm|Do not know</item>
-        <item>Yes|No|Do not know</item>
+        <item>Yes|No</item>
         <item>Yes|No</item>
         <item>Yes|No</item>
         <item>Yes|No</item>
         <item>Yes|No|Not applicable</item>
+        <item></item>
     </string-array>
 
     <string-array name="question_types">
@@ -106,11 +108,12 @@
         <item>binary</item>
         <item>digit</item>
         <item>digit</item>
+        <item>binary</item>
+        <item>binary</item>
+        <item>binary</item>
+        <item>binary</item>
         <item>ternary</item>
-        <item>binary</item>
-        <item>binary</item>
-        <item>binary</item>
-        <item>ternary</item>
+        <item>rdt</item>
     </string-array>
     <string name="result1">La situation ne relève probablement pas du COVID-19. Demandez au sujet de revenir vous voir si de nouveaux symptômes apparaissent.</string>
     <string name="result2">Adressez le sujet au centre de santé pour évaluation par un(e) infirmier(e).</string>
@@ -146,4 +149,23 @@
     <string name="sessions">Sessions</string>
     <string name="subject_profile">Subject Profile</string>
     <string name="go_back">Go Back</string>
+    <string name="rdt_result_pos">COVID-19 Positive.</string>
+    <string name="rdt_result_neg">COVID-19 Negative.</string>
+    <string name="rdt_result_invalid">Invalid: Control Failed.</string>
+
+    <string name="user_id">Rdt result</string>
+    <string name="rdt_result_text">RDT result text</string>
+    <string name="user_id_label">"User ID: "</string>
+    <string name="rdt_result_label">"RDT result: "</string>
+    <string name="lunch_rdt">Launch RDT</string>
+    <string name="capture_result">Capture result</string>
+    <string name="time_remaining">Test is resolving, please wait for timer: </string>
+    <string name="reults_valid_for">Results valid for: </string>
+    <string name="results_expired">Results expired</string>
+    <string name="rdt_error">rdt error</string>
+    <string name="rdt_results">"rdt results "</string>
+    <string name="please_capture_the_test_result">Please capture the test result</string>
+    <string name="index_code">Index code</string>
+    <string name="disconnected_internet">Disconnected to the internet</string>
+
 </resources>
