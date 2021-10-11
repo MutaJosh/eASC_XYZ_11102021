@@ -43,7 +43,6 @@ class ResultActivity : AppCompatActivity() {
             }
         )
 
-       // Toast.makeText(baseContext,"ascov res is: "+result_text.text, Toast.LENGTH_LONG).show()
 
         btn_start.setOnClickListener {
             startActivity(Intent(this, IntroActivity::class.java))
