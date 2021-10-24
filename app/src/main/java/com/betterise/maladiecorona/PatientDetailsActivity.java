@@ -385,8 +385,6 @@ public static final String PREF_FIRSTNAME = "firstname";
                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                     finish();
 
-
-
                 }
                 break;
 

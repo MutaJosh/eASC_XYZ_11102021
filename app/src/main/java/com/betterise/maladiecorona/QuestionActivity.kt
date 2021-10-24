@@ -67,25 +67,25 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
         setContentView(R.layout.activity_question)
 
-        btn_next.visibility= VISIBLE
+        btn_next.visibility = VISIBLE
 
         AgentManager().savefirstname(this, intent.getStringExtra("firstname"))
-        AgentManager().savelastname(this,intent.getStringExtra("lastname"))
-        AgentManager().savenational_ID(this,intent.getStringExtra("national_ID"))
-        AgentManager().savegender(this,intent.getStringExtra("patientgender"))
-        AgentManager().savetelephone(this,intent.getStringExtra("patienttelephone"))
-        AgentManager().savedob(this,intent.getStringExtra("dob"))
-        AgentManager().saveoccupation(this,intent.getStringExtra("occupation"))
-        AgentManager().savenationality(this,intent.getStringExtra("residence"))
-        AgentManager().saveresidence(this,intent.getStringExtra("nationality"))
-        AgentManager().saveprovince(this,intent.getStringExtra("province"))
-        AgentManager().savedistrict(this,intent.getStringExtra("district"))
-        AgentManager().savesector(this,intent.getStringExtra("sector"))
-        AgentManager().savecell(this,intent.getStringExtra("cell"))
-        AgentManager().savevillage(this,intent.getStringExtra("village"))
-        AgentManager().saveNumberhousehold(this,intent.getStringExtra("number_household"))
-        AgentManager().savevaccine_type(this,intent.getStringExtra("vaccine_type"))
-        AgentManager().savevaccine_dose(this,intent.getStringExtra("vaccine_dose"))
+        AgentManager().savelastname(this, intent.getStringExtra("lastname"))
+        AgentManager().savenational_ID(this, intent.getStringExtra("national_ID"))
+        AgentManager().savegender(this, intent.getStringExtra("patientgender"))
+        AgentManager().savetelephone(this, intent.getStringExtra("patienttelephone"))
+        AgentManager().savedob(this, intent.getStringExtra("dob"))
+        AgentManager().saveoccupation(this, intent.getStringExtra("occupation"))
+        AgentManager().savenationality(this, intent.getStringExtra("residence"))
+        AgentManager().saveresidence(this, intent.getStringExtra("nationality"))
+        AgentManager().saveprovince(this, intent.getStringExtra("province"))
+        AgentManager().savedistrict(this, intent.getStringExtra("district"))
+        AgentManager().savesector(this, intent.getStringExtra("sector"))
+        AgentManager().savecell(this, intent.getStringExtra("cell"))
+        AgentManager().savevillage(this, intent.getStringExtra("village"))
+        AgentManager().saveNumberhousehold(this, intent.getStringExtra("number_household"))
+        AgentManager().savevaccine_type(this, intent.getStringExtra("vaccine_type"))
+        AgentManager().savevaccine_dose(this, intent.getStringExtra("vaccine_dose"))
 
         questionManager = QuestionManager(
             resources.getStringArray(R.array.questions),
@@ -96,27 +96,28 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
         btn_next.setOnClickListener(this)
         btn_back_to_home.setOnClickListener(this)
-        btn_back_to_home.setOnClickListener{
+        btn_back_to_home.setOnClickListener {
 
 
+            AgentManager().saverdt_result(this,"null")
             var poll = questionManager!!.createPoll(this)
             PollManager().addPoll(this, poll)
 
             val intent = Intent(this, ActivityChooseCategory::class.java)
             startActivity(intent)
-           finish()
-
+            finish()
         }
-
         btn_back.setOnClickListener {
             if (questionManager!!.canGoBack()) {
                 questionManager?.previousQuestion()
                 loadQuestion()
-            } else
+            } else {
+                val intent = Intent(this, ActivityChooseCategory::class.java)
+                startActivity(intent)
                 finish()
+            }
         }
     }
-
     override fun onBackPressed() {
         if (!goBack())
             super.onBackPressed()
@@ -141,13 +142,12 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                 val intent = Intent(this, ResultActivity::class.java)
                 intent.putExtra(ResultActivity.EXTRA_RESULT, result)
 
-
                 intent.putExtra(ResultActivity.EXTRA_USER_ID, user_id)
                 intent.putExtra("patient_phone_number",getIntent().getStringExtra("patienttelephone"))
                 intent.putExtra("Indexi",getIntent().getStringExtra("Indexi"))
                 intent.putExtra(ResultActivity.EXTRA_RDT_RESULT, rdt_result)
                 startActivity(intent)
-               // finish()
+                finish()
             }
         }
     }
@@ -692,6 +692,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                 .build()
 
             startActivityForResult(intent, RDTOOLKIT_CAPTURE_RESULT_REQUEST_CODE)
+
         } catch (e: java.lang.Exception) {
             Log.e(this.localClassName, e.message)
         }
@@ -719,14 +720,6 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             val result = session?.result
 
 
-            //saving rdt results
-            AgentManager().saverdt_result(baseContext, getString(
-                when (result?.results.toString()) {
-                    "{sars_cov2=sars_cov2_pos}" -> R.string.rdt_result_pos
-                    "{sars_cov2=sars_cov2_neg}" -> R.string.rdt_result_neg
-                    else -> R.string.rdt_result_invalid
-                }
-            ))
 
             group?.rdt_result?.text = getString(
                 when (result?.results.toString()) {
@@ -735,6 +728,14 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                     else -> R.string.rdt_result_invalid
                 }
             )
+            //saving rdt results
+            AgentManager().saverdt_result(baseContext, getString(
+                when (result?.results.toString()) {
+                    "{sars_cov2=sars_cov2_pos}" -> R.string.rdt_result_pos
+                    "{sars_cov2=sars_cov2_neg}" -> R.string.rdt_result_neg
+                    else -> R.string.rdt_result_invalid
+                }
+            ))
 
             group?.rdt_result_label2?.visibility = VISIBLE
             group?.rdt_result?.visibility = VISIBLE

@@ -11,7 +11,6 @@ class AgentManager() {
         const val PRIVATE_MODE = 0
         const val PREF_POLLS = "patient_data"
         const val PREFS = "PREFS"
-        const val PREF_RDT = "rdt_results"
         const val PREF_AGENT_NUMBER = "CHW_phone"
         const val PREF_AGENT_NAME = "CHW_name"
 
