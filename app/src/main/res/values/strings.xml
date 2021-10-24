@@ -182,7 +182,7 @@
     <string name="proceed_to_rdt_test">Proceed to RDT Test</string>
     <string name="rdt_result_pos">COVID-19 Positive.</string>
     <string name="rdt_result_neg">COVID-19 Negative.</string>
-    <string name="rdt_result_invalid">Invalid: Control Failed.</string>
+    <string name="rdt_result_invalid">Invalid: Control Failed. Please, take a picture once more.</string>
 
     <string name="user_id">Rdt result</string>
     <string name="rdt_result_text">RDT result text</string>
@@ -198,5 +198,30 @@
     <string name="please_capture_the_test_result">Please capture the test result</string>
     <string name="index_code">Index code</string>
     <string name="disconnected_internet">Disconnected to the internet</string>
+    <string name="have_you_received_a_covid19_vaccine">Have you received a COVID19 vaccine?</string>
+    <string name="which_type_of_dose">Which type of Dose?</string>
+    <string name="how_many_doses">How many doses ?</string>
+    <string name="number_of_people_live_in_your_household">Number of people live in your household</string>
+    <string name="have_you_received_any_covid_19_vaccine_yet">Have you received any COVID-19 vaccine yet?</string>
+    <string name="how_many_number_of_people_living_in_your_household">How many number of people living in your household?</string>
+    <string name="enter_all_fieldss">Please All fields are required to be filled</string>
+    <string name="dose1">1st Dose</string>
+    <string name="dose2">2nd Dose</string>
+    <string name="dose3">1st and 2nd Dose</string>
+    <string name="patient_detailss">Patient details</string>
+    <string name="save_and_continues">Save and Continue</string>
+    <string name="yesi">Yes</string>
+    <string name="noo">No</string>
+    <string name="validate_code">Validating the code</string>
+    <string name="fetching_index">Fetching index...</string>
+    <string name="internnet_lost">Internet connection problem \n</string>
+    <string name="enter_index_first">Please,Enter index code first</string>
+    <string name="invalid_contact_code">Invalid index contact code</string>
+    <string name="choose_patient_category">Choose Patient category</string>
+    <string name="first_choose_patient_category">First choose patient category</string>
+    <string name="enter_your_contact_code_to_validate">Enter your contact code to validate</string>
+    <string name="index">Index</string>
+    <string name="contact">Contact</string>
+
 
 </resources>

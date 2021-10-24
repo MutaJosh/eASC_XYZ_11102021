@@ -45,7 +45,7 @@
                 android:paddingStart="10dp"
                 android:paddingTop="30dp"
                 android:paddingBottom="30dp"
-                android:text="Patient details"
+                android:text="@string/patient_detailss"
                 android:textIsSelectable="true" />
 
         </LinearLayout>
@@ -81,10 +81,10 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="20dp"
+                    android:layout_weight="1"
                     android:background="@drawable/edit_bg">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -386,14 +386,153 @@
                         android:paddingBottom="10dp" />
 
                 </LinearLayout>
+
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:paddingBottom="5dp"
+                    android:text="@string/how_many_number_of_people_living_in_your_household" />
+
+                <EditText
+                    android:id="@+id/et_numberhousehold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_bg"
+                    android:inputType="number"
+                    android:paddingStart="30dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="30dp"
+                    android:paddingBottom="10dp" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:layout_height="wrap_content"
+                    android:text="@string/have_you_received_any_covid_19_vaccine_yet"
+                    />
+
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:id="@+id/radiogrouptype"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="10dp">
+
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/radioYes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/shape_radio"
+                        android:layout_marginBottom="10dp"
+                        android:paddingStart="15dp"
+                        android:text="@string/yesi" />
+
+                    <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/radioNo"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@drawable/shape_radio"
+                        android:paddingStart="15dp"
+                        android:text="@string/noo" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/lay_vaccine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingBottom="5dp"
+                        android:text="@string/which_type_of_dose" />
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_bg"
+                        android:paddingStart="30dp"
+                        android:paddingTop="10dp"
+                        android:id="@+id/spinner_VaccineType"
+                        android:paddingEnd="30dp"
+                        android:paddingBottom="10dp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingBottom="5dp"
+                        android:text="@string/how_many_doses" />
+
+                    <Spinner
+                        android:id="@+id/spinner_Number_Dose"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_bg"
+                        android:paddingStart="30dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="30dp"
+                        android:paddingBottom="10dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
                 android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-medium"
                 android:paddingBottom="15dp"
                 android:text="@string/Address"
                 android:textStyle="bold" />
@@ -444,8 +583,8 @@
                         android:paddingBottom="5dp"
                         android:text="@string/District" />
 
-                    <EditText
-                        android:id="@+id/etdistrict"
+                    <Spinner
+                        android:id="@+id/sp_district"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_bg"
@@ -575,7 +714,7 @@
             android:fontFamily="sans-serif-medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save and Continue" />
+            android:text="@string/save_and_continues" />
 
     </LinearLayout>
 

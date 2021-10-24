@@ -43,9 +43,8 @@ class ResultActivity : AppCompatActivity() {
             }
         )
 
-
         btn_start.setOnClickListener {
-            startActivity(Intent(this, IntroActivity::class.java))
+            startActivity(Intent(this, ActivityChooseCategory::class.java))
             finish()
         }
     }

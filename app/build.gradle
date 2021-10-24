@@ -72,7 +72,7 @@ dependencies {
 
 
     implementation 'com.google.code.gson:gson:2.8.6'
-
+    compile 'com.loopj.android:android-async-http:1.4.9'
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
 

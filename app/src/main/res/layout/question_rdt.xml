@@ -17,11 +17,11 @@
         <Button
             android:id="@+id/rdt_action"
             android:layout_width="match_parent"
+            android:layout_marginTop="25dp"
             android:layout_height="wrap_content"
             android:background="@color/green"
             android:text="@string/lunch_rdt"
-            android:textColor="#FAFAFA"
-            android:visibility="visible" />
+            android:textColor="#FAFAFA"/>
     </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatTextView

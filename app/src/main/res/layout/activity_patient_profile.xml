@@ -332,7 +332,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/layrdttitle"
                 android:orientation="horizontal"
-                android:visibility="gone"
                 android:padding="15dp">
 
 

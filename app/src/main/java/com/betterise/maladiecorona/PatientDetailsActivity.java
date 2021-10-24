@@ -1,6 +1,7 @@
 package com.betterise.maladiecorona;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatRadioButton;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -16,6 +17,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,20 +36,20 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
 
 
     private static final int PRIVATE_MODE =0 ;
-    /**
-     * Created by MJC on 01/07/20.
-     */
+  private AppCompatRadioButton radioYes;
 
-
-    private Spinner sp_gender, sp_nationality, sp_residence;
-    private String nationality, gender, yearr, month, date, residency, dob;
+private RadioGroup radiogrouptype;
+    private Spinner sp_gender, sp_nationality, sp_residence,spinner_Number_Dose,sp_district;
+    private String nationality, gender, yearr, month, date, residency, dob,numberhousehold,VaxxineType,Number_Dose,NulledVaccination;
     private ImageButton btndatepicker;
     private Button btn_next;
     private ImageView btn_back;
     private TextView tvdob;
+    private Spinner spinner_VaccineType;
     private int mYear, mMonth, mDay;
+    private LinearLayout lay_vaccine;
     private TextView tvindexcode;
-    private EditText etfirstname, etlastname, etnational_ID, etpatientgender, etpatienttelephone, etoccupation, etresidence, etnationality, etprovince, etdistrict, etsector, etcell, etvillage;
+    private EditText etfirstname,et_numberhousehold, etlastname, etnational_ID, etpatientgender, etpatienttelephone, etoccupation, etresidence, etnationality, etprovince, etsector, etcell, etvillage;
     private String fn, lastname, national_ID, patientgender, patienttelephone, occupation, residence, province, district, sector, cell, village;
 public static final String PREF_FIRSTNAME = "firstname";
     public static final String PREF_LASTNAME = "lastname";
@@ -56,10 +60,15 @@ public static final String PREF_FIRSTNAME = "firstname";
 
 
         tvindexcode=findViewById(R.id.tvindexcode);
-
+        spinner_VaccineType=findViewById(R.id.spinner_VaccineType);
+        spinner_Number_Dose=findViewById(R.id.spinner_Number_Dose);
+        lay_vaccine=findViewById(R.id.lay_vaccine);
+        sp_district=findViewById(R.id.sp_district);
+        radiogrouptype=(RadioGroup)findViewById(R.id.radiogrouptype);
         //long l = ByteBuffer.wrap(getIntent().getStringExtra("uuid").toString().getBytes()).getLong();
     //  String a= Long.toString(l, Character.MAX_RADIX);
 
+        et_numberhousehold=findViewById(R.id.et_numberhousehold);
         tvindexcode.setTextIsSelectable(true);
         if (getIntent().getStringExtra("category").equals("contact")){
             tvindexcode.setText(getIntent().getStringExtra("indexcodee").toUpperCase());
@@ -70,13 +79,31 @@ public static final String PREF_FIRSTNAME = "firstname";
 
 
 
+        radiogrouptype.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+                radioYes =(AppCompatRadioButton) findViewById(selectedId);
+
+                if (radioYes.getText().equals("Yes")){
+                    lay_vaccine.setVisibility(View.VISIBLE);
+                    NulledVaccination="yes";
+
+                }else {
+                    NulledVaccination="no";
+                    lay_vaccine.setVisibility(View.GONE);
+                }
+            }
+        });
+
+
         etfirstname=findViewById(R.id.firstname);
         etlastname=findViewById(R.id.etlastname);
         etnational_ID=findViewById(R.id.national_ID);
         etpatienttelephone=findViewById(R.id.patient_telephone);
         etoccupation=findViewById(R.id.etoccupation);
         etprovince=findViewById(R.id.etprovince);
-        etdistrict=findViewById(R.id.etdistrict);
         etsector=findViewById(R.id.etsector);
         etcell=findViewById(R.id.etcell);
         etvillage=findViewById(R.id.etvillage);
@@ -88,6 +115,7 @@ public static final String PREF_FIRSTNAME = "firstname";
         tvdob = findViewById(R.id.tvdob);
         btndatepicker = findViewById(R.id.btndatepicker);
         btndatepicker.setOnClickListener(this);
+
 
         sp_nationality.setOnItemSelectedListener(this);
 
@@ -107,6 +135,112 @@ public static final String PREF_FIRSTNAME = "firstname";
         dataAdapte.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_nationality.setAdapter(dataAdapter);
         sp_residence.setAdapter(dataAdapte);
+
+
+        List<String> listnumbervacc = new ArrayList<String>();
+
+        listnumbervacc.add(getString(R.string.dose1));
+        listnumbervacc.add(getString(R.string.dose2));
+        listnumbervacc.add(getString(R.string.dose3));
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapternumbervacc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listnumbervacc);
+        // Drop down layout style - list view with radio button
+        dataAdapternumbervacc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_Number_Dose.setAdapter(dataAdapternumbervacc);
+
+        spinner_Number_Dose.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Number_Dose=adapterView.getItemAtPosition(i)+"";
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        List<String> listdis = new ArrayList<String>();
+
+        listdis.add("Bugesera");
+        listdis.add("Burera");
+        listdis.add("Gakenke");
+        listdis.add("Gasabo");
+        listdis.add("Gatsibo");
+        listdis.add("Gicumbi");
+        listdis.add("Gisagara");
+        listdis.add("Huye");
+        listdis.add("Kamonyi");
+        listdis.add("Karongi");
+        listdis.add("Kayonza");
+        listdis.add("Kicukiro");
+        listdis.add("Kirehe");
+        listdis.add("Muhanga");
+        listdis.add("Musanze");
+        listdis.add("Ngoma");
+        listdis.add("Ngororero");
+        listdis.add("Nyabihu");
+        listdis.add("Nyagatare");
+        listdis.add("Nyamagabe");
+        listdis.add("Nyamasheke");
+        listdis.add("Nyanza");
+        listdis.add("Nyarugenge");
+        listdis.add("Nyaruguru");
+        listdis.add("Rubavu");
+        listdis.add("Ruhango");
+        listdis.add("Rulindo");
+        listdis.add("Rusizi");
+        listdis.add("Rutsiro");
+        listdis.add("Rwamagana");
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapterdis = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listdis);
+        // Drop down layout style - list view with radio button
+        dataAdapterdis.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_district.setAdapter(dataAdapterdis);
+
+
+        sp_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                district=adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        List<String> listtypevacc = new ArrayList<String>();
+
+        listtypevacc.add(" AstraZenecca");
+        listtypevacc.add("Moderna");
+        listtypevacc.add("Pfizer");
+        listtypevacc.add("Johnson Johnson");
+        listtypevacc.add("Sputnik-V");
+        listtypevacc.add("Snovak");
+        listtypevacc.add("Other");
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdaptertyepVacc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listtypevacc);
+        // Drop down layout style - list view with radio button
+        dataAdaptertyepVacc.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_VaccineType.setAdapter(dataAdaptertyepVacc);
+
+        spinner_VaccineType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                VaxxineType=adapterView.getItemAtPosition(i) + "";
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
 
         List<String> listgender = new ArrayList<String>();
 
@@ -203,26 +337,21 @@ public static final String PREF_FIRSTNAME = "firstname";
                 break;
 
             case R.id.btn_next:
-
-
-
                 fn = etfirstname.getText().toString().trim();
                 lastname = etlastname.getText().toString().trim();
                 national_ID = etnational_ID.getText().toString().trim();
                 province = etprovince.getText().toString().trim();
-                district = etdistrict.getText().toString().trim();
                 sector = etsector.getText().toString().trim();
                 cell = etcell.getText().toString().trim();
                 village = etvillage.getText().toString().trim();
                 occupation=etoccupation.getText().toString().trim();
                 patienttelephone=etpatienttelephone.getText().toString().trim();
+                numberhousehold=et_numberhousehold.getText().toString().trim();
 
-                if (fn.isEmpty() || lastname.isEmpty() || national_ID.isEmpty() || province.isEmpty() ||
-                district.isEmpty() || sector.isEmpty() || sector.isEmpty() || cell.isEmpty()
-                || village.isEmpty() || occupation.isEmpty() || patienttelephone.isEmpty()  ){
-                    Toast.makeText(this, "Please All fields are required to be filled", Toast.LENGTH_LONG).show();
+                if (fn.isEmpty() || lastname.isEmpty() || national_ID.isEmpty() || province.isEmpty() || sector.isEmpty() || sector.isEmpty() || cell.isEmpty()
+                || village.isEmpty() || occupation.isEmpty() || patienttelephone.isEmpty() ||numberhousehold.isEmpty()  ){
+                    Toast.makeText(getBaseContext(), R.string.enter_all_fieldss, Toast.LENGTH_LONG).show();
                 }else {
-
 
                     new AgentManager().savecategory(this,getIntent().getStringExtra("category"));
 
@@ -243,10 +372,19 @@ public static final String PREF_FIRSTNAME = "firstname";
                     intent.putExtra("village", village);
                     intent.putExtra("rdt_result","null");
                     intent.putExtra("Indexi",tvindexcode.getText().toString().trim());
+                    intent.putExtra("number_household",numberhousehold);
+                    if (NulledVaccination.equals("no")){
 
+                        intent.putExtra("vaccine_type", "null");
+                        intent.putExtra("vaccine_dose", "null");
+                    }else if(NulledVaccination.equals("yes")){
+                        intent.putExtra("vaccine_type", VaxxineType);
+                        intent.putExtra("vaccine_dose", Number_Dose);
+                    }
                     startActivity(intent);
                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                   // finish();
+                    finish();
+
 
 
                 }

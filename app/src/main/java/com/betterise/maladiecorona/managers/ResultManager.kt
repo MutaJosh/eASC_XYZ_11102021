@@ -101,29 +101,31 @@ class ResultManager {
 
 
         if (
-                answers[TRAVEL].value == 1 &&
-                answers[CONTACT].value == 1 &&
-                answers[FIVER].value == 1 &&
-                answers[TEMPERATURE].value == 2 &&
-                answers[COUGH].value == 1 &&
-                answers[EAT_DRINK].value == 1 &&
-                answers[BREATH].value == 1 &&
-                answers[THROAT].value == 1 &&
-                answers[TASTE].value == 1 &&
-                answers[MUSCLE_PAIN].value == 1 &&
-                answers[DIARRHEA].value == 1 &&
-                answers[WEIGHT].value == 1 &&
-                answers[HEIGHT].value == 1 &&
-                answers[TENSION].value == 1 && answers[TENSION].value == 3 &&    // When the answer is YES or DO NOT KNOW
-                answers[DIABETES].value == 1 &&
-                answers[CANCER].value == 1 &&
-                answers[RESPIRATORY_DISEASE].value == 1 &&
-                answers[PREGNANT].value == 1
+                answers[TRAVEL].value == 1 || answers[CONTACT].value == 1 || answers[TEMPERATURE].value == 2
+
+//                &&
+//                answers[CONTACT].value == 1 &&
+//                answers[FIVER].value == 1 &&
+//                answers[TEMPERATURE].value == 2 &&
+//                answers[COUGH].value == 1 &&
+//                answers[EAT_DRINK].value == 1 &&
+//                answers[BREATH].value == 1 &&
+//                answers[THROAT].value == 1 &&
+//                answers[TASTE].value == 1 &&
+//                answers[MUSCLE_PAIN].value == 1 &&
+//                answers[DIARRHEA].value == 1 &&
+//                answers[WEIGHT].value == 1 &&
+//                answers[HEIGHT].value == 1 &&
+//                answers[TENSION].value == 1 && answers[TENSION].value == 3 &&    // When the answer is YES or DO NOT KNOW
+//                answers[DIABETES].value == 1 &&
+//                answers[CANCER].value == 1 &&
+//                answers[RESPIRATORY_DISEASE].value == 1 &&
+//                answers[PREGNANT].value == 1
 
         ){
 
           //  POSITIVE as the screening outcome
-          result=ResultType.CASE2
+          result = ResultType.CASE2
 
 
         }else{
@@ -133,7 +135,7 @@ class ResultManager {
                 // When someone chose the lowest conditions, ...
 
 //                    NEGATIVE as the screening outcome
-            result=ResultType.CASE1
+            result = ResultType.CASE1
         }
 
 

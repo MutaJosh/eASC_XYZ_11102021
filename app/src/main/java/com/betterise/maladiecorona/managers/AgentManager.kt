@@ -167,6 +167,29 @@ class AgentManager() {
             .apply()
     }
 
+    fun saveNumberhousehold(context:Context,index:String){
+        var sharedPrefs = context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE)
+        sharedPrefs
+            .edit()
+            .putString("number_household", index)
+            .apply()
+    }
+    fun savevaccine_type(context:Context,index:String){
+        var sharedPrefs = context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE)
+        sharedPrefs
+            .edit()
+            .putString("vaccine_type", index)
+            .apply()
+    }
+    fun savevaccine_dose(context:Context,index:String){
+        var sharedPrefs = context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE)
+        sharedPrefs
+            .edit()
+            .putString("vaccine_dose", index)
+            .apply()
+    }
+
+
     /***
      * Retrieving the current agent number
      */
@@ -190,4 +213,9 @@ class AgentManager() {
     fun getrdt_result(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("rdt_result", "")
     fun getindexcode(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("Index", "")
     fun getcategory(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("category", "")
+    fun getnumberhousehold(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("number_household", "")
+    fun getvaccine_type(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("vaccine_type", "")
+    fun getvaccine_dose(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("vaccine_dose", "")
+
+
 }

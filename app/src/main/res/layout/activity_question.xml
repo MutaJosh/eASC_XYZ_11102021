@@ -91,6 +91,19 @@
                 android:text="@string/question_example"
                 style="@style/DefaultText"/>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/test_resultascov"
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_gravity="center_vertical"
+                style="@style/DefaultText"
+                />
+
             <LinearLayout
                 android:id="@+id/answer_container"
                 android:layout_width="match_parent"
@@ -107,6 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
+        android:orientation="vertical"
         android:padding="20dp">
 
         <androidx.appcompat.widget.AppCompatButton
@@ -117,6 +131,20 @@
             android:enabled="false"
             style="@style/BottomFormButton"/>
 
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_back_to_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:text="Back to Home"
+            android:layout_alignParentBottom="true"
+            style="@style/BottomFormButton"/>
+
+
     </LinearLayout>
+
 
 </RelativeLayout>

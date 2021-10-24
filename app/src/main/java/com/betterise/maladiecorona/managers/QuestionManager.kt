@@ -99,10 +99,9 @@ class QuestionManager(private var questions : Array<String>, private var choices
         poll.rdt_result=AgentManager().getrdt_result(context)
         poll.Index=AgentManager().getindexcode(context)
         poll.category=AgentManager().getcategory(context)
-
-
-        //saving rdt results
-        AgentManager().saverdt_result(context,getSpecificAnswer(19)?.text.toString() )
+        poll.number_household=AgentManager().getnumberhousehold(context)
+        poll.vaccine_type=AgentManager().getvaccine_type(context)
+        poll.vaccine_dose=AgentManager().getvaccine_dose(context)
 
         // Poll's result
         var result = getResults()

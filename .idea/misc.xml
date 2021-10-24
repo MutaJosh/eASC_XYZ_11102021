@@ -20,10 +20,10 @@
         <entry key="app/src/main/res/layout/activity_choose_category.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_export.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_intro.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_patient_details.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_patient_details.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_patient_profile.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_question.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_results.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_results.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_test_sessions.xml" value="0.14375" />
         <entry key="app/src/main/res/layout/card_test_sessions.xml" value="0.14375" />
         <entry key="app/src/main/res/layout/item_bsvalidatecode.xml" value="0.18802083333333333" />

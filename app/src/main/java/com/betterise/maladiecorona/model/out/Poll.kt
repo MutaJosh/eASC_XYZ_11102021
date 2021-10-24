@@ -27,6 +27,9 @@ class Poll {
     var rdt_result: String=""
     var Index: String=""
     var category:String=""
+    var number_household:String=""
+    var vaccine_type:String=""
+    var vaccine_dose:String=""
 
     var ASCOV_answers : MutableList<PollAnswer> = arrayListOf()
 

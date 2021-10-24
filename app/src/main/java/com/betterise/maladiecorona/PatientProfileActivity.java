@@ -78,18 +78,18 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
         }
     }
 
-    // Starting the RDT activity - Test Provisioning
-    public void openrdttest(View view) {
-
-        Intent i = RdtIntentBuilder.forProvisioning()
-                .setSessionId(databaseId) // Explicitly declare an ID for the session
-                .requestProfileCriteria("sars_cov2", ProvisionMode.CRITERIA_SET_AND) //.requestProfileCriteria("sd_bioline_mal_pf_pv carestart_mal_pf_pv", ProvisionMode.CRITERIA_SET_OR)
-                .setFlavorOne(patientName) // Text to differentiate running tests
-                .setFlavorTwo(patientID) // Text to differentiate running tests
-                .build();
-
-
-    }
+//    // Starting the RDT activity - Test Provisioning
+//    public void openrdttest(View view) {
+//
+//        Intent i = RdtIntentBuilder.forProvisioning()
+//                .setSessionId(databaseId) // Explicitly declare an ID for the session
+//                .requestProfileCriteria("sars_cov2", ProvisionMode.CRITERIA_SET_AND) //.requestProfileCriteria("sd_bioline_mal_pf_pv carestart_mal_pf_pv", ProvisionMode.CRITERIA_SET_OR)
+//                .setFlavorOne(patientName) // Text to differentiate running tests
+//                .setFlavorTwo(patientID) // Text to differentiate running tests
+//                .build();
+//
+//
+//    }
 
 
 
