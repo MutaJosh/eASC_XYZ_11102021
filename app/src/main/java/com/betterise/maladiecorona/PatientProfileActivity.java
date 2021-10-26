@@ -84,14 +84,14 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
         patientID=getIntent().getStringExtra("national_ID");
         patientName=getIntent().getStringExtra("firstname")+getIntent().getStringExtra("lastname");
         databaseId= UUID.randomUUID().toString();
-
-        if (getIntent().getStringExtra("rdt_result").equals("null")){
-            btn_startprofile.setVisibility(View.GONE);
-            btn_startRdt.setVisibility(View.VISIBLE);
-        }else{
-            btn_startprofile.setVisibility(View.VISIBLE);
-            btn_startRdt.setVisibility(View.GONE);
-        }
+//
+//        if (getIntent().getStringExtra("rdt_result").equals("null")){
+//            btn_startprofile.setVisibility(View.GONE);
+//            btn_startRdt.setVisibility(View.VISIBLE);
+//        }else{
+//            btn_startprofile.setVisibility(View.VISIBLE);
+//            btn_startRdt.setVisibility(View.GONE);
+//        }
 
         result_namesprofile.setText(getIntent().getStringExtra("firstname")+getIntent().getStringExtra("lastname"));
         result_genderprofile.setText(getIntent().getStringExtra("patientgender"));

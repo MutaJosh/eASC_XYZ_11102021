@@ -45,6 +45,8 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
     var questionManager: QuestionManager? = null
     var group: ViewGroup? = null
 
+    var group_rdt: ViewGroup? = null
+
 
 
     private val RDTOOLKIT_ACTIVITY_REQUEST_CODE = 1
@@ -199,8 +201,12 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
               //  val mybutton = rl.findViewById<View>(R.id.rdt_action) as Button
                // mybutton.visibility= GONE
                 btn_back_to_home.visibility= VISIBLE
-                //Toast.makeText(baseContext, "Nimuzima ", Toast.LENGTH_LONG).show()
+                Toast.makeText(baseContext, "Nimuzima ", Toast.LENGTH_LONG).show()
                 btn_next.visibility=GONE
+
+                group_rdt== View.inflate(this, R.layout.question_rdt, null) as ViewGroup?
+                group_rdt?.rdt_action?.visibility = GONE
+
 
             }else{
                 btn_back_to_home.visibility=GONE
