@@ -100,12 +100,10 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
         result_nidprofile.setText(getIntent().getStringExtra("national_ID"));
         result_nationalityprofile.setText(getIntent().getStringExtra("nationality"));
         result_addressprofile.setText(getIntent().getStringExtra("district")+", "+getIntent().getStringExtra("sector"));
-        result_ascovprofile.setText(getIntent().getStringExtra("eascov_result"));
+        result_ascovprofile.setText(getIntent().getStringExtra("ascov_resulti"));
         result_rdtresultprofile.setText(getIntent().getStringExtra("rdt_result"));
         tvcaseindex.setText(getIntent().getStringExtra("Index"));
         tvcategory.setText(getIntent().getStringExtra("category"));
-
-
     }
 
     @Override

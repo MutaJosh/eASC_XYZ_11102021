@@ -2,13 +2,13 @@ package com.betterise.maladiecorona.model;
 
 public class Item_session {
     private String   firstname,lastname,national_ID,patienttelephone,dob;
-    private String patientgender,occupation,residence,nationality,province,district,sector,cell,village,Index,category
+    private String patientgender,occupation,residence,nationality,province,district,sector,cell,village,Index,category,ascov_resulti
             ,ASCOV_diagnostic,rdt_result;
 
     public Item_session() {
     }
 
-    public Item_session(String firstname, String lastname, String national_ID, String patienttelephone, String dob, String patientgender, String occupation, String residence, String nationality, String province, String district, String sector, String cell, String village, String index, String category, String ASCOV_diagnostic, String rdt_result) {
+    public Item_session(String firstname, String lastname, String national_ID, String patienttelephone, String dob, String patientgender, String occupation, String residence, String nationality, String province, String district, String sector, String cell, String village, String index, String category, String ascov_resulti, String ASCOV_diagnostic, String rdt_result) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.national_ID = national_ID;
@@ -23,8 +23,9 @@ public class Item_session {
         this.sector = sector;
         this.cell = cell;
         this.village = village;
-        this.Index = index;
+        Index = index;
         this.category = category;
+        this.ascov_resulti = ascov_resulti;
         this.ASCOV_diagnostic = ASCOV_diagnostic;
         this.rdt_result = rdt_result;
     }
@@ -155,6 +156,14 @@ public class Item_session {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getAscov_resulti() {
+        return ascov_resulti;
+    }
+
+    public void setAscov_resulti(String ascov_resulti) {
+        this.ascov_resulti = ascov_resulti;
     }
 
     public String getASCOV_diagnostic() {

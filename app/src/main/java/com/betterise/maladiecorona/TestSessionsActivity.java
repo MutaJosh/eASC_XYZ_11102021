@@ -100,7 +100,7 @@ public class TestSessionsActivity extends AppCompatActivity implements View.OnCl
         intent.putExtra("cell", mExampleList.get(position).getCell());
         intent.putExtra("village", mExampleList.get(position).getVillage());
         intent.putExtra("rdt_result",mExampleList.get(position).getRdt_result());
-        intent.putExtra("eascov_result",mExampleList.get(position).getASCOV_diagnostic());
+        intent.putExtra("ascov_resulti",mExampleList.get(position).getAscov_resulti());
         intent.putExtra("Index",mExampleList.get(position).getIndex().toUpperCase());
         intent.putExtra("category",mExampleList.get(position).getCategory());
 

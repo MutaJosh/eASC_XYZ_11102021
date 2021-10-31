@@ -25,6 +25,7 @@ class Poll {
     var cell: String = ""
     var village: String = ""
     var rdt_result: String=""
+    var ascov_resulti: String=""
     var Index: String=""
     var category:String=""
     var number_household:String=""

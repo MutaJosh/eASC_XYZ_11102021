@@ -173,8 +173,11 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
         if (qi.equals("20")) {
 
+
              // Toast.makeText(baseContext, "test btn rdt removal", Toast.LENGTH_LONG).show()
             var result_ascoov=  questionManager!!.getResults()
+
+
 
             test_resultascov.visibility=VISIBLE
             test_resultascov.text="Index : "+getIntent().getStringExtra("Indexi")+"\n \n \n"+baseContext.getString(
@@ -187,6 +190,18 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                     ResultType.CASE5 -> R.string.result5
                 }
             )
+
+            //saving ascov results
+            AgentManager().saveascov_result(this,baseContext.getString(
+                when (result_ascoov){
+                    ResultType.CASE1 -> R.string.result1
+                    ResultType.CASE2 -> R.string.result2
+                    ResultType.CASE3 -> R.string.result3
+                    ResultType.CASE3bis -> R.string.result3bis
+                    ResultType.CASE4 -> R.string.result4
+                    ResultType.CASE5 -> R.string.result5
+                }
+            ) )
 
             if ((baseContext.getString(when (result_ascoov){
                         ResultType.CASE1 -> R.string.result1
@@ -201,12 +216,11 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
               //  val mybutton = rl.findViewById<View>(R.id.rdt_action) as Button
                // mybutton.visibility= GONE
                 btn_back_to_home.visibility= VISIBLE
-                Toast.makeText(baseContext, "Nimuzima ", Toast.LENGTH_LONG).show()
+              //  Toast.makeText(baseContext, "Nimuzima ", Toast.LENGTH_LONG).show()
                 btn_next.visibility=GONE
 
                 group_rdt== View.inflate(this, R.layout.question_rdt, null) as ViewGroup?
                 group_rdt?.rdt_action?.visibility = GONE
-
 
             }else{
                 btn_back_to_home.visibility=GONE

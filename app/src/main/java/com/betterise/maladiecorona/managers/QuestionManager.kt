@@ -97,6 +97,7 @@ class QuestionManager(private var questions : Array<String>, private var choices
         poll.cell=AgentManager().getCell(context)
         poll.village=AgentManager().getVillage(context)
         poll.rdt_result=AgentManager().getrdt_result(context)
+        poll.ascov_resulti=AgentManager().getascov_result(context)
         poll.Index=AgentManager().getindexcode(context)
         poll.category=AgentManager().getcategory(context)
         poll.number_household=AgentManager().getnumberhousehold(context)

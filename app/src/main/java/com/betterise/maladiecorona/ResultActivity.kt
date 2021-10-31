@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.activity_results.*
  * Created by Alexandre on 24/06/20.
  */
 class ResultActivity : AppCompatActivity() {
-
     companion object {
         const val EXTRA_RESULT = "EXTRA_RESULT"
         const val EXTRA_USER_ID = "EXTRA_USER_ID"
