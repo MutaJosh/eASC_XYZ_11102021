@@ -45,9 +45,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
     var questionManager: QuestionManager? = null
     var group: ViewGroup? = null
 
-    var group_rdt: ViewGroup? = null
-
-
+    private var show_rdt:String=""
 
     private val RDTOOLKIT_ACTIVITY_REQUEST_CODE = 1
     private val RDTOOLKIT_CAPTURE_RESULT_REQUEST_CODE = 2
@@ -70,6 +68,8 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         setContentView(R.layout.activity_question)
 
         btn_next.visibility = VISIBLE
+
+
 
         AgentManager().savefirstname(this, intent.getStringExtra("firstname"))
         AgentManager().savelastname(this, intent.getStringExtra("lastname"))
@@ -156,6 +156,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
     private fun loadQuestion() {
 
+
         question.text = questionManager?.getCurrentQuestion()
         progress.text = String.format(
             getString(R.string.question_progress),
@@ -172,12 +173,8 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
 
         if (qi.equals("20")) {
-
-
-             // Toast.makeText(baseContext, "test btn rdt removal", Toast.LENGTH_LONG).show()
+            // Toast.makeText(baseContext, "test btn rdt removal", Toast.LENGTH_LONG).show()
             var result_ascoov=  questionManager!!.getResults()
-
-
 
             test_resultascov.visibility=VISIBLE
             test_resultascov.text="Index : "+getIntent().getStringExtra("Indexi")+"\n \n \n"+baseContext.getString(
@@ -211,18 +208,15 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                         ResultType.CASE4 -> R.string.result4
                         ResultType.CASE5 -> R.string.result5 }) as String).equals(getString(R.string.result1))){
 
-
-              //  val rl = findViewById<View>(R.id.container) as RelativeLayout
-              //  val mybutton = rl.findViewById<View>(R.id.rdt_action) as Button
-               // mybutton.visibility= GONE
                 btn_back_to_home.visibility= VISIBLE
               //  Toast.makeText(baseContext, "Nimuzima ", Toast.LENGTH_LONG).show()
                 btn_next.visibility=GONE
 
-                group_rdt== View.inflate(this, R.layout.question_rdt, null) as ViewGroup?
-                group_rdt?.rdt_action?.visibility = GONE
+                show_rdt="yes"
 
             }else{
+                show_rdt="no"
+
                 btn_back_to_home.visibility=GONE
                 btn_next.visibility=VISIBLE
             }
@@ -242,8 +236,6 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
 
     }
-
-
     private fun goBack(): Boolean {
         if (questionManager!!.canGoBack()) {
             questionManager?.previousQuestion()
@@ -515,6 +507,10 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         val answer = questionManager!!.getAnswer()
         btn_next.isEnabled = true
 
+        if (show_rdt.equals("yes")){
+
+            group?.rdt_action?.visibility = GONE
+        }
 
         if ((answer.text.isNotEmpty()) and (answer.text != RDT_PENDING_STATUS)) {
             group?.rdt_result?.setText(answer.text)
