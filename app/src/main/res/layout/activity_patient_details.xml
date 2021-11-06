@@ -81,9 +81,9 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/edit_bg">
 
@@ -93,17 +93,44 @@
                         android:layout_width="246dp"
                         android:layout_height="34dp"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="3dp"
                         android:fontFamily="sans-serif-medium"
-                        android:gravity="center"
+                        android:paddingLeft="5dp"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
-                        android:text="AB09-RT67"
+                        android:text="..."
                         android:textColor="#000"
-                        android:textSize="20dp"
+                        android:textSize="12dp"
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingBottom="5dp"
+                    android:text="@string/nid" />
+
+                <EditText
+                    android:id="@+id/national_ID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_bg"
+                    android:inputType="number"
+                    android:paddingStart="30dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="30dp"
+                    android:paddingBottom="10dp" />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -163,32 +190,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingBottom="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:paddingBottom="5dp"
-                    android:text="@string/nid" />
-
-                <EditText
-                    android:id="@+id/national_ID"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/edit_bg"
-                    android:inputType="number"
-                    android:paddingStart="30dp"
-                    android:paddingTop="10dp"
-                    android:paddingEnd="30dp"
-                    android:paddingBottom="10dp" />
-
-            </LinearLayout>
 
 
             <LinearLayout
@@ -713,6 +714,7 @@
             style="@style/BottomFormButton"
             android:fontFamily="sans-serif-medium"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:text="@string/save_and_continues" />
 

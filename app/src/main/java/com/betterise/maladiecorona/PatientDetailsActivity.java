@@ -9,6 +9,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,14 +29,29 @@ import android.widget.Toast;
 
 import com.betterise.maladiecorona.managers.AgentManager;
 import com.betterise.maladiecorona.managers.QuestionManager;
+import com.betterise.maladiecorona.model.IndexCode;
+import com.betterise.maladiecorona.networking.singleton.RESTApiClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PatientDetailsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
 
+
+    private String statusNID,codeNID,messageNID,fNameNID,lNameNID,dobNID,nationalityNID;
 
     private static final int PRIVATE_MODE =0 ;
   private AppCompatRadioButton radioYes;
@@ -70,13 +88,6 @@ public static final String PREF_FIRSTNAME = "firstname";
 
         et_numberhousehold=findViewById(R.id.et_numberhousehold);
         tvindexcode.setTextIsSelectable(true);
-        if (getIntent().getStringExtra("category").equals("contact")){
-            tvindexcode.setText(getIntent().getStringExtra("indexcodee").toUpperCase());
-        }else{
-            String x=getIntent().getStringExtra("uuid");
-            tvindexcode.setText(x.toUpperCase());
-        }
-
 
 
         radiogrouptype.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -115,6 +126,14 @@ public static final String PREF_FIRSTNAME = "firstname";
         tvdob = findViewById(R.id.tvdob);
         btndatepicker = findViewById(R.id.btndatepicker);
         btndatepicker.setOnClickListener(this);
+
+
+        etnational_ID.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                callNIDAPI();
+            }
+        });
 
 
         sp_nationality.setOnItemSelectedListener(this);
@@ -389,7 +408,7 @@ public static final String PREF_FIRSTNAME = "firstname";
                 break;
 
             case R.id.btn_back:
-                startActivity(new Intent(PatientDetailsActivity.this,ActivityChooseCategory.class));
+                startActivity(new Intent(PatientDetailsActivity.this,PatientDetailsActivity.class));
                 overridePendingTransition(R.anim.fadeout, R.anim.fadein);
                 finish();
                 break;
@@ -397,6 +416,84 @@ public static final String PREF_FIRSTNAME = "firstname";
         }
     }
 
+    private void callNIDAPI(){
+        IndexCode index =new IndexCode();
+        index.setIndex(etnational_ID.getText().toString().trim());
+        
+        Map<String, String> param = new HashMap<>();
+        param.put("NID", etnational_ID.getText().toString().trim());
+        out(param);
+    }
+    private void out(final Map<String, String> user) {
+        Call<ResponseBody> request = RESTApiClient.getInstance().getApi().sendNID(user);
+
+        request.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                //Response
+                if (Integer.toString(response.code()).equals("200")) {
+                 
+                    try {
+                        String jsondata = response.body().string();
+
+                        if (jsondata != null) {
+
+                           
+                            JSONObject reader = new JSONObject(jsondata);
+
+                            statusNID = reader.getString("status");
+                           codeNID=reader.getString("code");
+                            messageNID=reader.getString("message");
+                            if (messageNID.equals("Found")) {
+                                    tvindexcode.setText(codeNID);
+                                btn_next.setVisibility(View.VISIBLE);
+                                JSONObject jsonObject = new JSONObject(jsondata).getJSONObject("data");
+                                lNameNID=jsonObject.getString("lName");
+                                fNameNID=jsonObject.getString("fName");
+                                dobNID=jsonObject.getString("dob");
+                                nationalityNID=jsonObject.getString("natinality");
+                                etfirstname.setText(fNameNID);
+                                etlastname.setText(lNameNID);
+
+                                Log.e("Done",lNameNID+fNameNID+dobNID+nationalityNID);
+
+                            }
+                            if (getIntent().getStringExtra("category").equals("contact")){
+                                Log.e("contact ",codeNID+"-\n"+getIntent().getStringExtra("uuid"));
+                                tvindexcode.setText(codeNID+"-"+getIntent().getStringExtra("uuid"));
+                                btn_next.setVisibility(View.VISIBLE);
+                            }
+
+
+                            Log.e("Data from  DB",statusNID+"\n"+codeNID+"\n"+messageNID);
+
+
+                        }else{
+                            
+                            Toast.makeText(PatientDetailsActivity.this, "response error -null", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                      //  Toast.makeText(PatientDetailsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                       // Toast.makeText(PatientDetailsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                }else{
+                  
+                    Toast.makeText(PatientDetailsActivity.this, getString(R.string.check_internet)+response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                //failure
+               
+                Toast.makeText(PatientDetailsActivity.this, "Error"+t.getLocalizedMessage().toLowerCase(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
 }

@@ -98,54 +98,15 @@ private TextView errorBulletcate;
                     if (radiobtnindex.getText().equals("Index")){
 
 
-
-                        progressDialog2.show();
-
-                        AsyncHttpClient client = new AsyncHttpClient();
-                        client.setBasicAuth("EAC_test", "EACPass@2021");
-                        client.get("http://161.97.184.144:8080/api/33/trackedEntityAttributes/MSWzPQhISym/generateAndReserve?numberToReserve=1", new AsyncHttpResponseHandler() {
-                            @Override
-                            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                String json = new String(responseBody); // This is the json.
-                                progressDialog2.dismiss();
-                            //   Toast.makeText(getBaseContext(), "data is \n"+json, Toast.LENGTH_LONG).show();
-
-
-
-                                try {
-                                    JSONArray jsonArray = new JSONArray(json);
-                                    for (int i=0; i<jsonArray.length(); i++) {
-                                        JSONObject item = jsonArray.getJSONObject(i);
-                                         value = item.getString("value");
-                                    }
-
-
                         Intent intent=new Intent(ActivityChooseCategory.this,PatientDetailsActivity.class);
                         category="Index";
-                        intent.putExtra("uuid", value);
                         intent.putExtra("category",category);
 
-                        new AgentManager().saveindexcode(getBaseContext(),value);
+                        //save inex code
+//                        new AgentManager().saveindexcode(getBaseContext(),value);
                         startActivity(intent);
+
                         finish();
-
-
-                                   // Log.e("Value of index  is : ",value);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-
-                            }
-
-                            @Override
-                            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                                progressDialog2.dismiss();
-                                Toast.makeText(getBaseContext(), getString(R.string.internnet_lost)+error.getMessage() , Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-
 
                         lay_validate.setVisibility(View.GONE);
                     }else{
@@ -209,7 +170,7 @@ private TextView errorBulletcate;
                                 //for temporary testing ,validation needed
                                 Intent intt = new Intent(ActivityChooseCategory.this, PatientDetailsActivity.class);
                                 category = "contact";
-                                intt.putExtra("indexcodee", eTindexcode.getText().toString().trim());
+                                intt.putExtra("uuid", eTindexcode.getText().toString().trim());
                                 intt.putExtra("category", category);
                                 new AgentManager().saveindexcode(getBaseContext(),eTindexcode.getText().toString().trim());
                                 startActivity(intt);

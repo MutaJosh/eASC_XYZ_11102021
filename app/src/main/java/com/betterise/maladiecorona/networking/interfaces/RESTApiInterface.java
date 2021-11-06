@@ -16,5 +16,11 @@ public interface RESTApiInterface {
 
 
 
+    //send nid
+    @POST("fetch-nid.php")
+    Call<ResponseBody> sendNID(@Body Map<String,String> obj);
+
+
+
 
 }

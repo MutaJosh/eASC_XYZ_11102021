@@ -69,8 +69,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
         btn_next.visibility = VISIBLE
 
-
-
+        AgentManager().saveindexcode(this,intent.getStringExtra("Indexi"))
         AgentManager().savefirstname(this, intent.getStringExtra("firstname"))
         AgentManager().savelastname(this, intent.getStringExtra("lastname"))
         AgentManager().savenational_ID(this, intent.getStringExtra("national_ID"))

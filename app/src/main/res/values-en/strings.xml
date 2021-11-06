@@ -189,5 +189,6 @@
     <string name="first_choose_patient_category">First choose patient category</string>
     <string name="enter_your_contact_code_to_validate">Enter your contact code to validate</string>
     <string name="index">Index</string>
+    <string name="check_internet">\"error,Check your internet connection please \"</string>
 
 </resources>

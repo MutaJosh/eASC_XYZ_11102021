@@ -7,6 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RESTApiClient {
 
+
     private static final String BASE_URL = "https://rbc.gov.rw/community/data-sharing/api/";
     private static RESTApiClient apiClient;
     private static Retrofit retrofit;
