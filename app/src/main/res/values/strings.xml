@@ -223,6 +223,12 @@
     <string name="index">Index</string>
     <string name="contact">Contact</string>
     <string name="check_internet">\"error,Check your internet connection please \"</string>
+    <string name="enter_nid">Enter your Nation ID or Passport please</string>
+    <string name="south">South</string>
+    <string name="east">East</string>
+    <string name="north">North</string>
+    <string name="west">West</string>
+    <string name="kigali">Kigali</string>
 
 
 </resources>

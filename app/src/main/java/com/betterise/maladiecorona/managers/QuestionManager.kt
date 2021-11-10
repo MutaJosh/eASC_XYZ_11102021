@@ -103,6 +103,7 @@ class QuestionManager(private var questions : Array<String>, private var choices
         poll.number_household=AgentManager().getnumberhousehold(context)
         poll.vaccine_type=AgentManager().getvaccine_type(context)
         poll.vaccine_dose=AgentManager().getvaccine_dose(context)
+        poll.received_status=AgentManager().getreceived_status(context)
 
         // Poll's result
         var result = getResults()

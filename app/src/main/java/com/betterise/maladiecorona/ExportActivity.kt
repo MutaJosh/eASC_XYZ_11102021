@@ -90,7 +90,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
             val value = value1!!
             Log.d("Data from Storage", "$key: $value")
 
-            //    Toast.makeText(this, "$key: $value",Toast.LENGTH_LONG).show()
+               // Toast.makeText(this, "$key: $value",Toast.LENGTH_LONG).show()
 
            // testpref.text="data from SP : "+"$key: $value"
 

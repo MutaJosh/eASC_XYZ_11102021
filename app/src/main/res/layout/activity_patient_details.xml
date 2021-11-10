@@ -67,6 +67,8 @@
             android:padding="10dp">
 
             <LinearLayout
+                android:id="@+id/layindex"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -118,9 +120,15 @@
                     android:paddingBottom="5dp"
                     android:text="@string/nid" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
                 <EditText
                     android:id="@+id/national_ID"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_bg"
                     android:inputType="number"
@@ -128,9 +136,24 @@
                     android:paddingTop="10dp"
                     android:paddingEnd="30dp"
                     android:paddingBottom="10dp" />
+                    <Button
+                        android:onClick="onclickcallapisearchnid"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/ic_baseline_search_24"
+                        android:layout_height="wrap_content"
+                        />
+                </LinearLayout>
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/laypatientdatahide"
+                android:visibility="gone"
+                >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -558,8 +581,8 @@
                         android:paddingBottom="5dp"
                         android:text="@string/Province" />
 
-                    <EditText
-                        android:id="@+id/etprovince"
+                    <Spinner
+                        android:id="@+id/sp_province"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_bg"
@@ -694,8 +717,7 @@
                     android:layout_weight="1" />
             </LinearLayout>
 
-            /
-
+            </LinearLayout>
         </LinearLayout>
 
 

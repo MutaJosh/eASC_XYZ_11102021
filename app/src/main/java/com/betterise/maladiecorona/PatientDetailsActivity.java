@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -55,9 +56,10 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
 
     private static final int PRIVATE_MODE =0 ;
   private AppCompatRadioButton radioYes;
+  private LinearLayout laypatientdatahide,layindex;
 
 private RadioGroup radiogrouptype;
-    private Spinner sp_gender, sp_nationality, sp_residence,spinner_Number_Dose,sp_district;
+    private Spinner sp_gender, sp_nationality, sp_residence,spinner_Number_Dose,sp_district,sp_province;
     private String nationality, gender, yearr, month, date, residency, dob,numberhousehold,VaxxineType,Number_Dose,NulledVaccination;
     private ImageButton btndatepicker;
     private Button btn_next;
@@ -67,7 +69,7 @@ private RadioGroup radiogrouptype;
     private int mYear, mMonth, mDay;
     private LinearLayout lay_vaccine;
     private TextView tvindexcode;
-    private EditText etfirstname,et_numberhousehold, etlastname, etnational_ID, etpatientgender, etpatienttelephone, etoccupation, etresidence, etnationality, etprovince, etsector, etcell, etvillage;
+    private EditText etfirstname,et_numberhousehold, etlastname, etnational_ID, etpatientgender, etpatienttelephone, etoccupation, etresidence, etnationality, etsector, etcell, etvillage;
     private String fn, lastname, national_ID, patientgender, patienttelephone, occupation, residence, province, district, sector, cell, village;
 public static final String PREF_FIRSTNAME = "firstname";
     public static final String PREF_LASTNAME = "lastname";
@@ -76,6 +78,10 @@ public static final String PREF_FIRSTNAME = "firstname";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_details);
 
+        sp_province=findViewById(R.id.sp_province);
+
+        laypatientdatahide=findViewById(R.id.laypatientdatahide);
+        layindex=findViewById(R.id.layindex);
 
         tvindexcode=findViewById(R.id.tvindexcode);
         spinner_VaccineType=findViewById(R.id.spinner_VaccineType);
@@ -100,8 +106,12 @@ public static final String PREF_FIRSTNAME = "firstname";
                 if (radioYes.getText().equals("Yes")){
                     lay_vaccine.setVisibility(View.VISIBLE);
                     NulledVaccination="yes";
+                    new AgentManager().savereceived_status(getBaseContext(),"yes");
+
 
                 }else {
+
+                    new AgentManager().savereceived_status(getBaseContext(),"no");
                     NulledVaccination="no";
                     lay_vaccine.setVisibility(View.GONE);
                 }
@@ -114,7 +124,6 @@ public static final String PREF_FIRSTNAME = "firstname";
         etnational_ID=findViewById(R.id.national_ID);
         etpatienttelephone=findViewById(R.id.patient_telephone);
         etoccupation=findViewById(R.id.etoccupation);
-        etprovince=findViewById(R.id.etprovince);
         etsector=findViewById(R.id.etsector);
         etcell=findViewById(R.id.etcell);
         etvillage=findViewById(R.id.etvillage);
@@ -128,10 +137,13 @@ public static final String PREF_FIRSTNAME = "firstname";
         btndatepicker.setOnClickListener(this);
 
 
+       // Toast.makeText(PatientDetailsActivity.this, "clicked outside", Toast.LENGTH_SHORT).show();
+
+
         etnational_ID.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                callNIDAPI();
+                //callNIDAPI();
             }
         });
 
@@ -179,12 +191,42 @@ public static final String PREF_FIRSTNAME = "firstname";
 
             }
         });
+
+        List<String> listprovince=new ArrayList<>();
+
+        listprovince.add(getString(R.string.kigali));
+        listprovince.add(getString(R.string.south));
+        listprovince.add(getString(R.string.east));
+        listprovince.add(getString(R.string.north));
+        listprovince.add(getString(R.string.west));
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapterprovi = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listprovince);
+        // Drop down layout style - list view with radio button
+        dataAdapterprovi.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_province.setAdapter(dataAdapterprovi);
+        sp_province.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                province=adapterView.getItemAtPosition(i).toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
         List<String> listdis = new ArrayList<String>();
 
+        listdis.add("Gasabo");
+        listdis.add("Kicukiro");
+        listdis.add("Nyarugenge");
         listdis.add("Bugesera");
         listdis.add("Burera");
         listdis.add("Gakenke");
-        listdis.add("Gasabo");
         listdis.add("Gatsibo");
         listdis.add("Gicumbi");
         listdis.add("Gisagara");
@@ -192,7 +234,6 @@ public static final String PREF_FIRSTNAME = "firstname";
         listdis.add("Kamonyi");
         listdis.add("Karongi");
         listdis.add("Kayonza");
-        listdis.add("Kicukiro");
         listdis.add("Kirehe");
         listdis.add("Muhanga");
         listdis.add("Musanze");
@@ -203,7 +244,6 @@ public static final String PREF_FIRSTNAME = "firstname";
         listdis.add("Nyamagabe");
         listdis.add("Nyamasheke");
         listdis.add("Nyanza");
-        listdis.add("Nyarugenge");
         listdis.add("Nyaruguru");
         listdis.add("Rubavu");
         listdis.add("Ruhango");
@@ -359,7 +399,6 @@ public static final String PREF_FIRSTNAME = "firstname";
                 fn = etfirstname.getText().toString().trim();
                 lastname = etlastname.getText().toString().trim();
                 national_ID = etnational_ID.getText().toString().trim();
-                province = etprovince.getText().toString().trim();
                 sector = etsector.getText().toString().trim();
                 cell = etcell.getText().toString().trim();
                 village = etvillage.getText().toString().trim();
@@ -367,7 +406,7 @@ public static final String PREF_FIRSTNAME = "firstname";
                 patienttelephone=etpatienttelephone.getText().toString().trim();
                 numberhousehold=et_numberhousehold.getText().toString().trim();
 
-                if (fn.isEmpty() || lastname.isEmpty() || national_ID.isEmpty() || province.isEmpty() || sector.isEmpty() || sector.isEmpty() || cell.isEmpty()
+                if (fn.isEmpty() || lastname.isEmpty() || national_ID.isEmpty() ||  sector.isEmpty() || sector.isEmpty() || cell.isEmpty()
                 || village.isEmpty() || occupation.isEmpty() || patienttelephone.isEmpty() ||numberhousehold.isEmpty()  ){
                     Toast.makeText(getBaseContext(), R.string.enter_all_fieldss, Toast.LENGTH_LONG).show();
                 }else {
@@ -432,6 +471,8 @@ public static final String PREF_FIRSTNAME = "firstname";
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 //Response
                 if (Integer.toString(response.code()).equals("200")) {
+                    laypatientdatahide.setVisibility(View.VISIBLE);
+                    layindex.setVisibility(View.VISIBLE);
                  
                     try {
                         String jsondata = response.body().string();
@@ -445,6 +486,7 @@ public static final String PREF_FIRSTNAME = "firstname";
                            codeNID=reader.getString("code");
                             messageNID=reader.getString("message");
                             if (statusNID.equals("200")) {
+
                                     tvindexcode.setText(codeNID);
                                 btn_next.setVisibility(View.VISIBLE);
                                 JSONObject jsonObject = new JSONObject(jsondata).getJSONObject("data");
@@ -499,5 +541,12 @@ public static final String PREF_FIRSTNAME = "firstname";
         });
     }
 
+    public void onclickcallapisearchnid(View view){
+        if (etnational_ID.getText().toString().isEmpty()){
+            Toast.makeText(getBaseContext(), R.string.enter_nid, Toast.LENGTH_LONG).show();
+        }else{
+        callNIDAPI();
+    }
+    }
 
 }

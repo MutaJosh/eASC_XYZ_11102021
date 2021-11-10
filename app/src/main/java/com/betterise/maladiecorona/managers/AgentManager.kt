@@ -199,6 +199,15 @@ class AgentManager() {
     }
 
 
+    fun savereceived_status(context:Context,received_status:String){
+        var sharedPrefs = context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE)
+        sharedPrefs
+            .edit()
+            .putString("received_status", received_status)
+            .apply()
+    }
+
+
     /***
      * Retrieving the current agent number
      */
@@ -226,6 +235,7 @@ class AgentManager() {
     fun getnumberhousehold(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("number_household", "")
     fun getvaccine_type(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("vaccine_type", "")
     fun getvaccine_dose(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("vaccine_dose", "")
+    fun getreceived_status(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("received_status", "")
 
 
 
