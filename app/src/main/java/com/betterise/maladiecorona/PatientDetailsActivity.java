@@ -444,7 +444,7 @@ public static final String PREF_FIRSTNAME = "firstname";
                             statusNID = reader.getString("status");
                            codeNID=reader.getString("code");
                             messageNID=reader.getString("message");
-                            if (messageNID.equals("Found")) {
+                            if (statusNID.equals("200")) {
                                     tvindexcode.setText(codeNID);
                                 btn_next.setVisibility(View.VISIBLE);
                                 JSONObject jsonObject = new JSONObject(jsondata).getJSONObject("data");
@@ -454,19 +454,23 @@ public static final String PREF_FIRSTNAME = "firstname";
                                 nationalityNID=jsonObject.getString("natinality");
                                 etfirstname.setText(fNameNID);
                                 etlastname.setText(lNameNID);
+                                tvdob.setText(dobNID);
 
                                 Log.e("Done",lNameNID+fNameNID+dobNID+nationalityNID);
 
                             }
-                            if (getIntent().getStringExtra("category").equals("contact")){
-                                Log.e("contact ",codeNID+"-\n"+getIntent().getStringExtra("uuid"));
-                                tvindexcode.setText(codeNID+"-"+getIntent().getStringExtra("uuid"));
+                            if (statusNID.equals("404")) {
+                                tvindexcode.setText(codeNID);
+                                Toast.makeText(PatientDetailsActivity.this, "Not found in covid system", Toast.LENGTH_SHORT).show();
                                 btn_next.setVisibility(View.VISIBLE);
                             }
 
-
+                            if (getIntent().getStringExtra("category").equals("contact")){
+                                Log.e("contact ",codeNID+"-\n"+getIntent().getStringExtra("uuid"));
+                                tvindexcode.setText(codeNID+" -- "+getIntent().getStringExtra("uuid"));
+                                btn_next.setVisibility(View.VISIBLE);
+                            }
                             Log.e("Data from  DB",statusNID+"\n"+codeNID+"\n"+messageNID);
-
 
                         }else{
                             
