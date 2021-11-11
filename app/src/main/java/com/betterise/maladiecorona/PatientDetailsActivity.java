@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatRadioButton;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -73,10 +74,18 @@ private RadioGroup radiogrouptype;
     private String fn, lastname, national_ID, patientgender, patienttelephone, occupation, residence, province, district, sector, cell, village;
 public static final String PREF_FIRSTNAME = "firstname";
     public static final String PREF_LASTNAME = "lastname";
+
+    private ProgressDialog progressDialogi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_details);
+
+
+        progressDialogi=new ProgressDialog(PatientDetailsActivity.this);
+        progressDialogi.setMessage(getString(R.string.loading));
+        progressDialogi.setCanceledOnTouchOutside(false);
 
         sp_province=findViewById(R.id.sp_province);
 
@@ -103,7 +112,7 @@ public static final String PREF_FIRSTNAME = "firstname";
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 radioYes =(AppCompatRadioButton) findViewById(selectedId);
 
-                if (radioYes.getText().equals("Yes")){
+                if (radioYes.getText().equals(getString(R.string.yesi))){
                     lay_vaccine.setVisibility(View.VISIBLE);
                     NulledVaccination="yes";
                     new AgentManager().savereceived_status(getBaseContext(),"yes");
@@ -140,12 +149,12 @@ public static final String PREF_FIRSTNAME = "firstname";
        // Toast.makeText(PatientDetailsActivity.this, "clicked outside", Toast.LENGTH_SHORT).show();
 
 
-        etnational_ID.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                //callNIDAPI();
-            }
-        });
+//        etnational_ID.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                //callNIDAPI();
+//            }
+//        });
 
 
         sp_nationality.setOnItemSelectedListener(this);
@@ -303,8 +312,8 @@ public static final String PREF_FIRSTNAME = "firstname";
 
         List<String> listgender = new ArrayList<String>();
 
-        listgender.add("Female");
-        listgender.add("Male");
+        listgender.add(getString(R.string.female));
+        listgender.add(getString(R.string.male));
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdaptergender = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listgender);
         // Drop down layout style - list view with radio button
@@ -314,7 +323,7 @@ public static final String PREF_FIRSTNAME = "firstname";
         sp_gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-             //   Toast.makeText(PatientDetailsActivity.this, "sex is " + parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PatientDetailsActivity.this, "sex is " + parent.getItemAtPosition(position), Toast.LENGTH_SHORT).show();
 
                 gender = parent.getItemAtPosition(position) + "";
             }
@@ -456,6 +465,7 @@ public static final String PREF_FIRSTNAME = "firstname";
     }
 
     private void callNIDAPI(){
+        progressDialogi.show();
         IndexCode index =new IndexCode();
         index.setIndex(etnational_ID.getText().toString().trim());
         
@@ -471,6 +481,7 @@ public static final String PREF_FIRSTNAME = "firstname";
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 //Response
                 if (Integer.toString(response.code()).equals("200")) {
+                    progressDialogi.dismiss();
                     laypatientdatahide.setVisibility(View.VISIBLE);
                     layindex.setVisibility(View.VISIBLE);
                  
@@ -516,7 +527,7 @@ public static final String PREF_FIRSTNAME = "firstname";
 
                         }else{
                             
-                            Toast.makeText(PatientDetailsActivity.this, "response error -null", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), R.string.response_error, Toast.LENGTH_SHORT).show();
                         }
 
                     } catch (IOException e) {
@@ -528,6 +539,7 @@ public static final String PREF_FIRSTNAME = "firstname";
                     }
 
                 }else{
+                    progressDialogi.dismiss();
                   
                     Toast.makeText(PatientDetailsActivity.this, getString(R.string.check_internet)+response.message(), Toast.LENGTH_LONG).show();
                 }
@@ -535,7 +547,7 @@ public static final String PREF_FIRSTNAME = "firstname";
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 //failure
-               
+                progressDialogi.dismiss();
                 Toast.makeText(PatientDetailsActivity.this, getString(R.string.check_internet)+"\nError"+t.getLocalizedMessage().toLowerCase(), Toast.LENGTH_LONG).show();
             }
         });

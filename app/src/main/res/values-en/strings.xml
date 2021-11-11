@@ -111,12 +111,12 @@
         <item>rdt</item>
     </string-array>
 
-<!--    These are the only two e-ASCOV results being used. (NEGATIVE AND POSITIVE respectively)-->
+    <!--    These are the only two e-ASCOV results being used. (NEGATIVE AND POSITIVE respectively)-->
     <string name="result1">The situation probably does not fall under COVID-19. Ask the subject to come back to see you if new symptoms appear.</string>
     <string name="result2">The situation may fall under COVID-19. Address the subject to the health center for evaluation by a nurse.</string>
 
 
-<!--    These option used at the moment (Health team to review and approve probable scenarios) -->
+    <!--    These option used at the moment (Health team to review and approve probable scenarios) -->
     <string name="result3">severe case ,consult doctor</string>
     <string name="result3bis">The situation may fall under COVID-19. Address the subject to the district hospital because sign of gravity associated.</string>
     <string name="result4">The situation may fall under COVID-19. Address the subject to the Health center for evaluation by a nurse.</string>

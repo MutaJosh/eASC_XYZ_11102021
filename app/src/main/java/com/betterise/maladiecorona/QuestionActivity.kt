@@ -212,7 +212,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
               //  Toast.makeText(baseContext, "Nimuzima ", Toast.LENGTH_LONG).show()
                 btn_next.visibility=GONE
 
-                show_rdt="yes"
+                show_rdt= "yes"
 
             }else{
                 show_rdt="no"
@@ -352,11 +352,11 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                 3 -> group?.radio3?.isChecked = true }
 
 
-        if (intent.getStringExtra("patientgender").equals("Male")) {
+        if (intent.getStringExtra("patientgender").equals(getString(R.string.male))) {
             group?.radio1?.visibility= INVISIBLE
             group?.radio2?.visibility= INVISIBLE
 
-        }else if(intent.getStringExtra("patientgender").equals("Female")){
+        }else if(intent.getStringExtra("patientgender").equals(getString(R.string.female))){
             group?.radio3?.visibility= INVISIBLE
         }
 

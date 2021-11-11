@@ -39,25 +39,26 @@
     <string name="weight_error">Nyamuneka hitamo ibiro biri hagati ya 20 na 220 kg</string>
 
     <string-array name="questions">
-        <item>Yaba yaragiye mu gihugu cyangwa ahantu hagaragaye COVID-19 mbere y’uko agaragaza ibimenyetso?</item>
-        <item>Yaba yarahuye n’ushobora cyangwa ukekwa kuba yararwaye COVID-19 mu minsi 14 ishize mbere y’uko agaragaza ibimenyetso?</item>
-        <item>Yaba yaragize umuriro udasanzwe?</item>
-        <item>Afite umuriro ungana iki?</item>
-        <item>Yaba amaranye umuriro igihe kingana iki?</item>
-        <item>Yaba yaragize inkorora idasanzwe mu munsi ishize?</item>
-        <item>Yaba yananiwe kurya cyangwa kunywa mu masaha 24 ashize cg arenga?</item>
-        <item>Mu masaha 24 ashize, yaba yagize ikibazo cy’umwuka muke ari kuvuga cyangwa ari mumirimo isanzwe?</item>
-        <item>Yaba yaragize kubabara mumuhogo muminsi ishize?</item>
-        <item>Yaba yaragize kubura impumuro cyangwa kuryoherwa mu minsi ishize?</item>
-        <item>Yaba yaragize ububabare bw’imitsi cyangwa mu ngingo mu minsi ishize?</item>
-        <item>Yaba yagize impiswi mu masaha 24 ashize? (Byibura 3)?</item>
-        <item>Afite ibiro bingahe?</item>
-        <item>Afite uburebure bungana iki?</item>
-        <item>Yaba afite umuvuduko w’amaraso ukabije? Cyangwa yaba afite indwara z’umutima? Cyangwa yaba afata imiti y’indwara z’umutima?</item>
-        <item>Yaba arwaye diyabete?</item>
-        <item>Yaba yararwaye kanseri mu myaka itatu ishize? </item>
-        <item>Yaba afite indwara z’ubuhumekero zizwi?</item>
-        <item>Ese uyu muntu aratwite?</item>
+
+        <item>Usuzumwa yaba yaragiriye urugendo hanze y’igihugu mbere yuko agira ibimenyetso?</item>
+        <item>Usuzumwa yaba yarahuye n’umuntu ushobora kuba arwaye cuangwa akekwaho COVID-19 mu minsi 24 mbere yuko agira ibimenyetso? </item>
+        <item>Usuzumwa yaba yavuzeko yagize umuriro?</item>
+        <item>Igipimo cy’umuriro wafatiye usuzumwa ni ikihe?  </item>
+        <item>Usuzumwa amaranye umuriro igihe kingana iki (iminsi ingahe)? </item>
+        <item>Usuzumwa yaba afite inkorora isanzwe cyangwa yiyongereye mu minsi ya vuba?</item>
+        <item>Mu masaha 24 cyangwa arenga, usuzumwa yaba atabasha kurya cyangwa kunywa?</item>
+        <item>Mu masaha 24 ashize, usuzumwa yigeze guhumeka nabi mu gihe avuga cyanga igihe akoresheje ingufu zoroheje? </item>
+        <item>Usuzumwa yaba yarigeze ababara mu muhogo mu minsi mike ishize?</item>
+        <item>Usuzumwa yaba yarigeze atakaza icyanga cyangwa uguhumurirwa mu minsi mike ishize? </item>
+        <item>Usuzumwa yaba yarigeze aribwa mu mikaya cyangwa mu ngingo mu minsi mike ishize?</item>
+        <item>Usuzumwa yaba yigeze acibwamo (agira impiswi) mu masaha 24 ashize?</item>
+        <item>Usuzumwa afite ibiro bingahe?</item>
+        <item>Usuzumwa afite uburebure bungana iki?</item>
+        <item>Usuzumwa yaba afite umuvuduko w’amaraso uri hejuru, cyangwa indwara z’umutima n’imiyoboro y’amaraso? </item>
+        <item>Usuzumwa yaba arwaye diyabete?</item>
+        <item>Usuzumwa yaba yarigeze arwara kanseri mu myaka 3 ishize? </item>
+        <item>Usuzumwa yaba afite indwara z’ubuhumekero zizwi? </item>
+        <item>Usuzumwa yaba atwite?</item>
         <item></item>
     </string-array>
 
@@ -123,74 +124,78 @@
 
 
 
-    <string name="case_index" >Case Index </string>
-    <string name="Firstname" >First name</string>
-    <string name="Lastname">Last name</string>
-    <string name="nid">National ID / Passport</string>
-    <string name="Gender">Gender</string>
-    <string name="Telephone">Telephone</string>
-    <string name="dob">Date of Birth</string>
-    <string name="Occupation">Occupation</string>
-    <string name="Nationality">Nationality</string>
-    <string name="Residence">Residence</string>
-    <string name="Address">Address</string>
+    <string name="case_index" >Case ID </string>
+    <string name="Firstname" >Izina ry\' u umuryango</string>
+    <string name="Lastname">Izina rya batisimu</string>
+    <string name="nid">Indangamuntu / Pasiporo</string>
+    <string name="Gender">Igitsina</string>
+    <string name="Telephone">Terefone</string>
+    <string name="dob">Itariki y\'amavuko</string>
+    <string name="Occupation">Umwuga</string>
+    <string name="Nationality">Ubwenegihugu</string>
+    <string name="Residence">Aho utuye</string>
+    <string name="Address">Aderesi</string>
     <string name="Province">Intara</string>
-    <string name="District">District</string>
-    <string name="Sector">Sector</string>
-    <string name="Cell">Cell</string>
-    <string name="Village">Village</string>
-    <string name="sync_data">Sync Data</string>
-    <string name="screening_test_sessions">Screening Test Sessions</string>
-    <string name="contact_support">Contact Support</string>
+    <string name="District">Akarere</string>
+    <string name="Sector">Umurenge</string>
+    <string name="Cell">Akagari</string>
+    <string name="Village">Umudugudu</string>
+    <string name="sync_data">Guhuza amakuru</string>
+    <string name="screening_test_sessions">Kugaragaza Ikizamini</string>
+    <string name="contact_support">Hamagara ubufasha</string>
     <string name="sessions">Sessions</string>
-    <string name="subject_profile">Subject Profile</string>
-    <string name="go_back">Go Back</string>
+    <string name="subject_profile">Umwirondoro w\'u umuntu  </string>
+    <string name="go_back">Subira inyuma</string>
     <string name="rdt_result_pos">COVID-19 Positive.</string>
     <string name="rdt_result_neg">COVID-19 Negative.</string>
-    <string name="rdt_result_invalid">Invalid: Control Failed.</string>
+    <string name="rdt_result_invalid">Bitemewe: Igenzura ryatsinzwe.</string>
 
-    <string name="user_id">Rdt result</string>
-    <string name="rdt_result_text">RDT result text</string>
+    <string name="user_id">ibisubizo bya RDT</string>
+    <string name="rdt_result_text">Inyandiko y\'ibisubizo bya RDT</string>
     <string name="user_id_label">"User ID: "</string>
-    <string name="rdt_result_label">"RDT result: "</string>
-    <string name="lunch_rdt">Launch RDT</string>
-    <string name="capture_result">Capture result</string>
-    <string name="time_remaining">Test is resolving, please wait for timer: </string>
-    <string name="reults_valid_for">Results valid for: </string>
-    <string name="results_expired">Results expired</string>
-    <string name="rdt_error">rdt error</string>
-    <string name="rdt_results">"rdt results "</string>
-    <string name="please_capture_the_test_result">Please capture the test result</string>
+    <string name="rdt_result_label">"Ibisubizo bya RDT: "</string>
+    <string name="lunch_rdt">Tangiza RDT</string>
+    <string name="capture_result">Gufata ibisubizo</string>
+    <string name="time_remaining">Ikizamini kirakemuka, nyamuneka utegereze igihe: </string>
+    <string name="reults_valid_for">Ibisubizo byemewe kuri: </string>
+    <string name="results_expired">Ibisubizo byarangiye</string>
+    <string name="rdt_error">ikosa muri RDT</string>
+    <string name="rdt_results">" ibisubizo bya RDT"</string>
+    <string name="please_capture_the_test_result">Nyamuneka fata ibisubizo by\'ibizamini </string>
     <string name="index_code">Index code</string>
-    <string name="disconnected_internet">Disconnected to the internet</string>
-    <string name="which_type_of_dose">Which type of Dose?</string>
-    <string name="how_many_doses">How many doses ?</string>
-    <string name="number_of_people_live_in_your_household">Number of people live in your household</string>
-    <string name="have_you_received_any_covid_19_vaccine_yet">Have you received any COVID-19 vaccine yet?</string>
-    <string name="how_many_number_of_people_living_in_your_household">How many number of people living in your household?</string>
-    <string name="enter_all_fieldss">Please All fields are required to be filled</string>
+    <string name="disconnected_internet">interineti yavuyeho</string>
+    <string name="which_type_of_dose">ese wafashe doze yihe ?</string>
+    <string name="how_many_doses"> doze zingahe ?</string>
+    <string name="number_of_people_live_in_your_household">Umubare wabo abantu mubana mu rugo</string>
+    <string name="have_you_received_any_covid_19_vaccine_yet">ese usuzumwa yaba yarafashe  urukingo rwa COVID-19 ?</string>
+    <string name="how_many_number_of_people_living_in_your_household">Ese ni abantu bangahe mubana mu rugo?</string>
+    <string name="enter_all_fieldss">Nyamuneka uzuza imyirondoro yose wasabwe hejuru, irakenewe yose</string>
     <string name="dose1">1st Dose</string>
     <string name="dose2">2nd Dose</string>
-    <string name="patient_detailss">Patient details</string>
-    <string name="save_and_continues">Save and Continue</string>
-    <string name="noo">No</string>
-    <string name="yesi">Yes</string>
-    <string name="validate_code">Validating the code</string>
-    <string name="fetching_index">Fetching index...</string>
-    <string name="internnet_lost">Internet connection problem \n</string>
-    <string name="enter_index_first">Please,Enter index code first</string>
-    <string name="invalid_contact_code">Invalid index contact code</string>
-    <string name="choose_patient_category">Choose Patient category</string>
-    <string name="first_choose_patient_category">First choose patient category</string>
-    <string name="enter_your_contact_code_to_validate">Enter your contact code to validate</string>
+    <string name="patient_detailss">Umwirondoro w\'u usuzumwa </string>
+    <string name="save_and_continues">Bika ubashe gukomeza</string>
+    <string name="noo">oya</string>
+    <string name="yesi">yego</string>
+    <string name="validate_code">Gusuzuma kode</string>
+    <string name="fetching_index">Gutunganya...</string>
+    <string name="internnet_lost">suzuma interineti yawe, habayemwo ikibazo\n</string>
+    <string name="enter_index_first">Nyamuneka andika kode yawe (index code) </string>
+    <string name="invalid_contact_code">iyi kode ntabwo ariyo</string>
+    <string name="choose_patient_category">Hitamwo ikiciro cy\' usuzumwa</string>
+    <string name="first_choose_patient_category">Nyamuneka Hitamwo ikiciro cy\' usuzumwa</string>
+    <string name="enter_your_contact_code_to_validate">Andika kode (contact code) yawe kugirango wemeze</string>
     <string name="index">Index</string>
-    <string name="check_internet">\"error,Check your internet connection please \"</string>
-    <string name="enter_nid">Enter your Nation ID please</string>
-    <string name="south">South</string>
-    <string name="east">East</string>
-    <string name="north">North</string>
-    <string name="west">West</string>
+    <string name="check_internet">suzuma interineti yawe,habayemwo ikosa</string>
+    <string name="enter_nid">Andika indangamuntu  / pasiporo byawe ,nyamuneka ni ingenzi</string>
+    <string name="south">Amajyepfo</string>
+    <string name="east">Uburasirazuba</string>
+    <string name="north">Amajyaruguru</string>
+    <string name="west">Uburengerazuba</string>
     <string name="kigali">Kigali</string>
-    <string name="not_in_covid_system">The NID / passport provided doesn\'t exist in the Rwanda National COVID-19 Case-surveillance System. Created a new case!</string>
+    <string name="not_in_covid_system">Indangamuntu / Pasiporo mwatanze ntabwo biri Rwanda National COVID-19 Case-surveillance System. Twayishyizemwo!</string>
     <string name="case_id">Case ID</string>
+    <string name="loading">Gutunganya...</string>
+    <string name="female">Umugore</string>
+    <string name="male">Umugabo</string>
+    <string name="response_error">Habonetsemwo ikosa,suzuma interineti yawe</string>
 </resources>

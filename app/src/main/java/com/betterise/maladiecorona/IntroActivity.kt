@@ -39,8 +39,7 @@ class IntroActivity : AppCompatActivity() {
         btn_start.setOnClickListener{
             startActivity(Intent(this, ActivityChooseCategory::class.java))
             overridePendingTransition(R.anim.fadein, R.anim.fadeout)
-
-
+            finish()
         }
 
 
@@ -90,9 +89,10 @@ class IntroActivity : AppCompatActivity() {
         val conf = resources.configuration
         conf.setLocale(locale)
         resources.updateConfiguration(conf, resources.displayMetrics)
-        finish()
+
         startActivity(Intent(this, IntroActivity::class.java ))
         overridePendingTransition(R.anim.fadein, R.anim.fadeout)
+       // finish()
     }
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {

@@ -197,4 +197,8 @@
     <string name="kigali">Kigali</string>
     <string name="not_in_covid_system">The NID / passport provided doesn\'t exist in the Rwanda National COVID-19 Case-surveillance System. Created a new case!</string>
     <string name="case_id">Case ID</string>
+    <string name="loading">Loading...</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="response_error">response error -null</string>
 </resources>

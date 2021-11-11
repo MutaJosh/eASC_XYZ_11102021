@@ -102,6 +102,7 @@
                     android:id="@+id/lang_fr"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_weight="1"
                     android:background="@drawable/shape_button_white"
                     android:text="FR"/>

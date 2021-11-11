@@ -1,6 +1,7 @@
 package com.betterise.maladiecorona
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.betterise.maladiecorona.managers.AgentManager
 import kotlinx.android.synthetic.main.activity_agent.*
+import java.util.*
 
 
 class AgentActivity : AppCompatActivity(){
@@ -19,6 +21,24 @@ class AgentActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agent)
+
+        val lang = "rw"
+
+//create a string for country
+
+//create a string for country
+        val country = "RW"
+//use constructor with country
+//use constructor with country
+        val locale = Locale(lang, country)
+
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        baseContext.resources.updateConfiguration(
+            config,
+            baseContext.resources.displayMetrics
+        )
 
 
        // phone.setSelection(4)

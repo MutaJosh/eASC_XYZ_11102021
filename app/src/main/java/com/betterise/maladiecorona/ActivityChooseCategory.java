@@ -106,7 +106,7 @@ private TextView errorBulletcate;
 //                        new AgentManager().saveindexcode(getBaseContext(),value);
                         startActivity(intent);
 
-                        finish();
+                        //finish();
 
                         lay_validate.setVisibility(View.GONE);
                     }else{
