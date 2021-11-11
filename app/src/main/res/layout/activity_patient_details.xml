@@ -430,9 +430,8 @@
                     android:text="@string/how_many_number_of_people_living_in_your_household" />
 
                 <EditText
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
-                    android:paddingLeft="10dp"
                     android:id="@+id/et_numberhousehold"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -442,7 +441,7 @@
                     android:paddingStart="30dp"
                     android:paddingTop="10dp"
                     android:paddingEnd="30dp"
-                    android:paddingBottom="10dp" />
+                    android:paddingBottom="15dp" />
 
             </LinearLayout>
 

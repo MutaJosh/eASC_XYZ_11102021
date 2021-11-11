@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 style="@style/TitleText"
-                android:text="@string/informations"
+                android:text="@string/chw_info"
                 android:paddingTop="30dp"
                 android:paddingBottom="30dp"
                 android:paddingStart="10dp" />
@@ -98,7 +98,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Community Health Worker Names"
+                    android:text="@string/community_health_worker_names"
                     android:fontFamily="sans-serif-medium"
                     android:layout_marginTop="20dp"
                     android:padding="5dp"

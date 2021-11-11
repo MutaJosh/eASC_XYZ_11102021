@@ -201,4 +201,9 @@
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="response_error">response error -null</string>
+    <string name="community_health_worker_names">Community Health Worker Names</string>
+    <string name="chw_info">Umujyanama w\'ubuzima</string>
+    <string name="enter_chw">Please,Enter CHW Names first</string>
+    <string name="dose3">1st and 2nd Dose</string>
+    <string name="indexi">Indexi</string>
 </resources>

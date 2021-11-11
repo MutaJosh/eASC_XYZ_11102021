@@ -113,10 +113,10 @@ class IntroActivity : AppCompatActivity() {
         } else if (item.getTitle() === getString(R.string.contact_support)) {
             val builder_main = AlertDialog.Builder(this)
           //  builder_main.setTitle("Are you sure ?")
-            builder_main.setMessage("Do you need to call for more support about using this app."+"\n"+ "if yes, please press Call but if not press cancel button")
-            builder_main.setNegativeButton("CANCEL",
+            builder_main.setMessage("Ukeneye guhamagarira izindi nkunga zijyanye no gukoresha iyi porogaramu."+"\n"+ "niba ari yego, nyamuneka kanda Hamagara ariko niba udakanda buto yo guhagarika")
+            builder_main.setNegativeButton("GUSUBIKA",
                 DialogInterface.OnClickListener { dialog, which -> })
-            builder_main.setPositiveButton("CALL",
+            builder_main.setPositiveButton("HAMAGARA",
                 DialogInterface.OnClickListener { dialog, which ->
                     val phone = "+250786055919"
                     val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))

@@ -198,5 +198,10 @@
     <string name="kigali">Kigali</string>
     <string name="not_in_covid_system">The NID / passport provided doesn\'t exist in the Rwanda National COVID-19 Case-surveillance System. Created a new case!</string>
     <string name="case_id">Case ID</string>
+    <string name="community_health_worker_names">Community Health Worker Names</string>
+    <string name="chw_info">Umujyanama w\'ubuzima</string>
+    <string name="enter_chw">Please,Enter CHW Names first</string>
+    <string name="dose3">1st and 2nd Dose</string>
+    <string name="indexi">Indexi</string>
 
 </resources>

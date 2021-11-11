@@ -1,7 +1,6 @@
 package com.betterise.maladiecorona
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -22,30 +21,15 @@ class AgentActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agent)
 
-        val lang = "rw"
 
-//create a string for country
 
-//create a string for country
-        val country = "RW"
-//use constructor with country
-//use constructor with country
-        val locale = Locale(lang, country)
-
-        Locale.setDefault(locale)
-        val config = Configuration()
-        config.locale = locale
-        baseContext.resources.updateConfiguration(
-            config,
-            baseContext.resources.displayMetrics
-        )
 
 
        // phone.setSelection(4)
         phone.doOnTextChanged { text, _, _, _ -> btn_next.isEnabled = !text.isNullOrEmpty() }
         btn_next.setOnClickListener {
             if (chw_names.text.toString().trim().isBlank()) {
-                Toast.makeText(this, "Please,Enter CHW Names first", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.enter_chw), Toast.LENGTH_LONG).show()
                 error.visibility = View.VISIBLE
                 btn_next.isEnabled = false
             }

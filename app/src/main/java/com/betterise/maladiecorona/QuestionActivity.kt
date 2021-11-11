@@ -177,7 +177,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             var result_ascoov=  questionManager!!.getResults()
 
             test_resultascov.visibility=VISIBLE
-            test_resultascov.text="Index : "+getIntent().getStringExtra("Indexi")+"\n \n \n"+baseContext.getString(
+            test_resultascov.text="Index : "+getIntent().getStringExtra(getString(R.string.indexi))+"\n \n \n"+baseContext.getString(
                 when (result_ascoov){
                     ResultType.CASE1 -> R.string.result1
                     ResultType.CASE2 -> R.string.result2
