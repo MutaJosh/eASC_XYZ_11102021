@@ -117,7 +117,7 @@
     </string-array>
     <string name="result1">La situation ne relève probablement pas du COVID-19. Demandez au sujet de revenir vous voir si de nouveaux symptômes apparaissent.</string>
     <string name="result2">Adressez le sujet au centre de santé pour évaluation par un(e) infirmier(e).</string>
-    <string name="result3">La situation peut relever d\'un COVID-19. Adressez le sujet au centre de santé pour évaluation par un(e) infirmier(e).</string>
+    <string name="result3">severe case ,consult doctor</string>
     <string name="result3bis">La situation peut relever d\'un COVID-19. Adressez le sujet à l\'hôpital de district car signe de gravité associé.</string>
     <string name="result4">La situation peut relever d\'un COVID-19. Adressez le sujet au centre de santé pour évaluation par un(e) infirmier(e).</string>
     <string name="result5">Adressez le sujet en urgence à l\'hôpital de district pour évaluation par un médecin. COVID-19.</string>
@@ -195,4 +195,6 @@
     <string name="north">North</string>
     <string name="west">West</string>
     <string name="kigali">Kigali</string>
+    <string name="not_in_covid_system">The NID / passport provided doesn\'t exist in the Rwanda National COVID-19 Case-surveillance System. Created a new case!</string>
+    <string name="case_id">Case ID</string>
 </resources>

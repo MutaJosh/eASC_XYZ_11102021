@@ -117,7 +117,7 @@
 
 
 <!--    These option used at the moment (Health team to review and approve probable scenarios) -->
-    <string name="result3">The situation may fall under COVID-19. Send the subject to the health center for evaluation by a nurse.</string>
+    <string name="result3">severe case ,consult doctor</string>
     <string name="result3bis">The situation may fall under COVID-19. Address the subject to the district hospital because sign of gravity associated.</string>
     <string name="result4">The situation may fall under COVID-19. Address the subject to the Health center for evaluation by a nurse.</string>
     <string name="result5">Address the subject urgently to the district hospital for assessment by a doctor. COVID-19.</string>
@@ -196,5 +196,7 @@
     <string name="north">North</string>
     <string name="west">West</string>
     <string name="kigali">Kigali</string>
+    <string name="not_in_covid_system">The NID / passport provided doesn\'t exist in the Rwanda National COVID-19 Case-surveillance System. Created a new case!</string>
+    <string name="case_id">Case ID</string>
 
 </resources>

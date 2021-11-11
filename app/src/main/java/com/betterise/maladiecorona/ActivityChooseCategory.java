@@ -175,7 +175,7 @@ private TextView errorBulletcate;
                                 new AgentManager().saveindexcode(getBaseContext(),eTindexcode.getText().toString().trim());
                                 startActivity(intt);
                             }else{
-                                Toast.makeText(getBaseContext(), R.string.invalid_contact_code, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getBaseContext(), R.string.invalid_contact_code, Toast.LENGTH_LONG).show();
                             }
 
                         }else{

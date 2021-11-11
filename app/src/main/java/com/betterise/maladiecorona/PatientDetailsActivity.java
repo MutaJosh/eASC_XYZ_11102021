@@ -503,13 +503,13 @@ public static final String PREF_FIRSTNAME = "firstname";
                             }
                             if (statusNID.equals("404")) {
                                 tvindexcode.setText(codeNID);
-                                Toast.makeText(PatientDetailsActivity.this, "Not found in covid system", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getBaseContext(), R.string.not_in_covid_system, Toast.LENGTH_LONG).show();
                                 btn_next.setVisibility(View.VISIBLE);
                             }
 
                             if (getIntent().getStringExtra("category").equals("contact")){
                                 Log.e("contact ",codeNID+"-\n"+getIntent().getStringExtra("uuid"));
-                                tvindexcode.setText(codeNID+" -- "+getIntent().getStringExtra("uuid"));
+                                tvindexcode.setText(codeNID+" - "+getIntent().getStringExtra("uuid"));
                                 btn_next.setVisibility(View.VISIBLE);
                             }
                             Log.e("Data from  DB",statusNID+"\n"+codeNID+"\n"+messageNID);
@@ -536,7 +536,7 @@ public static final String PREF_FIRSTNAME = "firstname";
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 //failure
                
-                Toast.makeText(PatientDetailsActivity.this, "Error"+t.getLocalizedMessage().toLowerCase(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PatientDetailsActivity.this, getString(R.string.check_internet)+"\nError"+t.getLocalizedMessage().toLowerCase(), Toast.LENGTH_LONG).show();
             }
         });
     }

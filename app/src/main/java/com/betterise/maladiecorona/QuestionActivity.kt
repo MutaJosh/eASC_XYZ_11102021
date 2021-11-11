@@ -26,6 +26,7 @@ import com.betterise.maladiecorona.model.QuestionType
 import com.betterise.maladiecorona.model.ResultType
 import com.betterise.maladiecorona.model.out.PollResult
 import kotlinx.android.synthetic.main.activity_question.*
+import kotlinx.android.synthetic.main.activity_results.*
 import kotlinx.android.synthetic.main.question_bullet.view.*
 import kotlinx.android.synthetic.main.question_city.view.*
 import kotlinx.android.synthetic.main.question_digit.view.*

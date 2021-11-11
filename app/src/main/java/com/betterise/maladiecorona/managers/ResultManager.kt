@@ -99,8 +99,20 @@ class ResultManager {
 //            result = ResultType.CASE5
 
 
+        //condition to return  severe case here
 
-        if (
+        if(
+
+            ((answers[TRAVEL].value == 1)&&(answers[TEMPERATURE].value == 2))&&
+            ((answers[BREATH].value == 1) && (answers[RESPIRATORY_DISEASE].value == 1)) &&
+            ((answers[FIVER].value == 1) && (answers[CONTACT].value == 1 ))
+
+        ){
+            //show severe case result here
+            result = ResultType.CASE3
+
+        }
+        else if (
                 answers[TRAVEL].value == 1 || answers[CONTACT].value == 1 || answers[TEMPERATURE].value == 2
 
 //                &&
@@ -127,8 +139,7 @@ class ResultManager {
           //  POSITIVE as the screening outcome
           result = ResultType.CASE2
 
-
-        }else{
+        } else{
 
             // This is when all the conditions are all false.
                 // NO as the answer for all choices

@@ -153,7 +153,7 @@
 
     <string name="result1">Ibintu birashoboka ko atari inshingano za covid-19 saba ingingo kugaruka ku kureba niba ibimenyetso bishya bigaragar.</string>
     <string name="result2">Ohereza ingingo ku kigo nderabuzima kugirango isuzumwe n umuforomo.</string>
-    <string name="result3">Ibintu birashoboka kuvuka kuri COVID-19. Ohereza ingingo kubigo nderabuzima kugirango bisuzumwe n umuforomo.</string>
+    <string name="result3">severe case,consult doctor urgently </string>
     <string name="result3bis">Ibintu birashoboka kuvuka kuri COVID-19. Ngana ibitaro by\'Akarerekubera ikimenyetso cy\'ingufu zijyanye.</string>
     <string name="result4">Ibintu birashokoka kuvuka kuri COVID-19. Ngana ku kigo nderabuzima kugirango bisuzumwe n\'umuforomo.</string>
     <string name="result5">Ohereza ingingo byihutirwa mu bitaro by’Akarere kugirango asuzumwe na muganga.</string>
@@ -229,6 +229,8 @@
     <string name="north">North</string>
     <string name="west">West</string>
     <string name="kigali">Kigali</string>
+    <string name="not_in_covid_system">The NID / passport provided doesn\'t exist in the Rwanda National COVID-19 Case-surveillance System. Created a new case!</string>
+    <string name="case_id">Case ID</string>
 
 
 </resources>
