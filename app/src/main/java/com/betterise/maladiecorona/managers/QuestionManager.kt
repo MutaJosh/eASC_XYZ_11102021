@@ -54,7 +54,7 @@ class QuestionManager(private var questions : Array<String>, private var choices
         "double"        -> QuestionType.DOUBLE
         //"tel"           -> QuestionType.TELEPHONE
         "digit_forced"  -> QuestionType.DIGIT_FORCED
-       // "city"          -> QuestionType.CITY
+        // "city"          -> QuestionType.CITY
         "rdt"           -> QuestionType.RDT
         else            -> QuestionType.BINARY
     }
@@ -123,7 +123,7 @@ class QuestionManager(private var questions : Array<String>, private var choices
                 index, answer ->
 
             var pollAnswer = PollAnswer()
-           // pollAnswer.questionId = index
+            // pollAnswer.questionId = index
 
             if (!answer.text.isNullOrEmpty())
                 pollAnswer.answer = answer.text

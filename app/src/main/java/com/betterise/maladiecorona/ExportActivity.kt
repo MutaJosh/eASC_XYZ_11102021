@@ -158,6 +158,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
     /***
      * Saving the date and time of the last working export
      */
+    @SuppressLint("WrongConstant")
     private fun flagLastExport(){
         var dateFormat = getString(R.string.datetime_format)
 
@@ -170,6 +171,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
     /***
      * Retrieving the date and time of the last working export
      */
+    @SuppressLint("WrongConstant")
     private fun getLastExportFlag() : String {
         var timeStamp = getSharedPreferences(prefs, PRIVATE_MODE)
             .getLong(prefLastExport, 0)
@@ -183,6 +185,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
     }
 
 
+    @SuppressLint("MissingPermission")
     private fun checkForInternet(context: Context): Boolean {
 
         // register activity with the connectivity manager service

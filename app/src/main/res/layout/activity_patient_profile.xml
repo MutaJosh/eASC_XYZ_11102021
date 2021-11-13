@@ -406,10 +406,7 @@
         android:layout_marginTop="15dp"
         android:background="@color/green"
         android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:text="@string/proceed_to_rdt_test" />
-
-
+        android:layout_marginBottom="15dp" />
 
 
 </RelativeLayout>

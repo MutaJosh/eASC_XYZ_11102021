@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">e-ASCOV</string>
 
+    <string name="datetime_format" translatable="false">dd/MM/yyyy HH:mm</string>
+    <string name="date_format" translatable="false">dd/MM/yyyy</string>
+    <string name="time_format" translatable="false">HH:mm</string>
+
+    <string name="phone_start" translatable="false">078 </string>
+
     <string name="informations"> Ahabanza </string>
     <string name="intro">Ikaze kuri application ya e-ASCov. kanda ahanditse \"Tangira\" kugirango ukomeze </string>
     <string name="start_test">Tangira</string>
@@ -204,5 +210,12 @@
     <string name="chw_info">Umujyanama w\'ubuzima</string>
     <string name="enter_chw">Nyamuneka banza wandike amazina yawe</string>
     <string name="indexi">Numero y\'usuzumwa</string>
+    <string name="title_activity_rdt">title_activity_rdt</string>
+
+
+    <string name="loading">Kohereza...</string>
+    <string name="female">Umugore</string>
+    <string name="male">Umugabo</string>
+    <string name="response_error">habayemwo ikosa mugu kurura amakuru</string>
 
 </resources>

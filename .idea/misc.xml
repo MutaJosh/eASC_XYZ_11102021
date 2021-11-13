@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/layout/card_test_sessions.xml" value="0.14375" />
         <entry key="app/src/main/res/layout/content_rdt.xml" value="0.165" />
         <entry key="app/src/main/res/layout/item_bsvalidatecode.xml" value="0.18802083333333333" />
+        <entry key="app/src/main/res/layout/nav_header_rdt.xml" value="0.1640625" />
         <entry key="app/src/main/res/layout/question_bullet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/question_city.xml" value="0.228125" />
         <entry key="app/src/main/res/layout/question_digit.xml" value="0.165" />
@@ -37,7 +38,9 @@
         <entry key="app/src/main/res/layout/question_rdt.xml" value="0.1765625" />
         <entry key="app/src/main/res/layout/question_tel.xml" value="0.2015625" />
         <entry key="app/src/main/res/layout/test_files_to_deleted.xml" value="0.24375" />
+        <entry key="app/src/main/res/menu/activity_rdt_drawer.xml" value="0.24375" />
         <entry key="app/src/main/res/menu/context_menu_intro.xml" value="0.2015625" />
+        <entry key="app/src/main/res/menu/rdt.xml" value="0.1375" />
       </map>
     </option>
   </component>

@@ -70,24 +70,24 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
         btn_next.visibility = VISIBLE
 
-        AgentManager().saveindexcode(this,intent.getStringExtra("Indexi"))
-        AgentManager().savefirstname(this, intent.getStringExtra("firstname"))
-        AgentManager().savelastname(this, intent.getStringExtra("lastname"))
-        AgentManager().savenational_ID(this, intent.getStringExtra("national_ID"))
-        AgentManager().savegender(this, intent.getStringExtra("patientgender"))
-        AgentManager().savetelephone(this, intent.getStringExtra("patienttelephone"))
-        AgentManager().savedob(this, intent.getStringExtra("dob"))
-        AgentManager().saveoccupation(this, intent.getStringExtra("occupation"))
-        AgentManager().savenationality(this, intent.getStringExtra("residence"))
-        AgentManager().saveresidence(this, intent.getStringExtra("nationality"))
-        AgentManager().saveprovince(this, intent.getStringExtra("province"))
-        AgentManager().savedistrict(this, intent.getStringExtra("district"))
-        AgentManager().savesector(this, intent.getStringExtra("sector"))
-        AgentManager().savecell(this, intent.getStringExtra("cell"))
-        AgentManager().savevillage(this, intent.getStringExtra("village"))
-        AgentManager().saveNumberhousehold(this, intent.getStringExtra("number_household"))
-        AgentManager().savevaccine_type(this, intent.getStringExtra("vaccine_type"))
-        AgentManager().savevaccine_dose(this, intent.getStringExtra("vaccine_dose"))
+        AgentManager().saveindexcode(this, intent.getStringExtra("Indexi").toString())
+        AgentManager().savefirstname(this, intent.getStringExtra("firstname").toString())
+        AgentManager().savelastname(this, intent.getStringExtra("lastname").toString())
+        AgentManager().savenational_ID(this, intent.getStringExtra("national_ID").toString())
+        AgentManager().savegender(this, intent.getStringExtra("patientgender").toString())
+        AgentManager().savetelephone(this, intent.getStringExtra("patienttelephone").toString())
+        AgentManager().savedob(this, intent.getStringExtra("dob").toString())
+        AgentManager().saveoccupation(this, intent.getStringExtra("occupation").toString())
+        AgentManager().savenationality(this, intent.getStringExtra("residence").toString())
+        AgentManager().saveresidence(this, intent.getStringExtra("nationality").toString())
+        AgentManager().saveprovince(this, intent.getStringExtra("province").toString())
+        AgentManager().savedistrict(this, intent.getStringExtra("district").toString())
+        AgentManager().savesector(this, intent.getStringExtra("sector").toString())
+        AgentManager().savecell(this, intent.getStringExtra("cell").toString())
+        AgentManager().savevillage(this, intent.getStringExtra("village").toString())
+        AgentManager().saveNumberhousehold(this, intent.getStringExtra("number_household").toString())
+        AgentManager().savevaccine_type(this, intent.getStringExtra("vaccine_type").toString())
+        AgentManager().savevaccine_dose(this, intent.getStringExtra("vaccine_dose").toString())
 
         questionManager = QuestionManager(
             resources.getStringArray(R.array.questions),
@@ -167,7 +167,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             getString(if (questionManager!!.hasMoreQuestion()) R.string.next_question else R.string.save_and_continue)
         btn_next.isEnabled = false
 
-       var qi:String=(questionManager?.getCurrentIndex()?.plus(1).toString())
+        var qi:String=(questionManager?.getCurrentIndex()?.plus(1).toString())
 
         //Toast.makeText(baseContext, "ASCOV result: "+ test_resultascov.text, Toast.LENGTH_SHORT).show()
 
@@ -201,15 +201,15 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             ) )
 
             if ((baseContext.getString(when (result_ascoov){
-                        ResultType.CASE1 -> R.string.result1
-                        ResultType.CASE2 -> R.string.result2
-                        ResultType.CASE3 -> R.string.result3
-                        ResultType.CASE3bis -> R.string.result3bis
-                        ResultType.CASE4 -> R.string.result4
-                        ResultType.CASE5 -> R.string.result5 }) as String).equals(getString(R.string.result1))){
+                    ResultType.CASE1 -> R.string.result1
+                    ResultType.CASE2 -> R.string.result2
+                    ResultType.CASE3 -> R.string.result3
+                    ResultType.CASE3bis -> R.string.result3bis
+                    ResultType.CASE4 -> R.string.result4
+                    ResultType.CASE5 -> R.string.result5 }) as String).equals(getString(R.string.result1))){
 
                 btn_back_to_home.visibility= VISIBLE
-              //  Toast.makeText(baseContext, "Nimuzima ", Toast.LENGTH_LONG).show()
+                //  Toast.makeText(baseContext, "Nimuzima ", Toast.LENGTH_LONG).show()
                 btn_next.visibility=GONE
 
                 show_rdt= "yes"
@@ -224,12 +224,12 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         }
 
         when (questionManager?.getCurrentQuestionType()) {
-           // QuestionType.CITY -> loadCity()
+            // QuestionType.CITY -> loadCity()
             QuestionType.DIGIT -> loadDigitChoice()
             QuestionType.BINARY -> loadYesNo()
             QuestionType.DOUBLE -> loadTwoBullets()
             QuestionType.TERNARY -> loadThreeBullets()
-          //  QuestionType.TELEPHONE -> loadTelephone()
+            //  QuestionType.TELEPHONE -> loadTelephone()
             QuestionType.DIGIT_FORCED -> loadDigitForced()
             QuestionType.RDT -> loadRDT()
         }
@@ -339,17 +339,17 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         group = View.inflate(this, R.layout.question_bullet, null) as ViewGroup?
         var choices = questionManager?.getChoices()
 
-            group?.radio1?.text = choices!![0]
-            group?.radio2?.text = choices!![1]
-            group?.radio3?.text = choices!![2]
+        group?.radio1?.text = choices!![0]
+        group?.radio2?.text = choices!![1]
+        group?.radio3?.text = choices!![2]
 
         var answer = questionManager!!.getAnswer()
         btn_next.isEnabled = true
 
-            when (answer.value) {
-                1 -> group?.radio1?.isChecked = true
-                2 -> group?.radio2?.isChecked = true
-                3 -> group?.radio3?.isChecked = true }
+        when (answer.value) {
+            1 -> group?.radio1?.isChecked = true
+            2 -> group?.radio2?.isChecked = true
+            3 -> group?.radio3?.isChecked = true }
 
 
         if (intent.getStringExtra("patientgender").equals(getString(R.string.male))) {
@@ -540,7 +540,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         QuestionType.DIGIT -> validateDigit()
         QuestionType.DOUBLE -> validate2Bullets()
         QuestionType.TERNARY -> validate3Bullets()
-      //  QuestionType.TELEPHONE -> validateTelephone()
+        //  QuestionType.TELEPHONE -> validateTelephone()
         QuestionType.DIGIT_FORCED -> validateDigitForced()
         QuestionType.RDT -> validateRDT()
         else -> validate2Bullets()
@@ -671,7 +671,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             if (GeolocManager().requestLastGeoloc(this))
                 GeolocManager().getLastGeoloc(this, this)
         } catch (e: java.lang.Exception) {
-            Log.e(this.localClassName, e.message)
+            e.message?.let { Log.e(this.localClassName, it) }
         }
     }
 
@@ -688,7 +688,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             val intent = RdtIntentBuilder.forProvisioning()
                 .setSessionId(CW_SESSION_ID)
                 .setFlavorOne(getIntent().getStringExtra("firstname")+" "+getIntent().getStringExtra("lastname"))
-                .setFlavorTwo(getIntent().getStringExtra("national_ID"))
+                .setFlavorTwo(getIntent().getStringExtra("national_ID").toString())
                 .setCloudworksBackend(CLOUDWORKS_DSN)
                 .requestTestProfile(COVID_TEST_PROFILE)
                 .setSecondaryCaptureRequirements("capture_windowed")
@@ -697,7 +697,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
             startActivityForResult(intent, RDTOOLKIT_ACTIVITY_REQUEST_CODE)
         } catch (e: java.lang.Exception) {
-            Log.e(this.localClassName, e.message)
+            e.message?.let { Log.e(this.localClassName, it) }
         }
     }
 
@@ -710,7 +710,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             startActivityForResult(intent, RDTOOLKIT_CAPTURE_RESULT_REQUEST_CODE)
 
         } catch (e: java.lang.Exception) {
-            Log.e(this.localClassName, e.message)
+            e.message?.let { Log.e(this.localClassName, it) }
         }
     }
 
@@ -815,7 +815,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
             }
         } catch (e: java.lang.Exception) {
-            Log.e(this.localClassName, e.message)
+            e.message?.let { Log.e(this.localClassName, it) }
         }
     }
 
@@ -833,7 +833,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
             }
         } catch (e: java.lang.Exception) {
-            Log.e(this.localClassName, e.message)
+            e.message?.let { Log.e(this.localClassName, it) }
         }
 
     }

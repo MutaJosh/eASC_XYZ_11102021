@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:button="@drawable/shape_radio"
             android:paddingStart="20dp"
-            android:text="@string/contact" />
+            android:text="contact" />
 
     </RadioGroup>
 

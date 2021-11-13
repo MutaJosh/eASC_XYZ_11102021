@@ -645,8 +645,8 @@
                         android:paddingBottom="5dp"
                         android:text="@string/Sector" />
 
-                    <EditText
-                        android:id="@+id/etsector"
+                    <Spinner
+                        android:id="@+id/sp_sector"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_bg"
