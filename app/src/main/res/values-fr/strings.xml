@@ -207,4 +207,5 @@
     <string name="dose3">1st and 2nd Dose</string>
     <string name="indexi">Indexi</string>
     <string name="title_activity_rdt">title_activity_rdt</string>
+    <string name="valid_phone">Please enter valid phone</string>
 </resources>

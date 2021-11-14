@@ -90,6 +90,7 @@
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
+        <item>Yego|Oya</item>
         <item>Yego|Oya|Ntibishobora</item>
         <item></item>
     </string-array>
@@ -109,6 +110,7 @@
         <item>binary</item>
         <item>digit</item>
         <item>digit</item>
+        <item>binary</item>
         <item>binary</item>
         <item>binary</item>
         <item>binary</item>
@@ -176,7 +178,7 @@
     <string name="index_code">Index Code</string>
     <string name="disconnected_internet"> Ntabwo ugifite internet </string>
     <string name="which_type_of_dose">Ese wafashe uruhe rukingo?</string>
-    <string name="how_many_doses">Dose zingahe?</string>
+    <string name="how_many_doses">Ese wafashe Dose zingahe ?</string>
     <string name="number_of_people_live_in_your_household"> Ese ni abantu bangahe mubana mu nzu?</string>
     <string name="have_you_received_any_covid_19_vaccine_yet">Ese waba warafashe urukingo rwa COVID-19?</string>
     <string name="how_many_number_of_people_living_in_your_household">Ese ni abantu bangahe mubana mu nzu?</string>
@@ -217,5 +219,7 @@
     <string name="female">Umugore</string>
     <string name="male">Umugabo</string>
     <string name="response_error">habayemwo ikosa mugu kurura amakuru</string>
+
+    <string name="valid_phone">Nyamuneka Andika nimero ya telefone yuzuye ,igizwe n\' imibare icumi</string>
 
 </resources>

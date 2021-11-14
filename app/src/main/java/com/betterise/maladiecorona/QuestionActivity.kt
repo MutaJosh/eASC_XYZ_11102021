@@ -149,7 +149,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                 intent.putExtra("Indexi",getIntent().getStringExtra("Indexi"))
                 intent.putExtra(ResultActivity.EXTRA_RDT_RESULT, rdt_result)
                 startActivity(intent)
-                finish()
+                //finish()
             }
         }
     }
@@ -172,12 +172,12 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         //Toast.makeText(baseContext, "ASCOV result: "+ test_resultascov.text, Toast.LENGTH_SHORT).show()
 
 
-        if (qi.equals("20")) {
+        if (qi.equals("21")) {
             // Toast.makeText(baseContext, "test btn rdt removal", Toast.LENGTH_LONG).show()
             var result_ascoov=  questionManager!!.getResults()
 
             test_resultascov.visibility=VISIBLE
-            test_resultascov.text="Index : "+getIntent().getStringExtra(getString(R.string.indexi))+"\n \n \n"+baseContext.getString(
+            test_resultascov.text="Index : "+getIntent().getStringExtra("Indexi")+"\n \n \n"+baseContext.getString(
                 when (result_ascoov){
                     ResultType.CASE1 -> R.string.result1
                     ResultType.CASE2 -> R.string.result2

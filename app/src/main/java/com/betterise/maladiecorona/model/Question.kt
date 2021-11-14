@@ -25,11 +25,12 @@ class Question {
         const val WEIGHT                    = 12
         const val HEIGHT                    = 13
         const val TENSION                   = 14
-        const val DIABETES                  = 15
-        const val CANCER                    = 16
-        const val RESPIRATORY_DISEASE       = 17
-        const val PREGNANT                  = 18
-            const val RDT                       =19
+        const val TREATMENT                 = 15
+        const val DIABETES                  = 16
+        const val CANCER                    = 17
+        const val RESPIRATORY_DISEASE       = 18
+        const val PREGNANT                  = 19
+            const val RDT                       =20
 
     }
 }

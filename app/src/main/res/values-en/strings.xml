@@ -46,6 +46,8 @@
 
     <string-array name="questions">
 
+
+
         <item>Has the subject traveled to a country or region with community transmission of covid-19 in the prior to the onset symptoms?</item>
         <item>Has the subject been in contact with a probable or suspect coronavirus positive person in the last 14 days before the onset of symptoms?</item>
         <item>Does the subject says he had fever?</item>
@@ -61,11 +63,13 @@
         <item>What is the weight of the subject?</item>
         <item>What is the height of the subject?</item>
         <item>Does the subject have unbalanced high blood pressure? Or does he have a heart or vascular disease ? Does the subject take treatment for the heart?</item>
+        <item>Does the subject take treatment for the heart?</item>
         <item>Is the subject diabetic?</item>
         <item>Has the subject had a cancer in the past 3 years?</item>
         <item>Does the subject have a known respiratory illness?</item>
         <item>Is the subject pregnant?</item>
         <item></item>
+
     </string-array>
 
 
@@ -84,6 +88,7 @@
         <item>Yes|No</item>
         <item>Kg|Do not know</item>
         <item>Cm|Do not know</item>
+        <item>Yes|No</item>
         <item>Yes|No</item>
         <item>Yes|No</item>
         <item>Yes|No</item>
@@ -107,6 +112,7 @@
         <item>binary</item>
         <item>digit</item>
         <item>digit</item>
+        <item>binary</item>
         <item>binary</item>
         <item>binary</item>
         <item>binary</item>
@@ -214,5 +220,6 @@
     <string name="female">Female</string>
     <string name="male">Male</string>
     <string name="response_error">response error -null</string>
+    <string name="valid_phone">Please enter valid phone</string>
 
 </resources>
