@@ -33,12 +33,19 @@ import android.widget.Toast;
 import com.betterise.maladiecorona.managers.AgentManager;
 import com.betterise.maladiecorona.managers.QuestionManager;
 import com.betterise.maladiecorona.model.IndexCode;
+import com.betterise.maladiecorona.model.Item_session;
 import com.betterise.maladiecorona.networking.singleton.RESTApiClient;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,6 +54,7 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
+import cz.msebera.android.httpclient.Header;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,9 +68,12 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
   private AppCompatRadioButton radioYes;
   private LinearLayout laypatientdatahide,layindex;
 
+
+    ArrayList<IndexCode> mExampleListi;
+
 private RadioGroup radiogrouptype;
     private Spinner sp_gender, sp_nationality, sp_residence,spinner_Number_Dose,sp_district,sp_province,sp_sector;
-    private String nationality, gender, yearr, month, date, residency, dob,numberhousehold,VaxxineType,Number_Dose,NulledVaccination;
+    private String checkindex,nationality, gender, yearr, month, date, residency, dob,numberhousehold,VaxxineType,Number_Dose,NulledVaccination;
     private ImageButton btndatepicker;
     private Button btn_next;
     private ImageView btn_back;
@@ -77,6 +88,8 @@ public static final String PREF_FIRSTNAME = "firstname";
     public static final String PREF_LASTNAME = "lastname";
 
     private ProgressDialog progressDialogi;
+
+    private  ProgressDialog progresso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +117,10 @@ public static final String PREF_FIRSTNAME = "firstname";
 
         et_numberhousehold=findViewById(R.id.et_numberhousehold);
         tvindexcode.setTextIsSelectable(true);
+
+        progresso=new ProgressDialog(PatientDetailsActivity.this);
+        progresso.setMessage(getString(R.string.loading));
+        progresso.setCanceledOnTouchOutside(false);
 
 
         radiogrouptype.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -1639,41 +1656,47 @@ public static final String PREF_FIRSTNAME = "firstname";
 
                    // etpatienttelephone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
+
+
                     if (etpatienttelephone.getText().toString().trim().length()<9 ||etpatienttelephone.getText().toString().trim().length()>13){
                         Toast.makeText(getBaseContext(), R.string.valid_phone, Toast.LENGTH_LONG).show();
 
                     }else {
-                        new AgentManager().savecategory(this, getIntent().getStringExtra("category"));
+                        progresso.show();
+                        if (checkindex.equals("no")){
+                            new AgentManager().savecategory(this, getIntent().getStringExtra("category"));
 
-                        Intent intent = new Intent(PatientDetailsActivity.this, QuestionActivity.class);
-                        intent.putExtra("firstname", fn);
-                        intent.putExtra("lastname", lastname);
-                        intent.putExtra("national_ID", etnational_ID.getText().toString().trim());
-                        intent.putExtra("patientgender", gender);
-                        intent.putExtra("patienttelephone", etpatienttelephone.getText().toString().trim());
-                        intent.putExtra("dob", tvdob.getText().toString());
-                        intent.putExtra("occupation", etoccupation.getText().toString().trim());
-                        intent.putExtra("residence", residency);
-                        intent.putExtra("nationality", nationality);
-                        intent.putExtra("province", province);
-                        intent.putExtra("district", district);
-                        intent.putExtra("sector", sector);
-                        intent.putExtra("cell", cell);
-                        intent.putExtra("village", village);
-                        intent.putExtra("rdt_result", "null");
-                        intent.putExtra("Indexi", tvindexcode.getText().toString().trim());
-                        intent.putExtra("number_household", numberhousehold);
-                        if (NulledVaccination.equals("no")) {
+                            Intent intent = new Intent(PatientDetailsActivity.this, QuestionActivity.class);
+                            intent.putExtra("firstname", fn);
+                            intent.putExtra("lastname", lastname);
+                            intent.putExtra("national_ID", etnational_ID.getText().toString().trim());
+                            intent.putExtra("patientgender", gender);
+                            intent.putExtra("patienttelephone", etpatienttelephone.getText().toString().trim());
+                            intent.putExtra("dob", tvdob.getText().toString());
+                            intent.putExtra("occupation", etoccupation.getText().toString().trim());
+                            intent.putExtra("residence", residency);
+                            intent.putExtra("nationality", nationality);
+                            intent.putExtra("province", province);
+                            intent.putExtra("district", district);
+                            intent.putExtra("sector", sector);
+                            intent.putExtra("cell", cell);
+                            intent.putExtra("village", village);
+                            intent.putExtra("rdt_result", "null");
+                            intent.putExtra("Indexi", tvindexcode.getText().toString().trim());
+                            intent.putExtra("number_household", numberhousehold);
+                            if (NulledVaccination.equals("no")) {
 
-                            intent.putExtra("vaccine_type", "null");
-                            intent.putExtra("vaccine_dose", "null");
-                        } else if (NulledVaccination.equals("yes")) {
-                            intent.putExtra("vaccine_type", VaxxineType);
-                            intent.putExtra("vaccine_dose", Number_Dose);
+                                intent.putExtra("vaccine_type", "null");
+                                intent.putExtra("vaccine_dose", "null");
+                            } else if (NulledVaccination.equals("yes")) {
+                                intent.putExtra("vaccine_type", VaxxineType);
+                                intent.putExtra("vaccine_dose", Number_Dose);
+                            }
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
                         }
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                       // finish();
+                         // finish();
 
                     }
                 }
@@ -1721,7 +1744,7 @@ public static final String PREF_FIRSTNAME = "firstname";
                            codeNID=reader.getString("code");
                             messageNID=reader.getString("message");
                             if (statusNID.equals("200")) {
-
+            checkindex="no";
                                     tvindexcode.setText(codeNID);
                                 btn_next.setVisibility(View.VISIBLE);
                                 JSONObject jsonObject = new JSONObject(jsondata).getJSONObject("data");
@@ -1737,9 +1760,16 @@ public static final String PREF_FIRSTNAME = "firstname";
 
                             }
                             if (statusNID.equals("404")) {
-                                tvindexcode.setText(codeNID);
-                                Toast.makeText(getBaseContext(), R.string.not_in_covid_system, Toast.LENGTH_LONG).show();
-                                btn_next.setVisibility(View.VISIBLE);
+
+                                tvindexcode.setText("N/A");
+                               Toast.makeText(getBaseContext(), R.string.not_in_covid_system, Toast.LENGTH_LONG).show();
+                               btn_next.setVisibility(View.VISIBLE);
+
+                                checkindex="yes";
+
+                                callreservedindexes();
+
+
                             }
 
                             if (getIntent().getStringExtra("category").equals("contact")){
@@ -1783,6 +1813,85 @@ public static final String PREF_FIRSTNAME = "firstname";
         }else{
         callNIDAPI();
     }
+    }
+
+    private void callreservedindexes(){
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.setBasicAuth("EAC_test","EACPass@2021");
+        client.get("http://161.97.184.144:8080/api/33/trackedEntityAttributes/MSWzPQhISym/generateAndReserve?numberToReserve=1", new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+
+                //Here response will be received in form of JSONArray
+                Log.e("index-reserved",response.toString());
+                try {
+                   JSONArray jsonArray =new JSONArray(response.toString());
+                   for (int i=0;i<jsonArray.length();i++){
+                       JSONObject item=jsonArray.getJSONObject(i);
+                       String value =item.getString("value");
+                      progresso.dismiss();
+                       tvindexcode.setText(value);
+                      // Toast.makeText(getBaseContext(), "data is "+value, Toast.LENGTH_LONG).show();
+                       if (checkindex.equals("yes")){
+                           new AgentManager().savecategory(PatientDetailsActivity.this, getIntent().getStringExtra("category"));
+
+                           Intent intent = new Intent(PatientDetailsActivity.this, QuestionActivity.class);
+                           intent.putExtra("firstname", fn);
+                           intent.putExtra("lastname", lastname);
+                           intent.putExtra("national_ID", etnational_ID.getText().toString().trim());
+                           intent.putExtra("patientgender", gender);
+                           intent.putExtra("patienttelephone", etpatienttelephone.getText().toString().trim());
+                           intent.putExtra("dob", tvdob.getText().toString());
+                           intent.putExtra("occupation", etoccupation.getText().toString().trim());
+                           intent.putExtra("residence", residency);
+                           intent.putExtra("nationality", nationality);
+                           intent.putExtra("province", province);
+                           intent.putExtra("district", district);
+                           intent.putExtra("sector", sector);
+                           intent.putExtra("cell", cell);
+                           intent.putExtra("village", village);
+                           intent.putExtra("rdt_result", "null");
+                           intent.putExtra("Indexi", tvindexcode.getText().toString().trim());
+                           intent.putExtra("number_household", numberhousehold);
+                           if (NulledVaccination.equals("no")) {
+
+                               intent.putExtra("vaccine_type", "null");
+                               intent.putExtra("vaccine_dose", "null");
+                           } else if (NulledVaccination.equals("yes")) {
+                               intent.putExtra("vaccine_type", VaxxineType);
+                               intent.putExtra("vaccine_dose", Number_Dose);
+                           }
+                           startActivity(intent);
+                           overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
+                       }
+                   }
+
+                }
+                catch (JSONException e) {
+                    progresso.dismiss();
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+
+                //Here response will be received in form of JSONObject
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(getApplicationContext(), "We got an error", Toast.LENGTH_SHORT).show();
+                Log.e("index-error",responseString.toString());
+                progresso.dismiss();
+            }
+        });
     }
 
 }
