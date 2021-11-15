@@ -32,6 +32,7 @@ class Poll {
     var vaccine_type:String=""
     var vaccine_dose:String=""
     var received_status:String=""
+    var user_location:String=""
 
     var ASCOV_answers : MutableList<PollAnswer> = arrayListOf()
 

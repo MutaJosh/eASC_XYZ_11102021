@@ -208,4 +208,6 @@
     <string name="indexi">Indexi</string>
     <string name="title_activity_rdt">title_activity_rdt</string>
     <string name="valid_phone">Please enter valid phone</string>
+    <string name="not_available_index">N/A</string>
+    <string name="turn_on_location">Please turn on your location...</string>
 </resources>

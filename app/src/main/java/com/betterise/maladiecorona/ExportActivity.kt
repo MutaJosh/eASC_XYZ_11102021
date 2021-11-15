@@ -92,7 +92,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
 
                // Toast.makeText(this, "$key: $value",Toast.LENGTH_LONG).show()
 
-           // testpref.text="data from SP : "+"$key: $value"
+          //  testpref.text="data from SP : "+"$key: $value"
 
            // Log.e("Data", getSharedPreferences(prefs, MODE_PRIVATE).all.toString())
 

@@ -206,6 +206,14 @@ class AgentManager() {
             .putString("received_status", received_status)
             .apply()
     }
+    fun saveuser_location(context:Context,user_location:String){
+        var sharedPrefs = context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE)
+        sharedPrefs
+            .edit()
+            .putString("user_location", user_location)
+            .apply()
+    }
+
 
 
     /***
@@ -236,6 +244,7 @@ class AgentManager() {
     fun getvaccine_type(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("vaccine_type", "")
     fun getvaccine_dose(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("vaccine_dose", "")
     fun getreceived_status(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("received_status", "")
+    fun getuser_location(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("user_location", "")
 
 
 

@@ -21,7 +21,9 @@ import com.betterise.maladiecorona.managers.AgentManager
 import com.betterise.maladiecorona.managers.GeolocManager
 import com.betterise.maladiecorona.managers.PollManager
 import com.betterise.maladiecorona.managers.QuestionManager
+import com.betterise.maladiecorona.model.Answer
 import com.betterise.maladiecorona.model.Question
+import com.betterise.maladiecorona.model.Question.Companion.TREATMENT
 import com.betterise.maladiecorona.model.QuestionType
 import com.betterise.maladiecorona.model.ResultType
 import com.betterise.maladiecorona.model.out.PollResult
@@ -48,6 +50,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
     private var show_rdt:String=""
 
+
     private val RDTOOLKIT_ACTIVITY_REQUEST_CODE = 1
     private val RDTOOLKIT_CAPTURE_RESULT_REQUEST_CODE = 2
 
@@ -57,7 +60,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
     private val CLOUDWORKS_DSN = "https://vmi682749.contaboserver.net/ingest/0aa05fe0a88e1ee06df6fa7d74fbcce276d7eadb"
     private val COVID_TEST_PROFILE = "sd_standard_q_c19"
     private val RDT_PENDING_STATUS = "pending"
-
+    private var showtreatmentq:String=""
 
     companion object {
         const val EXTRA_RESULTQ = "EXTRA_RESULTQ"
@@ -141,13 +144,13 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                 PollManager().addPoll(this, poll)
 
                 var result = questionManager!!.getResults()
-                val intent = Intent(this, ResultActivity::class.java)
-                intent.putExtra(ResultActivity.EXTRA_RESULT, result)
-
-                intent.putExtra(ResultActivity.EXTRA_USER_ID, user_id)
-                intent.putExtra("patient_phone_number",getIntent().getStringExtra("patienttelephone"))
-                intent.putExtra("Indexi",getIntent().getStringExtra("Indexi"))
-                intent.putExtra(ResultActivity.EXTRA_RDT_RESULT, rdt_result)
+                val intent = Intent(this, ActivityChooseCategory::class.java)
+//                intent.putExtra(ResultActivity.EXTRA_RESULT, result)
+//
+//                intent.putExtra(ResultActivity.EXTRA_USER_ID, user_id)
+//                intent.putExtra("patient_phone_number",getIntent().getStringExtra("patienttelephone"))
+//                intent.putExtra("Indexi",getIntent().getStringExtra("Indexi"))
+//                intent.putExtra(ResultActivity.EXTRA_RDT_RESULT, rdt_result)
                 startActivity(intent)
                 //finish()
             }
@@ -170,6 +173,8 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         var qi:String=(questionManager?.getCurrentIndex()?.plus(1).toString())
 
         //Toast.makeText(baseContext, "ASCOV result: "+ test_resultascov.text, Toast.LENGTH_SHORT).show()
+
+       if (qi.equals("16")) { showtreatmentq="yes" }
 
 
         if (qi.equals("21")) {
@@ -294,7 +299,14 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         group?.radio1?.setOnCheckedChangeListener { _, _ ->
             btn_next.isEnabled = true
             group?.errorBullet?.visibility = INVISIBLE
+            if (showtreatmentq.equals("yes")){
+                Toast.makeText(baseContext,"Clicked yes treatment",Toast.LENGTH_LONG).show()
+            }
+
+
         }
+
+
         group?.radio2?.setOnCheckedChangeListener { _, _ ->
             btn_next.isEnabled = true
             group?.errorBullet?.visibility = INVISIBLE

@@ -186,9 +186,11 @@ private TextView errorBulletcate;
                     } catch (IOException e) {
                         e.printStackTrace();
                         Toast.makeText(ActivityChooseCategory.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                         Toast.makeText(ActivityChooseCategory.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("log",e.getMessage());
                     }
 
                 }else{

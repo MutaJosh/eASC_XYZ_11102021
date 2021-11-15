@@ -222,5 +222,7 @@
     <string name="male">Umugabo</string>
     <string name="response_error">habayemwo ikosa mugu kurura amakuru</string>
     <string name="valid_phone">Nyamuneka Andika nimero ya telefone yuzuye ,igizwe n\' imibare icumi</string>
+    <string name="not_available_index">N/A</string>
+    <string name="turn_on_location">Please turn on your location...</string>
 
 </resources>

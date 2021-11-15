@@ -63,6 +63,8 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_patient_profile);
 
 
+        //https://www.google.com/maps/search/?api=1&query=37.4219983, -122.084
+
         btn_startprofile=findViewById(R.id.btn_startprofile);
         btn_startprofile.setOnClickListener(this);
         btn_backprofile=findViewById(R.id.btn_backprofile);

@@ -62,8 +62,8 @@
         <item>Has the subject had diarrhea in the past 24 hours (at least 3 loose stools)?</item>
         <item>What is the weight of the subject?</item>
         <item>What is the height of the subject?</item>
-        <item>Does the subject have unbalanced high blood pressure? Or does he have a heart or vascular disease ? Does the subject take treatment for the heart?</item>
-        <item>Does the subject take treatment for the heart?</item>
+        <item>Does the subject have unbalanced high blood pressure? Or does he have cardiovascular diseases?</item>
+        <item>Does the subject take treatment for the vascular diseases?</item>
         <item>Is the subject diabetic?</item>
         <item>Has the subject had a cancer in the past 3 years?</item>
         <item>Does the subject have a known respiratory illness?</item>
@@ -122,12 +122,13 @@
     </string-array>
 
     <!--    These are the only two e-ASCOV results being used. (NEGATIVE AND POSITIVE respectively)-->
-    <string name="result1">The situation probably does not fall under COVID-19. Ask the subject to come back to see you if new symptoms appear.</string>
-    <string name="result2">The situation may fall under COVID-19. Address the subject to the health center for evaluation by a nurse.</string>
-
-
+    <string name="result1">Birashoboka ko usuzumwa nta bwandu bw\'icyorezo cya COVID-19 afite. Musabe kukumenyesha mugihe abonye ibimenyetso bishya.</string>
+    <string name="result2"> Birashoboka ko usuzumwa yaba afite ubwandu bw\'icyorezo cya COVID-19. Mukorere isuzuma rya Rapid Diagnosis Test (RDT) kugirango ubyemeze </string>
     <!--    These option used at the moment (Health team to review and approve probable scenarios) -->
-    <string name="result3">severe case ,consult doctor</string>
+    <!--    Approved now (11-11-2021) -->
+    <string name="result3">Biragaragara ko usuzumwa ashobora kuba afite ubwandu bw\'icyorezo cya COVID-19 buri hejuru. Mukorere isuzuma rya Rapid Diagnosis Test (RDT) kugirango ubyemeze  </string>
+
+
     <string name="result3bis">The situation may fall under COVID-19. Address the subject to the district hospital because sign of gravity associated.</string>
     <string name="result4">The situation may fall under COVID-19. Address the subject to the Health center for evaluation by a nurse.</string>
     <string name="result5">Address the subject urgently to the district hospital for assessment by a doctor. COVID-19.</string>
@@ -221,5 +222,7 @@
     <string name="male">Male</string>
     <string name="response_error">response error -null</string>
     <string name="valid_phone">Please enter valid phone</string>
+    <string name="not_available_index">N/A</string>
+    <string name="turn_on_location">Please turn on your location...</string>
 
 </resources>
