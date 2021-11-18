@@ -61,6 +61,7 @@ private ProgressDialog progressDialog,progressDialog2;
 private RadioGroup radioGroup;
     private OtpTextView otpTextView;
 private TextView errorBulletcate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

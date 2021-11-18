@@ -105,6 +105,7 @@ class QuestionManager(private var questions : Array<String>, private var choices
         poll.vaccine_dose=AgentManager().getvaccine_dose(context)
         poll.received_status=AgentManager().getreceived_status(context)
         poll.user_location=AgentManager().getuser_location(context)
+        poll.respiratory_diseases=AgentManager().getrespiratory_diseases(context)
 
         // Poll's result
         var result = getResults()

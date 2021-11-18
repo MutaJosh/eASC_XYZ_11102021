@@ -213,7 +213,13 @@ class AgentManager() {
             .putString("user_location", user_location)
             .apply()
     }
-
+    fun saverespiratory_diseases(context:Context,respiratory_diseases:String){
+        var sharedPrefs = context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE)
+        sharedPrefs
+            .edit()
+            .putString("respiratory_diseases", respiratory_diseases)
+            .apply()
+    }
 
 
     /***
@@ -245,8 +251,7 @@ class AgentManager() {
     fun getvaccine_dose(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("vaccine_dose", "")
     fun getreceived_status(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("received_status", "")
     fun getuser_location(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("user_location", "")
-
-
+    fun getrespiratory_diseases(context: Context)= context.getSharedPreferences(PREF_POLLS, PRIVATE_MODE).getString("respiratory_diseases", "")
 
 
 }

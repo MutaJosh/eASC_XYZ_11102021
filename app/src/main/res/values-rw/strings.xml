@@ -224,5 +224,11 @@
     <string name="valid_phone">Nyamuneka Andika nimero ya telefone yuzuye ,igizwe n\' imibare icumi</string>
     <string name="not_available_index">N/A</string>
     <string name="turn_on_location">Please turn on your location...</string>
+    <string name="tuberculosis">Tuberculosis</string>
+    <string name="pneumonia">Pneumonia</string>
+    <string name="asthma">Asthma</string>
+    <string name="flu">Flu</string>
+    <string name="cold">Cold</string>
+    <string name="others">Others</string>
 
 </resources>

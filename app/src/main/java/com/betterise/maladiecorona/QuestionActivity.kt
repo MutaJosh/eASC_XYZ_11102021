@@ -11,19 +11,17 @@ import android.util.Log
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.betterise.maladiecorona.managers.AgentManager
 import com.betterise.maladiecorona.managers.GeolocManager
 import com.betterise.maladiecorona.managers.PollManager
 import com.betterise.maladiecorona.managers.QuestionManager
-import com.betterise.maladiecorona.model.Answer
 import com.betterise.maladiecorona.model.Question
-import com.betterise.maladiecorona.model.Question.Companion.TREATMENT
 import com.betterise.maladiecorona.model.QuestionType
 import com.betterise.maladiecorona.model.ResultType
-import com.betterise.maladiecorona.model.out.PollResult
 import kotlinx.android.synthetic.main.activity_question.*
 import kotlinx.android.synthetic.main.activity_results.*
 import kotlinx.android.synthetic.main.question_bullet.view.*
@@ -58,6 +56,13 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
     private val COVID_TEST_PROFILE = "sd_standard_q_c19"
     private val RDT_PENDING_STATUS = "pending"
     private var showtreatmentq:String=""
+
+    private var tub:String="";
+    private var pn:String="";
+    private var asth:String="";
+    private var fl:String="";
+    private var co:String="";
+    private var ot:String="";
 
     companion object {
         const val EXTRA_RESULTQ = "EXTRA_RESULTQ"
@@ -171,9 +176,12 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
         //Toast.makeText(baseContext, "ASCOV result: "+ test_resultascov.text, Toast.LENGTH_SHORT).show()
 
-       if (qi.equals("16")) { showtreatmentq="yes" }
+       if (qi.equals("19")) { showtreatmentq="yes" }else{showtreatmentq="no"}
 
         if (qi.equals("21")) {
+            //Toast.makeText(baseContext, "diseases\n "+tub+pn+asth+co+fl+ot, Toast.LENGTH_LONG).show()
+
+            AgentManager().saverespiratory_diseases(baseContext, tub+","+pn+","+asth+","+co+","+fl+","+ot)
             // Toast.makeText(baseContext, "test btn rdt removal", Toast.LENGTH_LONG).show()
             var result_ascoov=  questionManager!!.getResults()
 
@@ -297,13 +305,46 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             group?.errorBullet?.visibility = INVISIBLE
         }
         if (showtreatmentq.equals("yes")){
+            group?.radio1?.setOnClickListener {
+                group?.lin_diseases?.visibility = VISIBLE
+                //  Toast.makeText(baseContext,"Clickedi :"+group?.radio1?.text,Toast.LENGTH_SHORT).show()
+                group?.cxtuberulosis?.setOnCheckedChangeListener{ buttonView, isChecked ->
+                    if (isChecked){
+                    tub="Tuberulosis"
+                    }
+                }
 
-        group?.radio1?.setOnCheckedChangeListener { _, _ ->
-            Toast.makeText(baseContext,"Clicked : ${group?.radio1?.text}",Toast.LENGTH_LONG).show()
+                group?.cxpneumonia?.setOnCheckedChangeListener{ buttonView, isChecked ->
+                    if (isChecked){
+                        pn="Pneumonia"
+                    }
+                }
+                group?.cxasthma?.setOnCheckedChangeListener{ buttonView, isChecked ->
+                    if (isChecked){
+                        asth="Asthma"
+                    }
+                }
+                group?.cxflu?.setOnCheckedChangeListener{ buttonView, isChecked ->
+                    if (isChecked){
+                        fl="Flu"
+                    }
+                }
+                group?.cxcold?.setOnCheckedChangeListener{ buttonView, isChecked ->
+                    if (isChecked){
+                        co="Cold"
+                    }
+                }
+                group?.cxothers?.setOnCheckedChangeListener{ buttonView, isChecked ->
+                    if (isChecked){
+                        ot="Others"
+                    }
+                }
+
+
+            }
+            group?.radio2?.setOnClickListener {group?.lin_diseases?.visibility= View.GONE}
         }
 
-            Toast.makeText(baseContext,"Clicked yes treatment",Toast.LENGTH_LONG).show()
-        }
         group?.radio2?.setOnCheckedChangeListener { _, _ ->
             btn_next.isEnabled = true
             group?.errorBullet?.visibility = INVISIBLE

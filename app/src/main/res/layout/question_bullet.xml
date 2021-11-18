@@ -7,8 +7,8 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:text="@string/select_option"
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:padding="25dp">
+        android:padding="15dp">
 
         <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/radio1"
@@ -52,8 +52,8 @@
         android:id="@+id/errorBullet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="2dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_gravity="center_horizontal"
@@ -61,5 +61,52 @@
         android:visibility="invisible"
         android:text="@string/select_option_error"
         style="@style/ErrorText"/>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/lin_diseases"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        >
+
+        <CheckBox
+            android:id="@+id/cxtuberulosis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tuberculosis" />
+        <CheckBox
+            android:id="@+id/cxpneumonia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pneumonia" />
+
+        <CheckBox
+            android:id="@+id/cxasthma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/asthma" />
+        <CheckBox
+            android:id="@+id/cxflu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/flu" />
+        <CheckBox
+            android:id="@+id/cxcold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cold" />
+        <CheckBox
+            android:id="@+id/cxothers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/others" />
+
+
+    </LinearLayout>
+
+
+
 
 </LinearLayout>
