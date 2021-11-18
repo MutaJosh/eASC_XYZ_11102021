@@ -11,10 +11,7 @@ import android.util.Log
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.RelativeLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.betterise.maladiecorona.managers.AgentManager
@@ -176,7 +173,6 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
        if (qi.equals("16")) { showtreatmentq="yes" }
 
-
         if (qi.equals("21")) {
             // Toast.makeText(baseContext, "test btn rdt removal", Toast.LENGTH_LONG).show()
             var result_ascoov=  questionManager!!.getResults()
@@ -299,14 +295,15 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         group?.radio1?.setOnCheckedChangeListener { _, _ ->
             btn_next.isEnabled = true
             group?.errorBullet?.visibility = INVISIBLE
-            if (showtreatmentq.equals("yes")){
-                Toast.makeText(baseContext,"Clicked yes treatment",Toast.LENGTH_LONG).show()
-            }
+        }
+        if (showtreatmentq.equals("yes")){
 
-
+        group?.radio1?.setOnCheckedChangeListener { _, _ ->
+            Toast.makeText(baseContext,"Clicked : ${group?.radio1?.text}",Toast.LENGTH_LONG).show()
         }
 
-
+            Toast.makeText(baseContext,"Clicked yes treatment",Toast.LENGTH_LONG).show()
+        }
         group?.radio2?.setOnCheckedChangeListener { _, _ ->
             btn_next.isEnabled = true
             group?.errorBullet?.visibility = INVISIBLE
