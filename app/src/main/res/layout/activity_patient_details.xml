@@ -671,8 +671,8 @@
                         android:paddingBottom="5dp"
                         android:text="@string/Cell" />
 
-                    <EditText
-                        android:id="@+id/etcell"
+                    <Spinner
+                        android:id="@+id/sp_cell"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_bg"
@@ -704,8 +704,8 @@
                         android:paddingBottom="5dp"
                         android:text="@string/Village" />
 
-                    <EditText
-                        android:id="@+id/etvillage"
+                    <Spinner
+                        android:id="@+id/sp_village"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_bg"

@@ -72,6 +72,7 @@ dependencies {
 
 
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'androidx.games:games-activity:+'
     compile 'com.loopj.android:android-async-http:1.4.9'
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
@@ -89,6 +90,9 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.squareup.retrofit2:converter-scalars:+'
+
+
+    implementation 'com.android.volley:volley:1.2.1'
 
 
 }

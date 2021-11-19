@@ -11,22 +11,15 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
-import android.telephony.PhoneNumberFormattingTextWatcher;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,15 +30,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.betterise.maladiecorona.managers.AgentManager;
-import com.betterise.maladiecorona.managers.QuestionManager;
 import com.betterise.maladiecorona.model.IndexCode;
-import com.betterise.maladiecorona.model.Item_session;
+import com.betterise.maladiecorona.model.Province;
 import com.betterise.maladiecorona.networking.singleton.RESTApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -54,8 +50,6 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -64,10 +58,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -88,6 +81,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
     // Initializing other items
     int PERMISSION_ID = 44;
 
+
     private String statusNID, codeNID, messageNID, fNameNID, lNameNID, dobNID, nationalityNID;
 
     private static final int PRIVATE_MODE = 0;
@@ -98,7 +92,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
     ArrayList<IndexCode> mExampleListi;
 
     private RadioGroup radiogrouptype;
-    private Spinner sp_gender, sp_nationality, sp_residence, spinner_Number_Dose, sp_district, sp_province, sp_sector;
+    private Spinner sp_cell,sp_village,sp_gender, sp_nationality, sp_residence, spinner_Number_Dose, sp_district, sp_province, sp_sector;
     private String country,zip,state,city,address, longitude,latitude,checkindex, nationality, gender, yearr, month, date, residency, dob, numberhousehold, VaxxineType, Number_Dose, NulledVaccination;
     private ImageButton btndatepicker;
     private Button btn_next;
@@ -117,6 +111,15 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
 
     private ProgressDialog progresso;
 
+
+    ArrayList<Province> provinceList = new ArrayList<Province>();
+    ArrayList<Province> districtList = new ArrayList<Province>();
+    ArrayList<Province> sectorList = new ArrayList<Province>();
+    ArrayList<Province> cellList = new ArrayList<Province>();
+    ArrayList<Province> villageList = new ArrayList<Province>();
+    ArrayAdapter<Province> provinceAdapter;
+    RequestQueue requestQueue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,6 +135,8 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
         progressDialogi.setCanceledOnTouchOutside(false);
 
         sp_province=findViewById(R.id.sp_province);
+        sp_cell=findViewById(R.id.sp_cell);
+        sp_village=findViewById(R.id.sp_village);
 
         laypatientdatahide=findViewById(R.id.laypatientdatahide);
         layindex=findViewById(R.id.layindex);
@@ -181,8 +186,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
         etnational_ID=findViewById(R.id.national_ID);
         etpatienttelephone=findViewById(R.id.patient_telephone);
         etoccupation=findViewById(R.id.etoccupation);
-        etcell=findViewById(R.id.etcell);
-        etvillage=findViewById(R.id.etvillage);
+
 
         sp_gender = findViewById(R.id.sp_gender);
         sp_nationality = findViewById(R.id.sp_nationality);
@@ -251,204 +255,214 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
             }
         });
 
-        List<String> listprovince=new ArrayList<>();
+        requestQueue = Volley.newRequestQueue(this);
+        String url = "https://rbc.gov.rw/community/data-sharing/api/organisationUnit.php";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                url, null, new com.android.volley.Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("provinces");
+                    for(int i=0; i<jsonArray.length();i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        Province proObj=new Province();
+                        proObj.setName(jsonObject.optString("name"));
+                        proObj.setId(jsonObject.optString("id"));
 
-        listprovince.add(getString(R.string.kigali));
-        listprovince.add(getString(R.string.south));
-        listprovince.add(getString(R.string.east));
-        listprovince.add(getString(R.string.north));
-        listprovince.add(getString(R.string.west));
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapterprovi = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listprovince);
-        // Drop down layout style - list view with radio button
-        dataAdapterprovi.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_province.setAdapter(dataAdapterprovi);
+                        provinceList.add(proObj);
+
+                        provinceAdapter = new ArrayAdapter<>(PatientDetailsActivity.this,
+                                android.R.layout.simple_spinner_item, provinceList);
+                        provinceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        sp_province.setAdapter(provinceAdapter);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
         sp_province.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //Toast.makeText(getBaseContext(), "selected province is: " +adapterView.getItemAtPosition(i).toString()+"\n"+provinceList.get(i).getId(), Toast.LENGTH_LONG).show();
                 province=adapterView.getItemAtPosition(i).toString();
-                if (province.equals(getString(R.string.kigali))){
-                    List<String> listdis = new ArrayList<String>();
+                districtList.clear();
+                sectorList.clear();
+                String url = "https://rbc.gov.rw/community/data-sharing/api/organisationUnit.php?province="+provinceList.get(i).getId();
+                requestQueue = Volley.newRequestQueue(PatientDetailsActivity.this);
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                        url, null, new com.android.volley.Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("districts");
+                            for(int i=0; i<jsonArray.length();i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                Province proObj=new Province();
+                                proObj.setName(jsonObject.optString("name"));
+                                proObj.setId(jsonObject.optString("id"));
 
-                    listdis.add("Gasabo");
-                    listdis.add("Kicukiro");
-                    listdis.add("Nyarugenge");
-                    // Creating adapter for spinner
-                    ArrayAdapter<String> dataAdapterdis = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listdis);
-                    // Drop down layout style - list view with radio button
-                    dataAdapterdis.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    sp_district.setAdapter(dataAdapterdis);
+                                districtList.add(proObj);
 
-                    sp_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            district=adapterView.getItemAtPosition(i).toString();
-
-                            if (district.equals("Nyarugenge")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Gitega");
-                                listsector.add("Kanyinya");
-                                listsector.add("Kigali");
-                                listsector.add("Kimisagara");
-                                listsector.add("Mageregere");
-                                listsector.add("Muhima");
-                                listsector.add("Nyakabanda");
-                                listsector.add("Nyamirambo");
-                                listsector.add("Nyarugenge");
-                                listsector.add("Rwezamenyo");
-
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
+                                ArrayAdapter<Province>     dsAdapter = new ArrayAdapter<>(PatientDetailsActivity.this,
+                                        android.R.layout.simple_spinner_item, districtList);
+                                dsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                sp_district.setAdapter(dsAdapter);
 
                             }
-                            else if (district.equals("Gasabo")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Bumbogo");
-                                listsector.add("Gatsata");
-                                listsector.add("Gikomero");
-                                listsector.add("Gisozi");
-                                listsector.add("Jabana");
-                                listsector.add("Jali");
-                                listsector.add("Kacyiru");
-                                listsector.add("Kimihurura");
-                                listsector.add("Kimironko");
-                                listsector.add("Kinyinya");
-                                listsector.add("Ndera");
-                                listsector.add("Rusororo");
-                                listsector.add("Rutunga");
-                                listsector.add("Remera");
-                                listsector.add("Nduba");
-
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Kicukiro")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Kanombe");
-                                listsector.add("Gahanga");
-                                listsector.add("Gatenga");
-                                listsector.add("Gikondo");
-                                listsector.add("Kagarama");
-                                listsector.add("Kicukiro");
-                                listsector.add("Kigarama");
-                                listsector.add("Masaka");
-                                listsector.add("Niboye");
-                                listsector.add("Nyarugunga");
-
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
+                    }
+                }, new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
 
-                        }
-                    });
+                    }
+                });
+                requestQueue.add(jsonObjectRequest);
+                sp_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                       // Toast.makeText(getBaseContext(), "choosed district"+provinceList.get(i).getId()+provinceList.get(i).getName(), Toast.LENGTH_SHORT).show();
+                       district=adapterView.getItemAtPosition(i).toString();
+                        sectorList.clear();
+                        String url = "https://rbc.gov.rw/community/data-sharing/api/organisationUnit.php?province="+provinceList.get(i).getId()+"&district="+districtList.get(i).getId();
+                        requestQueue = Volley.newRequestQueue(PatientDetailsActivity.this);
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                                url, null, new com.android.volley.Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    JSONArray jsonArray = response.getJSONArray("sectors");
+                                    for(int i=0; i<jsonArray.length();i++){
+                                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                        Province proObj=new Province();
+                                        proObj.setName(jsonObject.optString("name"));
+                                        proObj.setId(jsonObject.optString("id"));
 
-                }
-                else if (province.equals(getString(R.string.east))){
+                                        sectorList.add(proObj);
 
-                    List<String> listdis = new ArrayList<String>();
+                                        ArrayAdapter<Province>     sectorAdapter = new ArrayAdapter<>(PatientDetailsActivity.this,
+                                                android.R.layout.simple_spinner_item,sectorList);
+                                        sectorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                        sp_sector.setAdapter(sectorAdapter);
 
-                    listdis.add("Bugesera");
-                    listdis.add("Gatsibo");
-                    listdis.add("Kayonza");
-                    listdis.add("Kirehe");
-                    listdis.add("Ngoma");
-                    listdis.add("Nyagatare");
-                    listdis.add("Rwamagana");
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new com.android.volley.Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
 
-                    // Creating adapter for spinner
-                    ArrayAdapter<String> dataAdapterdis = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listdis);
-                    // Drop down layout style - list view with radio button
-                    dataAdapterdis.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    sp_district.setAdapter(dataAdapterdis);
+                            }
+                        });
+                        requestQueue.add(jsonObjectRequest);
+                        sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                               // Toast.makeText(getBaseContext(), "sector is"+sectorList.get(i).getId()+sectorList.get(i).getName(), Toast.LENGTH_SHORT).show();
+                           sector=adapterView.getItemAtPosition(i).toString();
+                            cellList.clear();
+                            villageList.clear();
+                                String url = "https://rbc.gov.rw/community/data-sharing/api/organisationUnit.php?province="+provinceList.get(i).getId()+"&district="+districtList.get(i).getId()+"&sector="+sectorList.get(i).getId();
+                                requestQueue = Volley.newRequestQueue(PatientDetailsActivity.this);
+                                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                                        url, null, new com.android.volley.Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        try {
+                                            JSONArray jsonArray = response.getJSONArray("cells");
+                                            for(int i=0; i<jsonArray.length();i++){
+                                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                                Province proObj=new Province();
+                                                proObj.setName(jsonObject.optString("name"));
+                                                proObj.setId(jsonObject.optString("id"));
 
-                    sp_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            district=adapterView.getItemAtPosition(i).toString();
-                            if (district.equals("Bugesera")){
-                                List<String> listsector = new ArrayList<String>();
+                                                cellList.add(proObj);
 
-                                listsector.add("Gashora");
-                                listsector.add("Juru");
-                                listsector.add("Kamabuye");
-                                listsector.add("Ntarama");
-                                listsector.add("Mareba");
-                                listsector.add("Mayange");
-                                listsector.add("Musenyi");
-                                listsector.add("Mwogo");
-                                listsector.add("Ngeruka");
-                                listsector.add("Nyamata");
-                                listsector.add("Nyarugenge");
-                                listsector.add("Rilima");
-                                listsector.add("Ruhuha");
-                                listsector.add("Rweru");
-                                listsector.add("Shyara");
+                                                ArrayAdapter<Province>     cellAdapter = new ArrayAdapter<>(PatientDetailsActivity.this,
+                                                        android.R.layout.simple_spinner_item,cellList);
+                                                cellAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                                sp_cell.setAdapter(cellAdapter);
 
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }, new com.android.volley.Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
 
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    }
+                                });
+                                requestQueue.add(jsonObjectRequest);
+                                sp_cell.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
+                                       // Toast.makeText(getBaseContext(), "cell is:  "+cellList.get(i).getId()+cellList.get(i).getName(), Toast.LENGTH_SHORT).show();
+                                  cell=adapterView.getItemAtPosition(i).toString();
+                                   villageList.clear();
+                                        String url = "https://rbc.gov.rw/community/data-sharing/api/organisationUnit.php?province="+provinceList.get(i).getId()
+                                                +"&district="+districtList.get(i).getId()+"&sector="
+                                                +sectorList.get(i).getId()+"&cell="+cellList.get(i).getId();
+                                        requestQueue = Volley.newRequestQueue(PatientDetailsActivity.this);
+                                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                                                url, null, new com.android.volley.Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+
+                                                try {
+                                                    JSONArray jsonArray = response.getJSONArray("villages");
+                                                    for(int i=0; i<jsonArray.length();i++){
+                                                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                                        Province proObj=new Province();
+                                                        proObj.setName(jsonObject.optString("name"));
+                                                        proObj.setId(jsonObject.optString("id"));
+
+                                                        villageList.add(proObj);
+
+                                                        ArrayAdapter<Province>     villageAdapter = new ArrayAdapter<>(PatientDetailsActivity.this,
+                                                                android.R.layout.simple_spinner_item,villageList);
+                                                        villageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                                        sp_village.setAdapter(villageAdapter);
+
+                                                    }
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        }, new com.android.volley.Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+
+                                            }
+                                        });
+                                        requestQueue.add(jsonObjectRequest);
+                                        sp_village.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                            @Override
+                                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                               // Toast.makeText(getBaseContext(), "village is: "+villageList.get(i).getId()+villageList.get(i).getName(), Toast.LENGTH_SHORT).show();
+                                           village=adapterView.getItemAtPosition(i).toString();
+                                            }
+
+                                            @Override
+                                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                            }
+                                        });
+
                                     }
 
                                     @Override
@@ -457,1083 +471,22 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
                                     }
                                 });
 
-                            }
-                            else if (district.equals("Gatsibo")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Gasange");
-                                listsector.add("Gatsibo");
-                                listsector.add("Gitoki");
-                                listsector.add("Kabarore");
-                                listsector.add("Kageyo");
-                                listsector.add("Kiramuruzi");
-                                listsector.add("Kiziguro");
-                                listsector.add("Muhura");
-                                listsector.add("Murambi");
-                                listsector.add("Ngarama");
-                                listsector.add("Nyagihanga");
-                                listsector.add("Remera");
-                                listsector.add("Rugarama");
-                                listsector.add("Rwimbogo");
-
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Kayonza")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Gahini");
-                                listsector.add("Kabare");
-                                listsector.add("Kabarondo");
-                                listsector.add("Mukarange");
-                                listsector.add("Murama");
-                                listsector.add("Murundi");
-                                listsector.add("Mwiri");
-                                listsector.add("Ndego");
-                                listsector.add("Nyamirama");
-                                listsector.add("Rukara");
-                                listsector.add("Ruramira");
-                                listsector.add("Rwinkwavu");
-
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Kirehe")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Gahara");
-                                listsector.add("Gatore");
-                                listsector.add("Kigarama");
-                                listsector.add("Kigina");
-                                listsector.add("Kirehe");
-                                listsector.add("Mahama");
-                                listsector.add("Mpanga");
-                                listsector.add("Musaza");
-                                listsector.add("Mushikiri");
-                                listsector.add("Nasho");
-                                listsector.add("Nyamugari");
-                                listsector.add("Nyarubuye");
-
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Ngoma")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Gashanda");
-                                listsector.add("Jarama");
-                                listsector.add("Karembo");
-                                listsector.add("Kazo");
-                                listsector.add("Kibungo");
-                                listsector.add("Mugesera");
-                                listsector.add("Murama");
-                                listsector.add("Mutenderi");
-                                listsector.add("Remera");
-                                listsector.add("Rukira");
-                                listsector.add("Rukumberi");
-                                listsector.add("Rurenge");
-                                listsector.add("Sake");
-                                listsector.add("Zaza");
-
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Nyagatare")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Gatunda");
-                                listsector.add("Kiyombe");
-                                listsector.add("Karama");
-                                listsector.add("Karangazi");
-                                listsector.add("Katabagemu");
-                                listsector.add("Matimba");
-                                listsector.add("Mimuli");
-                                listsector.add("Mukama");
-                                listsector.add("Musheli");
-                                listsector.add("Nyagatare");
-                                listsector.add("Rukomo");
-                                listsector.add("Rwempasha");
-                                listsector.add("Rwimiyaga");
-                                listsector.add("Tabagwe");
-
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Rwamagana")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Fumbwe");
-                                listsector.add("Gahengeri");
-                                listsector.add("Gishari");
-                                listsector.add("Karenge");
-                                listsector.add("Kigabiro");
-                                listsector.add("Muhazi");
-                                listsector.add("Munyaga");
-                                listsector.add("Munyiginya");
-                                listsector.add("Musha");
-                                listsector.add("Muyumbu");
-                                listsector.add("Mwulire");
-                                listsector.add("Nyakariro");
-                                listsector.add("Nzige");
-                                listsector.add("Rubona");
-
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
 
                             }
 
-
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-
-                }
-                else if (province.equals(getString(R.string.south))){
-
-                    List<String> listdis = new ArrayList<String>();
-                    listdis.add("Gisagara");
-                    listdis.add("Huye");
-                    listdis.add("Kamonyi");
-                    listdis.add("Muhanga");
-                    listdis.add("Nyamagabe");
-                    listdis.add("Nyanza");
-                    listdis.add("Nyaruguru");
-                    listdis.add("Ruhango");
-
-
-                    // Creating adapter for spinner
-                    ArrayAdapter<String> dataAdapterdis = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listdis);
-                    // Drop down layout style - list view with radio button
-                    dataAdapterdis.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    sp_district.setAdapter(dataAdapterdis);
-
-                    sp_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            district=adapterView.getItemAtPosition(i).toString();
-                            if (district.equals("Gisagara")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Gikonko");
-                                listsector.add("Gishubi");
-                                listsector.add("Kansi");
-                                listsector.add("Kibilizi");
-                                listsector.add("Kigembe");
-                                listsector.add("Mamba");
-                                listsector.add("Muganza");
-                                listsector.add("Mugombwa");
-                                listsector.add("Mukindo");
-                                listsector.add("Musha");
-                                listsector.add("Ndora");
-                                listsector.add("Nyanza");
-                                listsector.add("Save");
-
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
 
                             }
-                            else if (district.equals("Huye")){
-                                List<String> listsector = new ArrayList<String>();
+                        });
 
-                                listsector.add("Gishamvu");
-                                listsector.add("Karama");
-                                listsector.add("Kigoma");
-                                listsector.add("Kinazi");
-                                listsector.add("Maraba");
-                                listsector.add("Mbazi");
-                                listsector.add("Mukura");
-                                listsector.add("Ngoma");
-                                listsector.add("Ruhashya");
-                                listsector.add("Huye");
-                                listsector.add("Rusatira");
-                                listsector.add("Rwaniro");
-                                listsector.add("Simbi");
-                                listsector.add("Tumba");
+                    }
 
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
 
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Kamonyi")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Gacurabwenge");
-                                listsector.add("Karama");
-                                listsector.add("Kayenzi");
-                                listsector.add("Kayumbu");
-                                listsector.add("Mugina");
-                                listsector.add("Musambira");
-                                listsector.add("Ngamba");
-                                listsector.add("Nyamiyaga");
-                                listsector.add("Nyarubaka");
-                                listsector.add("Rugalika");
-                                listsector.add("Rukoma");
-                                listsector.add("Runda");
-
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Muhanga")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add(" Muhanga");
-                                listsector.add("Cyeza");
-                                listsector.add("Kibangu");
-                                listsector.add("Kiyumba");
-                                listsector.add("Mushishiro");
-                                listsector.add("Kabacuzi");
-                                listsector.add("Nyabinoni");
-                                listsector.add("Nyamabuye");
-                                listsector.add("Nyarusange");
-                                listsector.add("Rongi");
-                                listsector.add("Rugendabari");
-                                listsector.add("Shyogwe");
-
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Nyamagabe")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Buruhukiro");
-                                listsector.add("Cyanika");
-                                listsector.add("Gatare");
-                                listsector.add("Kaduha");
-                                listsector.add("Kamegeli");
-                                listsector.add("Kibirizi");
-                                listsector.add("Kibumbwe");
-                                listsector.add("Kitabi");
-                                listsector.add("Mbazi");
-                                listsector.add("Mugano");
-                                listsector.add("Musange");
-                                listsector.add("Musebeya");
-                                listsector.add("Mushubi");
-                                listsector.add("Nkomane");
-                                listsector.add("Gasaka");
-                                listsector.add("Tare");
-                                listsector.add("Uwinkingi");
-
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Nyanza")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Busasamana");
-                                listsector.add("Busoro");
-                                listsector.add("Cyabakamyi");
-                                listsector.add("Kibirizi");
-                                listsector.add("Kigoma");
-                                listsector.add("Mukingo");
-                                listsector.add("Muyira");
-                                listsector.add("Ntyazo");
-                                listsector.add("Nyagisozi");
-                                listsector.add("Rwabicuma");
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Nyaruguru")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Cyahinda");
-                                listsector.add("Busanze");
-                                listsector.add("Kibeho");
-                                listsector.add("Mata");
-                                listsector.add("Munini");
-                                listsector.add("Kivu");
-                                listsector.add("Ngera");
-                                listsector.add("Ngoma");
-                                listsector.add("Nyabimata");
-                                listsector.add("Nyagisozi");
-                                listsector.add("Muganza");
-                                listsector.add("Ruheru");
-                                listsector.add("Ruramba");
-                                listsector.add("Rusenge");
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Ruhango")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Kinazi");
-                                listsector.add("Byimana");
-                                listsector.add("Bweramana");
-                                listsector.add("Mbuye");
-                                listsector.add("Ruhango");
-                                listsector.add("Mwendo");
-                                listsector.add("Kinihira");
-                                listsector.add("Ntongwe");
-                                listsector.add("Kabagari");
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-
-
-
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-
-                }
-                else if (province.equals(getString(R.string.north))){
-
-                    List<String> listdis = new ArrayList<String>();
-                    listdis.add("Burera");
-                    listdis.add("Gakenke");
-                    listdis.add("Gicumbi");
-                    listdis.add("Musanze");
-                    listdis.add("Rulindo");
-
-
-                    // Creating adapter for spinner
-                    ArrayAdapter<String> dataAdapterdis = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listdis);
-                    // Drop down layout style - list view with radio button
-                    dataAdapterdis.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    sp_district.setAdapter(dataAdapterdis);
-
-                    sp_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            district=adapterView.getItemAtPosition(i).toString();
-                            if (district.equals("Burera")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Bungwe");
-                                listsector.add("Butaro");
-                                listsector.add("Cyanika");
-                                listsector.add("Cyeru");
-                                listsector.add("Gahunga");
-                                listsector.add("Gatebe");
-                                listsector.add("Gitovu");
-                                listsector.add("Kagogo");
-                                listsector.add("Kinoni");
-                                listsector.add("Kinyababa");
-                                listsector.add("Kivuye");
-                                listsector.add("Nemba");
-                                listsector.add("Rugarama");
-                                listsector.add("Rugendabari");
-                                listsector.add("Ruhunde");
-                                listsector.add("Rusarabuye");
-                                listsector.add("Rwerere");
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Gakenke")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Busengo");
-                                listsector.add("Coko");
-                                listsector.add("Cyabingo");
-                                listsector.add("Gakenke");
-                                listsector.add("Gashenyi");
-                                listsector.add("Mugunga");
-                                listsector.add("Janja");
-                                listsector.add("Kamubuga");
-                                listsector.add("Karambo");
-                                listsector.add("Kivuruga");
-                                listsector.add("Mataba");
-                                listsector.add("Minazi");
-                                listsector.add("Muhondo");
-                                listsector.add("Muyongwe");
-                                listsector.add("Muzo");
-                                listsector.add("Nemba");
-                                listsector.add("Ruli");
-                                listsector.add("Rusasa");
-                                listsector.add("Rushashi");
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Gicumbi")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Bukure");
-                                listsector.add("Bwisige");
-                                listsector.add("Byumba");
-                                listsector.add("Cyumba");
-                                listsector.add("Giti");
-                                listsector.add("Kaniga");
-                                listsector.add("Manyagiro");
-                                listsector.add("Miyove");
-                                listsector.add("Kageyo");
-                                listsector.add("Mukarange");
-                                listsector.add("Muko");
-                                listsector.add("Mutete");
-                                listsector.add("Nyamiyaga");
-                                listsector.add("Nyankenke II");
-                                listsector.add("Rubaya");
-                                listsector.add("Rukomo");
-                                listsector.add("Rushaki");
-                                listsector.add("Rutare");
-                                listsector.add("Ruvune");
-                                listsector.add("Rwamiko");
-                                listsector.add("Shangasha");
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-
-                            else if (district.equals("Musanze")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Busogo");
-                                listsector.add("Cyuve");
-                                listsector.add("Gacaca");
-                                listsector.add("Gashaki");
-                                listsector.add("Gataraga");
-                                listsector.add("Kimonyi");
-                                listsector.add("Kinigi");
-                                listsector.add("Muhoza");
-                                listsector.add("Muko");
-                                listsector.add("Musanze");
-                                listsector.add("Nkotsi");
-                                listsector.add("Nyange");
-                                listsector.add("Remera");
-                                listsector.add("Rwaza");
-                                listsector.add("Shingiro");
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                            else if (district.equals("Rulindo")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Base");
-                                listsector.add("Burega");
-                                listsector.add("Bushoki");
-                                listsector.add("Buyoga");
-                                listsector.add("Cyinzuzi");
-                                listsector.add("Cyungo");
-                                listsector.add("Kinihira");
-                                listsector.add("Kisaro");
-                                listsector.add("Masoro");
-                                listsector.add("Mbogo");
-                                listsector.add("Murambi");
-                                listsector.add("Ngoma");
-                                listsector.add("Ntarabana");
-                                listsector.add("Rukozo");
-                                listsector.add("Rusiga");
-                                listsector.add("Shyorongi");
-                                listsector.add("Tumba");
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-
-
-
-
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-
-                }
-                else if (province.equals(getString(R.string.west))){
-
-                    List<String> listdis = new ArrayList<String>();
-                    listdis.add("Karongi");
-                    listdis.add("Ngororero");
-                    listdis.add("Nyabihu");
-                    listdis.add("Nyamasheke");
-                    listdis.add("Rubavu");
-                    listdis.add("Rusizi");
-                    listdis.add("Rutsiro");
-
-
-                    // Creating adapter for spinner
-                    ArrayAdapter<String> dataAdapterdis = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listdis);
-                    // Drop down layout style - list view with radio button
-                    dataAdapterdis.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    sp_district.setAdapter(dataAdapterdis);
-
-                    sp_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            district=adapterView.getItemAtPosition(i).toString();
-
-                             if (district.equals("Karongi")){
-                                List<String> listsector = new ArrayList<String>();
-
-                                listsector.add("Bwishyura");
-                                listsector.add("Gishyita");
-                                listsector.add("Gishari");
-                                listsector.add("Gitesi");
-                                listsector.add("Mubuga");
-                                listsector.add("Murambi");
-                                listsector.add("Murundi");
-                                listsector.add("Mutuntu");
-                                listsector.add("Rubengera");
-                                listsector.add("Rugabano");
-                                listsector.add("Ruganda");
-                                listsector.add("Rwankuba");
-                                listsector.add("Twumba");
-                                listsector.add("Rusiga");
-                                listsector.add("Shyorongi");
-                                listsector.add("Tumba");
-                                // Creating adapter for spinner
-                                ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                // Drop down layout style - list view with radio button
-                                dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                sp_sector.setAdapter(dataAdaptersector);
-
-                                sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                    @Override
-                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        sector=adapterView.getItemAtPosition(i)+"";
-                                    }
-
-                                    @Override
-                                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                    }
-                                });
-
-                            }
-                             else if (district.equals("Ngororero")){
-                                 List<String> listsector = new ArrayList<String>();
-
-                                 listsector.add("Bwira");
-                                 listsector.add("Gatumba");
-                                 listsector.add("Hindiro");
-                                 listsector.add("Kabaya");
-                                 listsector.add("Kageyo");
-                                 listsector.add("Kavumu");
-                                 listsector.add("Matyazo");
-                                 listsector.add("Muhanda");
-                                 listsector.add("Muhororo");
-                                 listsector.add("Ndaro");
-                                 listsector.add("Ngororero");
-                                 listsector.add("Nyange");
-                                 listsector.add("Sovu");
-                                 listsector.add("Rusiga");
-                                 // Creating adapter for spinner
-                                 ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                 // Drop down layout style - list view with radio button
-                                 dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                 sp_sector.setAdapter(dataAdaptersector);
-
-                                 sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                     @Override
-                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                         sector=adapterView.getItemAtPosition(i)+"";
-                                     }
-
-                                     @Override
-                                     public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                     }
-                                 });
-
-                             }
-                             else if (district.equals("Nyabihu")){
-                                 List<String> listsector = new ArrayList<String>();
-
-                                 listsector.add("Mukamira");
-                                 listsector.add("Bigogwe");
-                                 listsector.add("Jenda");
-                                 listsector.add("Jomba");
-                                 listsector.add("Kabatwa");
-                                 listsector.add("Karago");
-                                 listsector.add("Kintobo");
-                                 listsector.add("Mukamira");
-                                 listsector.add("Muringa");
-                                 listsector.add("Rambura");
-                                 listsector.add("Rugera");
-                                 listsector.add("Rurembo");
-                                 listsector.add("Shyira");
-                                 // Creating adapter for spinner
-                                 ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                 // Drop down layout style - list view with radio button
-                                 dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                 sp_sector.setAdapter(dataAdaptersector);
-
-                                 sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                     @Override
-                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                         sector=adapterView.getItemAtPosition(i)+"";
-                                     }
-
-                                     @Override
-                                     public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                     }
-                                 });
-
-                             }
-                             else if (district.equals("Nyamasheke")){
-                                 List<String> listsector = new ArrayList<String>();
-
-                                 listsector.add("Ruharambuga");
-                                 listsector.add("Bushekeri");
-                                 listsector.add("Bushenge");
-                                 listsector.add("Cyato");
-                                 listsector.add("Gihombo");
-                                 listsector.add("Kagano");
-                                 listsector.add("Kanjongo");
-                                 listsector.add("Karambi");
-                                 listsector.add("Karengera");
-                                 listsector.add("Kirimbi");
-                                 listsector.add("Macuba");
-                                 listsector.add("Nyabitekeri");
-                                 listsector.add("Mahembe");
-                                 listsector.add("Rangiro");
-                                 listsector.add("Shangi");
-                                 // Creating adapter for spinner
-                                 ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                 // Drop down layout style - list view with radio button
-                                 dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                 sp_sector.setAdapter(dataAdaptersector);
-
-                                 sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                     @Override
-                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                         sector=adapterView.getItemAtPosition(i)+"";
-                                     }
-
-                                     @Override
-                                     public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                     }
-                                 });
-
-                             }
-                             else if (district.equals("Rubavu")){
-                                 List<String> listsector = new ArrayList<String>();
-
-                                 listsector.add("Bugeshi");
-                                 listsector.add("Busasamana");
-                                 listsector.add("Cyanzarwe");
-                                 listsector.add("Gisenyi");
-                                 listsector.add("Kanama");
-                                 listsector.add("Kanzenze");
-                                 listsector.add("Mudende");
-                                 listsector.add("Nyakiliba");
-                                 listsector.add("Nyamyumba");
-                                 listsector.add("Nyundo");
-                                 listsector.add("Rubavu");
-                                 listsector.add("Rugerero");
-                                 // Creating adapter for spinner
-                                 ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                 // Drop down layout style - list view with radio button
-                                 dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                 sp_sector.setAdapter(dataAdaptersector);
-
-                                 sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                     @Override
-                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                         sector=adapterView.getItemAtPosition(i)+"";
-                                     }
-
-                                     @Override
-                                     public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                     }
-                                 });
-
-                             }
-                             else if (district.equals("Rusizi")){
-                                 List<String> listsector = new ArrayList<String>();
-
-                                 listsector.add("Bugarama");
-                                 listsector.add("Butare");
-                                 listsector.add("Bweyeye");
-                                 listsector.add("Gikundamvura");
-                                 listsector.add("Gashonga");
-                                 listsector.add("Giheke");
-                                 listsector.add("Gihundwe");
-                                 listsector.add("Gitambi");
-                                 listsector.add("Kamembe");
-                                 listsector.add("Muganza");
-                                 listsector.add("Mururu");
-                                 listsector.add("Nkanka");
-                                 listsector.add("Nkombo");
-                                 listsector.add("Nkungu");
-                                 listsector.add("Nyakabuye");
-                                 listsector.add("Nyakarenzo");
-                                 listsector.add("Nzahaha");
-                                 listsector.add("Rwimbogo");
-
-
-                                 // Creating adapter for spinner
-                                 ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                 // Drop down layout style - list view with radio button
-                                 dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                 sp_sector.setAdapter(dataAdaptersector);
-
-                                 sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                     @Override
-                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                         sector=adapterView.getItemAtPosition(i)+"";
-                                     }
-
-                                     @Override
-                                     public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                     }
-                                 });
-
-                             }
-                             else if (district.equals("Rutsiro")){
-                                 List<String> listsector = new ArrayList<String>();
-
-                                 listsector.add("Boneza");
-                                 listsector.add("Gihango");
-                                 listsector.add("Kigeyo");
-                                 listsector.add("Kivumu");
-                                 listsector.add("Manihira");
-                                 listsector.add("Mukura");
-                                 listsector.add("Murunda");
-                                 listsector.add("Musasa");
-                                 listsector.add("Mushonyi");
-                                 listsector.add("Mushubati");
-                                 listsector.add("Nyabirasi");
-                                 listsector.add("Ruhango");
-                                 listsector.add("Rusebeya");
-
-
-
-                                 // Creating adapter for spinner
-                                 ArrayAdapter<String> dataAdaptersector = new ArrayAdapter<String>(PatientDetailsActivity.this, android.R.layout.simple_spinner_item, listsector);
-                                 // Drop down layout style - list view with radio button
-                                 dataAdaptersector.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                 sp_sector.setAdapter(dataAdaptersector);
-
-                                 sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                     @Override
-                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                         sector=adapterView.getItemAtPosition(i)+"";
-                                     }
-
-                                     @Override
-                                     public void onNothingSelected(AdapterView<?> adapterView) {
-
-                                     }
-                                 });
-
-                             }
-
-
-
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-
-                }
-
-
+                    }
+                });
 
             }
 
@@ -1673,8 +626,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
                 fn = etfirstname.getText().toString().trim();
                 lastname = etlastname.getText().toString().trim();
                 national_ID = etnational_ID.getText().toString().trim();
-                cell = etcell.getText().toString().trim();
-                village = etvillage.getText().toString().trim();
+
                 occupation=etoccupation.getText().toString().trim();
                 patienttelephone=etpatienttelephone.getText().toString().trim();
                 numberhousehold=et_numberhousehold.getText().toString().trim();
@@ -1685,8 +637,6 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
                 }else {
 
                    // etpatienttelephone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
-
-
 
                     if (etpatienttelephone.getText().toString().trim().length()<9 ||etpatienttelephone.getText().toString().trim().length()>13){
                         Toast.makeText(getBaseContext(), R.string.valid_phone, Toast.LENGTH_LONG).show();
@@ -1729,7 +679,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
 
                             callreservedindexes();
                         }
-                         // finish();
+                       PatientDetailsActivity.this.finish();
 
                     }
                 }
