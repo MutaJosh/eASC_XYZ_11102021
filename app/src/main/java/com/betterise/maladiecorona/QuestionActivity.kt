@@ -57,12 +57,12 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
     private val RDT_PENDING_STATUS = "pending"
     private var showtreatmentq:String=""
 
-    private var tub:String="";
-    private var pn:String="";
-    private var asth:String="";
-    private var fl:String="";
-    private var co:String="";
-    private var ot:String="";
+    private var tub:String="no";
+    private var pn:String="no";
+    private var asth:String="no";
+    private var fl:String="no";
+    private var co:String="no";
+    private var ot:String="no";
 
     companion object {
         const val EXTRA_RESULTQ = "EXTRA_RESULTQ"
@@ -111,6 +111,8 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             PollManager().addPoll(this, poll)
 
             val intent = Intent(this, ActivityChooseCategory::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent)
             finish()
         }
@@ -120,6 +122,8 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                 loadQuestion()
             } else {
                 val intent = Intent(this, ActivityChooseCategory::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent)
                 finish()
             }
@@ -153,6 +157,8 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 //                intent.putExtra("patient_phone_number",getIntent().getStringExtra("patienttelephone"))
 //                intent.putExtra("Indexi",getIntent().getStringExtra("Indexi"))
 //                intent.putExtra(ResultActivity.EXTRA_RDT_RESULT, rdt_result)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent)
                 //finish()
             }
@@ -469,7 +475,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
         group?.value?.doOnTextChanged { text, _, _, _ ->
             if (text != null && text.isNotEmpty()) {
-                group?.not_known?.tag = text.toString().toInt()
+                group?.not_known?.tag = text.toString()
                 group?.not_known?.setImageDrawable(
                     resources.getDrawable(
                         R.drawable.shape_radio_off,
@@ -633,7 +639,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         if (group?.not_known!!.tag == 1) {
             questionManager?.setAnswer(1)
             return true
-        } else if (testRange(30, 220)) {
+        } else if (testRange(10, 220)) {
             var intVal = group?.value?.text.toString().toInt()
             questionManager?.setAnswer(intVal)
             return true

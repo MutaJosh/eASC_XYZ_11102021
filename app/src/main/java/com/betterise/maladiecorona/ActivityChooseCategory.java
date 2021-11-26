@@ -61,6 +61,8 @@ private ProgressDialog progressDialog,progressDialog2;
 private RadioGroup radioGroup;
     private OtpTextView otpTextView;
 private TextView errorBulletcate;
+    private static final int TIME_INTERVAL = 3000;
+    private long mBackPressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -209,4 +211,15 @@ private TextView errorBulletcate;
     }
 
 
+    @Override
+    public void onBackPressed() {
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed();
+            return;
+        } else {
+            Toast.makeText(ActivityChooseCategory.this, R.string.pres_btn_exit_again, Toast.LENGTH_SHORT).show();
+        }
+
+        mBackPressed = System.currentTimeMillis();
+    }
 }

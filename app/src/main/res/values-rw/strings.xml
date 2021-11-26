@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">e-ASCOV</string>
 
-    <string name="datetime_format" translatable="false">dd/MM/yyyy HH:mm</string>
-    <string name="date_format" translatable="false">dd/MM/yyyy</string>
-    <string name="time_format" translatable="false">HH:mm</string>
+    <string name="datetime_format" translatable="false">yyyy-MM-dd HH:mm:ss</string>
+    <string name="date_format" translatable="false">yyyy-MM-dd</string>
+    <string name="time_format" translatable="false">HH:mm:ss</string>
 
     <string name="phone_start" translatable="false">078 </string>
 
@@ -42,9 +42,9 @@
     <string name="select_option_error">Hitamo</string>
     <string name="city_error">Nyamuneka, shyiramo aho usuzumwa atuye</string>
     <string name="days_error">Nyamuneka, shyiramo iminsi iri hagati ya 0 na 35</string>
-    <string name="age_error">Nyamuneka, shyiramo imyaka iri hagati ya 0 na 120</string>
+    <string name="age_error">Nyamuneka, shyiramo iminsi iri hagati ya 0 na 5</string>
     <string name="height_error">Nyamuneka, shyiramo uburebure buri hagati ya sentimetere (cm) 30 na 220</string>
-    <string name="weight_error">Nyamuneka, shyiramo ibiro biri hagati ya 30 na 220 </string>
+    <string name="weight_error">Nyamuneka, shyiramo ibiro biri hagati ya 10 na 220 </string>
 
     <string-array name="questions">
 
@@ -123,10 +123,10 @@
 
     <!--    These are the only two e-ASCOV results being used. (NEGATIVE AND POSITIVE respectively)-->
     <string name="result1">Birashoboka ko usuzumwa nta bwandu bw\'icyorezo cya COVID-19 afite. Musabe kukumenyesha mugihe abonye ibimenyetso bishya.</string>
-    <string name="result2"> Birashoboka ko usuzumwa yaba afite ubwandu bw\'icyorezo cya COVID-19. Mukorere isuzuma rya Rapid Diagnosis Test (RDT) kugirango ubyemeze </string>
+    <string name="result2"> Birashoboka ko usuzumwa yaba afite ubwandu bw\'icyorezo cya COVID-19. Mukorere isuzuma rya Rapid Diagnosis Test (RDT) kugirango ubyemeze. </string>
     <!--    These option used at the moment (Health team to review and approve probable scenarios) -->
 <!--    Approved now (11-11-2021) -->
-    <string name="result3">Biragaragara ko usuzumwa ashobora kuba afite ubwandu bw\'icyorezo cya COVID-19 buri hejuru. Mukorere isuzuma rya Rapid Diagnosis Test (RDT) kugirango ubyemeze  </string>
+    <string name="result3">Biragaragara ko usuzumwa ashobora kuba afite ubwandu bw\'icyorezo cya COVID-19 buri ku kigero cyo hejuru. Mukorere isuzuma rya Rapid Diagnosis Test (RDT) kugirango ubyemeze neza.</string>
 
 
     <string name="result3bis">The situation may fall under COVID-19. Address the subject to the district hospital because sign of gravity associated.</string>
@@ -230,5 +230,6 @@
     <string name="flu">Flu</string>
     <string name="cold">Cold</string>
     <string name="others">Others</string>
+    <string name="pres_btn_exit_again">press back button again to exit</string>
 
 </resources>

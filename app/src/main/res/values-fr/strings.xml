@@ -216,4 +216,5 @@
     <string name="flu">Flu</string>
     <string name="cold">Cold</string>
     <string name="others">Others</string>
+    <string name="pres_btn_exit_again">press back button again to exit</string>
 </resources>

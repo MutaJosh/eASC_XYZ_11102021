@@ -805,14 +805,14 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
     }
 
     private void callreservedindexes(){
-
+        progressiio.show();
         AsyncHttpClient client = new AsyncHttpClient();
         client.setBasicAuth("EAC_test","EACPass@2021");
         client.get("http://161.97.184.144:8080/api/33/trackedEntityAttributes/MSWzPQhISym/generateAndReserve?numberToReserve=1", new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
-
+                progressiio.dismiss();
                 //Here response will be received in form of JSONArray
                 Log.e("index-reserved",response.toString());
                 try {
@@ -873,7 +873,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
-
+                progressiio.dismiss();
                 //Here response will be received in form of JSONObject
             }
 
@@ -882,7 +882,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
                 super.onFailure(statusCode, headers, responseString, throwable);
                 Toast.makeText(getApplicationContext(), "We got an error", Toast.LENGTH_SHORT).show();
                 Log.e("index-error",responseString.toString());
-
+                progressiio.dismiss();
             }
         });
     }

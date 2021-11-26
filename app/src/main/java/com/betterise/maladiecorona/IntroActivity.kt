@@ -17,6 +17,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import kotlinx.android.synthetic.main.activity_intro.*
 import java.util.*
 
+
 class IntroActivity : AppCompatActivity() {
 
 
@@ -113,7 +114,7 @@ class IntroActivity : AppCompatActivity() {
         } else if (item.getTitle() === getString(R.string.contact_support)) {
             val builder_main = AlertDialog.Builder(this)
           //  builder_main.setTitle("Are you sure ?")
-            builder_main.setMessage("Ukeneye guhamagarira izindi nkunga zijyanye no gukoresha iyi porogaramu."+"\n"+ "niba ari yego, nyamuneka kanda Hamagara ariko niba udakanda buto yo guhagarika")
+            builder_main.setMessage("Ukeneye ubufasha  bujyanye no gukoresha iyi porogaramu. "+"\n"+"Nyamuneka kanda Hamagara ariko niba udakanda buto yo guhagarika")
             builder_main.setNegativeButton("GUSUBIKA",
                 DialogInterface.OnClickListener { dialog, which -> })
             builder_main.setPositiveButton("HAMAGARA",
@@ -128,5 +129,6 @@ class IntroActivity : AppCompatActivity() {
         }
         return true
     }
+
 
 }
