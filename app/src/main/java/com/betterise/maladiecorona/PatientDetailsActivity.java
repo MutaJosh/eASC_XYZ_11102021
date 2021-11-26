@@ -111,7 +111,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
 
     private ProgressDialog progresso;
 
-
+    private ProgressDialog progressiio;
     ArrayList<Province> provinceList = new ArrayList<Province>();
     ArrayList<Province> districtList = new ArrayList<Province>();
     ArrayList<Province> sectorList = new ArrayList<Province>();
@@ -133,6 +133,11 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
         progressDialogi=new ProgressDialog(PatientDetailsActivity.this);
         progressDialogi.setMessage(getString(R.string.loading));
         progressDialogi.setCanceledOnTouchOutside(false);
+
+        progressiio=new ProgressDialog(PatientDetailsActivity.this);
+        progressiio.setMessage(getString(R.string.loading));
+        progressiio.setCanceledOnTouchOutside(false);
+
 
         sp_province=findViewById(R.id.sp_province);
         sp_cell=findViewById(R.id.sp_cell);
@@ -291,13 +296,13 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
         sp_province.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //Toast.makeText(getBaseContext(), "selected province is: " +adapterView.getItemAtPosition(i).toString()+"\n"+provinceList.get(i).getId(), Toast.LENGTH_LONG).show();
                 province=adapterView.getItemAtPosition(i).toString();
-                districtList.clear();
-                sectorList.clear();
+                 districtList.clear();
+               // Toast.makeText(getBaseContext(), "selected province is: "+provinceList.get(i).getId(), Toast.LENGTH_LONG).show();
+
                 String url = "https://rbc.gov.rw/community/data-sharing/api/organisationUnit.php?province="+provinceList.get(i).getId();
                 requestQueue = Volley.newRequestQueue(PatientDetailsActivity.this);
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                         url, null, new com.android.volley.Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -332,12 +337,13 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
                 sp_district.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                       // Toast.makeText(getBaseContext(), "choosed district"+provinceList.get(i).getId()+provinceList.get(i).getName(), Toast.LENGTH_SHORT).show();
                        district=adapterView.getItemAtPosition(i).toString();
-                        sectorList.clear();
+                       sectorList.clear();
+                        //Toast.makeText(getBaseContext(), "choosed district"+districtList.get(i).getId(), Toast.LENGTH_LONG).show();
+
                         String url = "https://rbc.gov.rw/community/data-sharing/api/organisationUnit.php?province="+provinceList.get(i).getId()+"&district="+districtList.get(i).getId();
                         requestQueue = Volley.newRequestQueue(PatientDetailsActivity.this);
-                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                                 url, null, new com.android.volley.Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
@@ -371,13 +377,14 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
                         sp_sector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                               // Toast.makeText(getBaseContext(), "sector is"+sectorList.get(i).getId()+sectorList.get(i).getName(), Toast.LENGTH_SHORT).show();
                            sector=adapterView.getItemAtPosition(i).toString();
                             cellList.clear();
-                            villageList.clear();
+
+                                //Toast.makeText(getBaseContext(), "sector is"+sectorList.get(i).getId(), Toast.LENGTH_SHORT).show();
+
                                 String url = "https://rbc.gov.rw/community/data-sharing/api/organisationUnit.php?province="+provinceList.get(i).getId()+"&district="+districtList.get(i).getId()+"&sector="+sectorList.get(i).getId();
                                 requestQueue = Volley.newRequestQueue(PatientDetailsActivity.this);
-                                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                                         url, null, new com.android.volley.Response.Listener<JSONObject>() {
                                     @Override
                                     public void onResponse(JSONObject response) {
@@ -414,11 +421,10 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
                                        // Toast.makeText(getBaseContext(), "cell is:  "+cellList.get(i).getId()+cellList.get(i).getName(), Toast.LENGTH_SHORT).show();
                                   cell=adapterView.getItemAtPosition(i).toString();
                                    villageList.clear();
-                                        String url = "https://rbc.gov.rw/community/data-sharing/api/organisationUnit.php?province="+provinceList.get(i).getId()
-                                                +"&district="+districtList.get(i).getId()+"&sector="
-                                                +sectorList.get(i).getId()+"&cell="+cellList.get(i).getId();
+                                        String url = "https://rbc.gov.rw/community/data-sharing/api/organisationUnit.php?province="+provinceList.get(i).getId() +"&district="+districtList.get(i).getId()+"&sector="+sectorList.get(i).getId()+"&cell="+cellList.get(i).getId();
                                         requestQueue = Volley.newRequestQueue(PatientDetailsActivity.this);
-                                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET
+                                                ,
                                                 url, null, new com.android.volley.Response.Listener<JSONObject>() {
                                             @Override
                                             public void onResponse(JSONObject response) {
@@ -642,7 +648,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
                         Toast.makeText(getBaseContext(), R.string.valid_phone, Toast.LENGTH_LONG).show();
 
                     }else {
-                        progresso.show();
+//                        progresso.show();
                         if (checkindex.equals("no")){
                             new AgentManager().savecategory(this, getIntent().getStringExtra("category"));
 
@@ -675,11 +681,12 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
                             startActivity(intent);
                             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
+
                         }else if (checkindex.equals("yes")){
 
                             callreservedindexes();
                         }
-                       PatientDetailsActivity.this.finish();
+
 
                     }
                 }
@@ -798,13 +805,14 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
     }
 
     private void callreservedindexes(){
+
         AsyncHttpClient client = new AsyncHttpClient();
         client.setBasicAuth("EAC_test","EACPass@2021");
         client.get("http://161.97.184.144:8080/api/33/trackedEntityAttributes/MSWzPQhISym/generateAndReserve?numberToReserve=1", new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
-                  progresso.dismiss();
+
                 //Here response will be received in form of JSONArray
                 Log.e("index-reserved",response.toString());
                 try {
@@ -855,7 +863,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
 
                 }
                 catch (JSONException e) {
-                    progresso.dismiss();
+
                     e.printStackTrace();
                 }
 
@@ -874,7 +882,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
                 super.onFailure(statusCode, headers, responseString, throwable);
                 Toast.makeText(getApplicationContext(), "We got an error", Toast.LENGTH_SHORT).show();
                 Log.e("index-error",responseString.toString());
-                progresso.dismiss();
+
             }
         });
     }
