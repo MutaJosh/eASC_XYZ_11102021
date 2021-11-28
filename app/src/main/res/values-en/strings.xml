@@ -87,7 +87,7 @@
         <item>Yes|No</item>
         <item>Kg|Do not know</item>
         <item>Cm|Do not know</item>
-        <item>Yes|No</item>
+        <item>Yes|No|No applicable</item>
         <item>Yes|No</item>
         <item>Yes|No</item>
         <item>Yes|No</item>
@@ -111,7 +111,7 @@
         <item>binary</item>
         <item>digit</item>
         <item>digit</item>
-        <item>binary</item>
+        <item>tenary</item>
         <item>binary</item>
         <item>binary</item>
         <item>binary</item>

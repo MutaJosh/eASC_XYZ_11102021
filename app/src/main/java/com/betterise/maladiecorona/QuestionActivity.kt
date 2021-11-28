@@ -63,6 +63,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
     private var fl:String="no";
     private var co:String="no";
     private var ot:String="no";
+    private var qn:String="";
 
     companion object {
         const val EXTRA_RESULTQ = "EXTRA_RESULTQ"
@@ -182,7 +183,8 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
 
         //Toast.makeText(baseContext, "ASCOV result: "+ test_resultascov.text, Toast.LENGTH_SHORT).show()
 
-       if (qi.equals("19")) { showtreatmentq="yes" }else{showtreatmentq="no"}
+        if (qi.equals("20")){ qn="yes" }else{qn="no"}
+            if (qi.equals("19")) { showtreatmentq="yes" }else{ showtreatmentq="no"}
 
         if (qi.equals("21")) {
             //Toast.makeText(baseContext, "diseases\n "+tub+pn+asth+co+fl+ot, Toast.LENGTH_LONG).show()
@@ -407,13 +409,19 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             3 -> group?.radio3?.isChecked = true }
 
 
-        if (intent.getStringExtra("patientgender").equals(getString(R.string.male))) {
-            group?.radio1?.visibility= INVISIBLE
-            group?.radio2?.visibility= INVISIBLE
 
-        }else if(intent.getStringExtra("patientgender").equals(getString(R.string.female))){
-            group?.radio3?.visibility= INVISIBLE
+        if (qn.equals("yes")) {
+            if (intent.getStringExtra("patientgender").equals(getString(R.string.male))) {
+                group?.radio1?.visibility = INVISIBLE
+                group?.radio2?.visibility = INVISIBLE
+
+            } else if (intent.getStringExtra("patientgender").equals(getString(R.string.female))) {
+                group?.radio3?.visibility = INVISIBLE
+            }
+
         }
+
+
 
         group?.radio1?.setOnClickListener {
             group?.errorBullet?.visibility = INVISIBLE
