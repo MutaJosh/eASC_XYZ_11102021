@@ -342,10 +342,9 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                 }
                 group?.cxothers?.setOnCheckedChangeListener{ buttonView, isChecked ->
                     if (isChecked){
-                        ot="Others"
+                        ot=getString(R.string.dontknow)
                     }
                 }
-
 
             }
             group?.radio2?.setOnClickListener {group?.lin_diseases?.visibility= View.GONE}

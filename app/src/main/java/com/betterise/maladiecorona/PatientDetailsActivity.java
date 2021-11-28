@@ -241,6 +241,8 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
         listnumbervacc.add(getString(R.string.dose1));
         listnumbervacc.add(getString(R.string.dose2));
         listnumbervacc.add(getString(R.string.dose3));
+        listnumbervacc.add(getString(R.string.dontknow));
+
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapternumbervacc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listnumbervacc);
@@ -512,7 +514,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
         listtypevacc.add("Johnson Johnson");
         listtypevacc.add("Sputnik-V");
         listtypevacc.add("Snovak");
-        listtypevacc.add("Other");
+        listtypevacc.add(getString(R.string.dontknow));
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdaptertyepVacc = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listtypevacc);
         // Drop down layout style - list view with radio button
