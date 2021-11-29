@@ -9,11 +9,9 @@ import android.os.Bundle
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatImageView
 import kotlinx.android.synthetic.main.activity_intro.*
 import java.util.*
 
@@ -21,6 +19,8 @@ import java.util.*
 class IntroActivity : AppCompatActivity() {
 
 
+   // private static final int TIME_INTERVAL = 3000
+    private var mBackPressed: Long = 0
     /**
      * Created by MJC on 01/08/21.
      */
@@ -128,6 +128,16 @@ class IntroActivity : AppCompatActivity() {
             builder_main.show()
         }
         return true
+    }
+
+    override fun onBackPressed() {
+        if (mBackPressed + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed()
+            return
+        } else {
+            Toast.makeText(this, R.string.pres_btn_exit_again, Toast.LENGTH_SHORT).show()
+        }
+        mBackPressed = System.currentTimeMillis()
     }
 
 

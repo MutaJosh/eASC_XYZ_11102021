@@ -199,7 +199,7 @@
     <string name="choose_patient_category">Choose Patient category</string>
     <string name="first_choose_patient_category">First choose patient category</string>
     <string name="enter_your_contact_code_to_validate">Enter your contact code to validate</string>
-    <string name="index">Index</string>
+    <string name="index">Suspected Case</string>
     <string name="check_internet">\"error,Check your internet connection please \"</string>
     <string name="enter_nid">Enter your Nation ID please</string>
     <string name="south">South</string>
@@ -232,5 +232,12 @@
     <string name="others">Others</string>
     <string name="pres_btn_exit_again">press back button again to exit</string>
     <string name="dontknow">don\'t know</string>
+    <string name="Index">Suspected Case</string>
+    <string name="nullrt">You dontt need to carryout RDT tests for this subject</string>
+    <string name="contact">contact</string>
+    <string name="names">Names</string>
+    <string name="results_with_e_ascov">Results with e-ascov</string>
+    <string name="results_with_rdt_toolkit">Results with RDT Toolkit:</string>
+    <string name="click_below_to_screen_another_person">Click below button to screen another person</string>
 
 </resources>

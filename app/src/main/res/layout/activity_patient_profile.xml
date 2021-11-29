@@ -94,7 +94,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Names" />
+                    android:text="@string/names" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/result_namesprofile"
@@ -119,7 +119,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Gender"
+                    android:text="@string/Gender"
                     style="@style/DefaultText"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -145,7 +145,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Telephone"
+                    android:text="@string/Telephone"
                     style="@style/DefaultText"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -198,8 +198,8 @@
                     style="@style/DefaultText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="National ID" />
+                    android:layout_weight="1.5"
+                    android:text="@string/nid" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/result_nidprofile"
@@ -281,7 +281,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     style="@style/DefaultText"
                     android:layout_width="0dp"
-                    android:text="Results with e-ascov"
+                    android:text="@string/results_with_e_ascov"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
@@ -289,6 +289,7 @@
                     android:id="@+id/result_ascovprofile"
                     style="@style/DefaultText"
                     android:layout_width="0dp"
+                    android:textStyle="bold"
                     android:layout_height="wrap_content"
                     android:layout_weight="2" />
 
@@ -343,7 +344,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1.5"
-                    android:text="Results with RDT Toolkit:" />
+                    android:text="@string/results_with_rdt_toolkit" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/result_rdtresulti"

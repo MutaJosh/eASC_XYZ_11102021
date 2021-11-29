@@ -758,12 +758,9 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
                                btn_next.setVisibility(View.VISIBLE);
 
                                 checkindex="yes";
-
-
-
                             }
 
-                            if (getIntent().getStringExtra("category").equals("contact")){
+                            if (getIntent().getStringExtra("category").equals(getString(R.string.contact))){
                                 Log.e("contact ",codeNID+"-\n"+getIntent().getStringExtra("uuid"));
                                 tvindexcode.setText(codeNID+" - "+getIntent().getStringExtra("uuid"));
                                 btn_next.setVisibility(View.VISIBLE);
@@ -824,7 +821,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
                        String value =item.getString("value");
 
 
-                       if (getIntent().getStringExtra("category").equals("contact")){
+                       if (getIntent().getStringExtra("category").equals(getString(R.string.contact))){
                            tvindexcode.setText((value+" - "+getIntent().getStringExtra("uuid")));
 
                        }else { tvindexcode.setText(value); }

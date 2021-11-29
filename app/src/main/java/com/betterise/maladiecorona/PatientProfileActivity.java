@@ -95,7 +95,7 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
 //            btn_startRdt.setVisibility(View.GONE);
 //        }
 
-        result_namesprofile.setText(getIntent().getStringExtra("firstname")+getIntent().getStringExtra("lastname"));
+        result_namesprofile.setText(getIntent().getStringExtra("firstname")+" "+getIntent().getStringExtra("lastname"));
         result_genderprofile.setText(getIntent().getStringExtra("patientgender"));
         result_telephoneprofile.setText(getIntent().getStringExtra("patienttelephone"));
         result_dobprofile.setText(getIntent().getStringExtra("dob"));

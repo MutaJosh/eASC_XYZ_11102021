@@ -2,6 +2,7 @@ package com.betterise.maladiecorona;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatRadioButton;
+import androidx.core.app.ActivityCompat;
 import androidx.core.widget.TextViewCompat;
 
 import android.app.ProgressDialog;
@@ -98,7 +99,7 @@ private TextView errorBulletcate;
                 if(selectedId==-1){
                     errorBulletcate.setVisibility(View.VISIBLE);
                 } else{
-                    if (radiobtnindex.getText().equals("Index")){
+                    if (radiobtnindex.getText().equals(getString(R.string.Index))){
 
 
                         Intent intent=new Intent(ActivityChooseCategory.this,PatientDetailsActivity.class);
@@ -172,7 +173,7 @@ private TextView errorBulletcate;
                             if (message.equals("Found")) {
                                 //for temporary testing ,validation needed
                                 Intent intt = new Intent(ActivityChooseCategory.this, PatientDetailsActivity.class);
-                                category = "contact";
+                                category = getString(R.string.contact);
                                 intt.putExtra("uuid", eTindexcode.getText().toString().trim());
                                 intt.putExtra("category", category);
                                 new AgentManager().saveindexcode(getBaseContext(),eTindexcode.getText().toString().trim());
@@ -217,6 +218,8 @@ private TextView errorBulletcate;
             super.onBackPressed();
             return;
         } else {
+            startActivity(new Intent(ActivityChooseCategory.this,IntroActivity.class));
+            finish();
             Toast.makeText(ActivityChooseCategory.this, R.string.pres_btn_exit_again, Toast.LENGTH_SHORT).show();
         }
 

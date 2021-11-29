@@ -107,7 +107,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         btn_back_to_home.setOnClickListener {
 
 
-            AgentManager().saverdt_result(this,"null")
+            AgentManager().saverdt_result(this,getString(R.string.nullrt))
             var poll = questionManager!!.createPoll(this)
             PollManager().addPoll(this, poll)
 
@@ -238,6 +238,8 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                 btn_next.visibility=VISIBLE
             }
 
+        }else{
+            test_resultascov.visibility= GONE
         }
 
         when (questionManager?.getCurrentQuestionType()) {
@@ -291,6 +293,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         group?.geoloc?.setOnClickListener { requestGeoloc() }
         answer_container.addView(group)
     }
+
 
     private fun loadYesNo() {
         group = View.inflate(this, R.layout.question_bullet, null) as ViewGroup?
@@ -799,6 +802,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             val result = session?.result
 
 
+            Toast.makeText(baseContext,getString(R.string.click_below_to_screen_another_person),Toast.LENGTH_LONG).show();
 
             group?.rdt_result?.text = getString(
                 when (result?.results.toString()) {
