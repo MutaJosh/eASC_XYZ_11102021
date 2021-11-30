@@ -72,7 +72,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PatientDetailsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class PatientDetailsActivity extends AppCompatActivity implements  View.OnClickListener {
 
     // FusedLocationProviderClient
     // object
@@ -117,6 +117,8 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
     ArrayList<Province> sectorList = new ArrayList<Province>();
     ArrayList<Province> cellList = new ArrayList<Province>();
     ArrayList<Province> villageList = new ArrayList<Province>();
+    ArrayList<Province> nationalityList = new ArrayList<Province>();
+    ArrayList<Province> residenceList = new ArrayList<Province>();
     ArrayAdapter<Province> provinceAdapter;
     RequestQueue requestQueue;
 
@@ -214,24 +216,107 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
 //        });
 
 
-        sp_nationality.setOnItemSelectedListener(this);
 
-        List<String> listcountry = new ArrayList<String>();
 
-        listcountry.add("Rwanda");
-        listcountry.add("Tanzania");
-        listcountry.add("Burundi");
-        listcountry.add("Kenya");
-        listcountry.add("Uganda");
-        listcountry.add("DRC");
-        // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listcountry);
-        // Drop down layout style - list view with radio button
-        ArrayAdapter<String> dataAdapte = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listcountry);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dataAdapte.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_nationality.setAdapter(dataAdapter);
-        sp_residence.setAdapter(dataAdapte);
+
+        requestQueue = Volley.newRequestQueue(this);
+        String urli = "https://rbc.gov.rw/community/data-sharing/api/countries.php";
+        JsonObjectRequest jsonObjectRequesti = new JsonObjectRequest(Request.Method.GET,
+                urli, null, new com.android.volley.Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("countries");
+                    for(int i=0; i<jsonArray.length();i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        Province proObj=new Province();
+                        proObj.setName(jsonObject.optString("name"));
+                        proObj.setId(jsonObject.optString("id"));
+
+                        nationalityList.add(proObj);
+
+                        ArrayAdapter<Province>  natAdapter = new ArrayAdapter<>(PatientDetailsActivity.this,
+                                android.R.layout.simple_spinner_item, nationalityList);
+                        natAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        sp_nationality.setAdapter(natAdapter);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        requestQueue.add(jsonObjectRequesti);
+        sp_nationality.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                nationality=parent.getItemAtPosition(position).toString();
+                //Toast.makeText(PatientDetailsActivity.this, "nationality is "+nationality+"\n"+ nationalityList.get(position).getId(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+        requestQueue = Volley.newRequestQueue(this);
+        String urlii = "https://rbc.gov.rw/community/data-sharing/api/countries.php";
+        JsonObjectRequest jsonObjectRequestiii = new JsonObjectRequest(Request.Method.GET,
+                urlii, null, new com.android.volley.Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("countries");
+                    for(int i=0; i<jsonArray.length();i++){
+                        JSONObject jsonObjecti = jsonArray.getJSONObject(i);
+                        Province proObji=new Province();
+                        proObji.setName(jsonObjecti.optString("name"));
+                        proObji.setId(jsonObjecti.optString("id"));
+
+                        residenceList.add(proObji);
+
+                        ArrayAdapter<Province>  resAdapter = new ArrayAdapter<>(PatientDetailsActivity.this,
+                                android.R.layout.simple_spinner_item, residenceList);
+                        resAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        sp_residence.setAdapter(resAdapter);
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        requestQueue.add(jsonObjectRequestiii);
+        sp_residence.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                residence=parent.getItemAtPosition(position).toString();
+              //  Toast.makeText(PatientDetailsActivity.this, "residence is "+residence+"\n"+ nationalityList.get(position).getId(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         sp_sector=findViewById(R.id.sp_sector);
 
@@ -560,20 +645,6 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
             }
         });
 
-        sp_residence.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                residency = parent.getItemAtPosition(position).toString();
-            //    Toast.makeText(PatientDetailsActivity.this, "country of residence is " + residency, Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         btn_next = findViewById(R.id.btn_next);
         btn_next.setOnClickListener(this);
         btn_back = findViewById(R.id.btn_backpat);
@@ -581,18 +652,6 @@ public class PatientDetailsActivity extends AppCompatActivity implements Adapter
 
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-        nationality = parent.getItemAtPosition(position).toString();
-        //Toast.makeText(this, "taped " + nationality, Toast.LENGTH_SHORT).show();
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 
     @Override
     public void onClick(View v) {

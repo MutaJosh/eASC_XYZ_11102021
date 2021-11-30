@@ -1,18 +1,25 @@
 package com.betterise.maladiecorona
 
-import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_intro.*
+import org.json.JSONObject
 import java.util.*
 
 
@@ -21,6 +28,8 @@ class IntroActivity : AppCompatActivity() {
 
    // private static final int TIME_INTERVAL = 3000
     private var mBackPressed: Long = 0
+    var requestQueue: RequestQueue? = null
+    private var support_number:String="";
     /**
      * Created by MJC on 01/08/21.
      */
@@ -112,15 +121,37 @@ class IntroActivity : AppCompatActivity() {
         } else if (item.getTitle() === getString(R.string.sync_data)) {
             startActivity(Intent(this, ExportActivity::class.java))
         } else if (item.getTitle() === getString(R.string.contact_support)) {
+
+            requestQueue = Volley.newRequestQueue(this)
+            val url = "https://rbc.gov.rw/community/data-sharing/api/contact.php"
+            val stringRequest = StringRequest(Request.Method.GET, url,
+                Response.Listener<String> { stringResponse ->
+                    //handle the response
+
+                    val jresponse = JSONObject(stringResponse)
+                    support_number = jresponse.getString("telephone")
+                    Log.e("nimero",support_number);
+
+                },
+                Response.ErrorListener { volleyError ->
+                    // handle error
+                    Toast.makeText(baseContext,getString(R.string.check_internet),Toast.LENGTH_LONG).show()
+
+                }
+            )
+            requestQueue!!.add(stringRequest)
+
+
             val builder_main = AlertDialog.Builder(this)
+
           //  builder_main.setTitle("Are you sure ?")
             builder_main.setMessage("Ukeneye ubufasha  bujyanye no gukoresha iyi porogaramu. "+"\n"+"Nyamuneka kanda Hamagara ariko niba udakanda buto yo guhagarika")
             builder_main.setNegativeButton("GUSUBIKA",
                 DialogInterface.OnClickListener { dialog, which -> })
             builder_main.setPositiveButton("HAMAGARA",
                 DialogInterface.OnClickListener { dialog, which ->
-                    val phone = "+250786055919"
-                    val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))
+//                    val phone = ""
+                    val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", support_number, null))
                     startActivity(intent)
 
                 })
