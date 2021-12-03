@@ -258,7 +258,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements  View.O
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 nationality=parent.getItemAtPosition(position).toString();
-                //Toast.makeText(PatientDetailsActivity.this, "nationality is "+nationality+"\n"+ nationalityList.get(position).getId(), Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(PatientDetailsActivity.this, "nationality is "+nationality, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -269,7 +269,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements  View.O
 
 
 
-        requestQueue = Volley.newRequestQueue(this);
+       RequestQueue requestQueuee = Volley.newRequestQueue(this);
         String urlii = "https://rbc.gov.rw/community/data-sharing/api/countries.php";
         JsonObjectRequest jsonObjectRequestiii = new JsonObjectRequest(Request.Method.GET,
                 urlii, null, new com.android.volley.Response.Listener<JSONObject>() {
@@ -303,12 +303,12 @@ public class PatientDetailsActivity extends AppCompatActivity implements  View.O
             }
         });
 
-        requestQueue.add(jsonObjectRequestiii);
+        requestQueuee.add(jsonObjectRequestiii);
         sp_residence.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 residence=parent.getItemAtPosition(position).toString();
-              //  Toast.makeText(PatientDetailsActivity.this, "residence is "+residence+"\n"+ nationalityList.get(position).getId(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PatientDetailsActivity.this, "residence is "+residence+"\n"+ nationalityList.get(position).getId(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -721,7 +721,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements  View.O
                             intent.putExtra("patienttelephone", etpatienttelephone.getText().toString().trim());
                             intent.putExtra("dob", tvdob.getText().toString());
                             intent.putExtra("occupation", etoccupation.getText().toString().trim());
-                            intent.putExtra("residence", residency);
+                            intent.putExtra("residence", residence);
                             intent.putExtra("nationality", nationality);
                             intent.putExtra("province", province);
                             intent.putExtra("district", district);
@@ -896,7 +896,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements  View.O
                        intent.putExtra("patienttelephone", etpatienttelephone.getText().toString().trim());
                        intent.putExtra("dob", tvdob.getText().toString());
                        intent.putExtra("occupation", etoccupation.getText().toString().trim());
-                       intent.putExtra("residence", residency);
+                       intent.putExtra("residence", residence);
                        intent.putExtra("nationality", nationality);
                        intent.putExtra("province", province);
                        intent.putExtra("district", district);
