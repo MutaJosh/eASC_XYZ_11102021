@@ -233,7 +233,7 @@
     <string name="pres_btn_exit_again">press back button again to exit</string>
     <string name="dontknow">don\'t know</string>
     <string name="Index">Suspected Case</string>
-    <string name="nullrt">You dontt need to carryout RDT tests for this subject</string>
+    <string name="nullrt">You dont need to carryout RDT tests for this subject</string>
     <string name="contact">contact</string>
     <string name="names">Names</string>
     <string name="results_with_e_ascov">Results with e-ascov</string>

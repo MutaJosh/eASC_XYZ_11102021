@@ -117,9 +117,6 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
                         //progressDialog.dismiss()
                     // export_text.text = getString(R.string.export_error)
 
-
-
-
                     }  else {
 
                         // On success, flagging date and erasing current poll list

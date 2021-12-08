@@ -93,7 +93,9 @@ public class PatientDetailsActivity extends AppCompatActivity implements  View.O
 
     private RadioGroup radiogrouptype;
     private Spinner sp_cell,sp_village,sp_gender, sp_nationality, sp_residence, spinner_Number_Dose, sp_district, sp_province, sp_sector;
-    private String country,zip,state,city,address, longitude,latitude,checkindex, nationality, gender, yearr, month, date, residency, dob, numberhousehold, VaxxineType, Number_Dose, NulledVaccination;
+    private String country,zip,state,city,address,
+            longitude,latitude,checkindex, nationality, gender, yearr, month, date, residency, dob,
+            numberhousehold="null", VaxxineType="null", Number_Dose="null", NulledVaccination="null";
     private ImageButton btndatepicker;
     private Button btn_next;
     private ImageView btn_back;
@@ -103,7 +105,8 @@ public class PatientDetailsActivity extends AppCompatActivity implements  View.O
     private LinearLayout lay_vaccine;
     private TextView tvindexcode;
     private EditText etfirstname, et_numberhousehold, etlastname, etnational_ID, etpatientgender, etpatienttelephone, etoccupation, etresidence, etnationality, etcell, etvillage;
-    private String fn, lastname, national_ID, patientgender, patienttelephone, occupation, residence, province, district, sector, cell, village;
+    private String fn, lastname, national_ID, patientgender,
+            patienttelephone, occupation, residence, province, district, sector, cell, village;
     public static final String PREF_FIRSTNAME = "firstname";
     public static final String PREF_LASTNAME = "lastname";
 
