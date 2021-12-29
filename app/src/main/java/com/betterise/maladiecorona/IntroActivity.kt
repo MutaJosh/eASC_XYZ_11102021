@@ -166,10 +166,8 @@ class IntroActivity : AppCompatActivity() {
             super.onBackPressed()
             return
         } else {
-            Toast.makeText(this, R.string.pres_btn_exit_again, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Ongera usubire inyuma kugirango ubashe kuva muri sisitemu", Toast.LENGTH_SHORT).show()
         }
         mBackPressed = System.currentTimeMillis()
     }
-
-
 }

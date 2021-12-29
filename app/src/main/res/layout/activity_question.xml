@@ -141,7 +141,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             android:layout_marginTop="5dp"
-            android:text="Back to Home"
+            android:text="@string/back_to_home"
             android:layout_alignParentBottom="true"
             style="@style/BottomFormButton"/>
 

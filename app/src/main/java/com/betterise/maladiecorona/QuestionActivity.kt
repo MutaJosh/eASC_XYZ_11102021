@@ -194,7 +194,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             var result_ascoov=  questionManager!!.getResults()
 
             test_resultascov.visibility=VISIBLE
-            test_resultascov.text="Index : "+getIntent().getStringExtra("Indexi")+"\n \n \n"+baseContext.getString(
+            test_resultascov.text=getString(R.string.indexii)+" : "+getIntent().getStringExtra("Indexi")+"\n \n \n"+baseContext.getString(
                 when (result_ascoov){
                     ResultType.CASE1 -> R.string.result1
                     ResultType.CASE2 -> R.string.result2
@@ -348,6 +348,8 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                 group?.cxothers?.setOnCheckedChangeListener{ buttonView, isChecked ->
                     if (isChecked){
                         ot=getString(R.string.dontknow)
+                        group?.et_other_heartdisease?.visibility= VISIBLE
+                        ot=group?.et_other_heartdisease?.text.toString()
                     }
                 }
 
@@ -801,8 +803,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             val session = RdtUtils.getRdtSession(data!!);
             val result = session?.result
 
-
-            Toast.makeText(baseContext,getString(R.string.click_below_to_screen_another_person),Toast.LENGTH_LONG).show();
+            Toast.makeText(baseContext,"Byakunze wamaze kumusuzuma ,Kanda hano usuzume ukurikira",Toast.LENGTH_LONG).show();
 
             group?.rdt_result?.text = getString(
                 when (result?.results.toString()) {

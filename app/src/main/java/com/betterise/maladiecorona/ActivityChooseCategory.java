@@ -7,6 +7,7 @@ import androidx.core.widget.TextViewCompat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +34,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -68,7 +70,16 @@ private TextView errorBulletcate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_category);
+
+        String languageToLoad  = "rw"; // your language
+        Locale locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+        this.setContentView(R.layout.activity_choose_category);
+
         radioGroup=(RadioGroup) findViewById(R.id.radiogroup);
         btn_start=findViewById(R.id.btn_startcategory);
         btn_backfromcategory=findViewById(R.id.btn_backfromcategory);
@@ -100,8 +111,6 @@ private TextView errorBulletcate;
                     errorBulletcate.setVisibility(View.VISIBLE);
                 } else{
                     if (radiobtnindex.getText().equals(getString(R.string.Index))){
-
-
                         Intent intent=new Intent(ActivityChooseCategory.this,PatientDetailsActivity.class);
                         category="Index";
                         intent.putExtra("category",category);
@@ -173,10 +182,10 @@ private TextView errorBulletcate;
                             if (message.equals("Found")) {
                                 //for temporary testing ,validation needed
                                 Intent intt = new Intent(ActivityChooseCategory.this, PatientDetailsActivity.class);
-                                category = getString(R.string.contact);
+                                category = "contact";
                                 intt.putExtra("uuid", eTindexcode.getText().toString().trim());
-                                intt.putExtra("category", category);
-                                new AgentManager().saveindexcode(getBaseContext(),eTindexcode.getText().toString().trim());
+                                intt.putExtra("category", "contact");
+                              //  new AgentManager().saveindexcode(getBaseContext(),eTindexcode.getText().toString().trim());
                                 startActivity(intt);
                             }else{
                                 Toast.makeText(getBaseContext(), R.string.invalid_contact_code, Toast.LENGTH_LONG).show();
@@ -220,7 +229,7 @@ private TextView errorBulletcate;
         } else {
             startActivity(new Intent(ActivityChooseCategory.this,IntroActivity.class));
             finish();
-            Toast.makeText(ActivityChooseCategory.this, R.string.pres_btn_exit_again, Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActivityChooseCategory.this, "Ongera usubire inyuma kugirango ubashe kuva muri sisitemu", Toast.LENGTH_SHORT).show();
         }
 
         mBackPressed = System.currentTimeMillis();

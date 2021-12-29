@@ -82,6 +82,7 @@
             android:id="@+id/radiobtnindex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
             android:button="@drawable/shape_radio"
             android:layout_marginBottom="10dp"
             android:paddingStart="20dp"
@@ -89,6 +90,8 @@
 
         <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/radio3"
+            android:layout_marginTop="15dp"
+            android:textSize="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/shape_radio"

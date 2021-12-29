@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">e-ASCOV</string>
+    <string name="app_name">Offline e-ASCOV</string>
 
     <string name="datetime_format" translatable="false">yyyy-MM-dd HH:mm:ss</string>
     <string name="date_format" translatable="false">yyyy-MM-dd</string>
@@ -30,7 +30,7 @@
     <string name="to_export">Ohereza Nonaha</string>
     <string name="export_text">Ugiye kohereza muri sisitemu amakuru y\'abantu %1$d umaze gukorera.</string>
     <string name="export_done">Kohereza byarangiye</string>
-    <string name="export_error">Hari ibitagenze neza. Nyamuneka, suzuma umuyoboro wa murandasi wawe (Internet connection).</string>
+    <string name="export_error">Hari ibitagenze neza mukohereza amakuru muri sisitemu. Nyamuneka, saba ubufasha kugirango bikemukeNtibishoboka k\u0027umugabo</string>
     <string name="export_restart">Ongera wohereze</string>
     <string name="export_last">Uheruka kohereza amakuru muri sisitemu ku italiki ya %1$s, saa %2$s.</string>
 
@@ -48,7 +48,7 @@
 
     <string-array name="questions">
         <item>Usuzumwa yaba yaragiriye urugendo hanze y\’igihugu mbere yuko agira ibimenyetso?</item>
-        <item>Usuzumwa yaba yarahuye n\’umuntu ushobora kuba arwaye cuangwa akekwaho COVID-19 mu minsi 24 mbere yuko agira ibimenyetso? </item>
+        <item>Usuzumwa yaba yarahuye n\’umuntu ushobora kuba arwaye cyangwa akekwaho COVID-19 mu minsi 24 mbere yuko agira ibimenyetso? </item>
         <item>Usuzumwa yaba yavuzeko yagize umuriro?</item>
         <item>Igipimo cy\’umuriro wafatiye usuzumwa ni ikihe?  </item>
         <item>Usuzumwa amaranye umuriro igihe kingana iki (iminsi ingahe)? </item>
@@ -75,8 +75,8 @@
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
-        <item>&lt; 38°|≥ 38°</item>
-        <item>Days</item>
+        <item>Munsi ya 38°|Hejuru ya 38°</item>
+        <item>iminsi</item>
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
@@ -86,12 +86,12 @@
         <item>Yego|Oya</item>
         <item>Kg|Simbizi</item>
         <item>Cm|Simbizi</item>
-        <item>Yes|No|Simbizi</item>
+        <item>Yego|Oya|Simbizi</item>
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
-        <item>Yego|Oya|Ntibishobora</item>
+        <item>Yego|Oya|Ntibishoboka k umugabo</item>
         <item></item>
     </string-array>
 
@@ -185,7 +185,7 @@
     <string name="enter_all_fieldss">Nyamuneka, ni ngombwa kuzuza ibisabwa byose hejuru</string>
     <string name="dose1">Iya mbere</string>
     <string name="dose2">Iya kabiri</string>
-    <string name="dose3">Iya mbere n\'iya kabiri</string>
+    <string name="dose3">Iya mbere n iya kabiri</string>
     <string name="patient_detailss">Umwirondo w\'usuzumwa</string>
     <string name="save_and_continues">Bika ukomeza</string>
     <string name="noo">Oya</string>
@@ -198,7 +198,7 @@
     <string name="choose_patient_category">Hitamo icyiciro cy\'usuzumwa</string>
     <string name="first_choose_patient_category">Nyamuneka, banza uhitemo icyiciro cy\'usuzumwa</string>
     <string name="enter_your_contact_code_to_validate">Shyiramo CODE kugirango ukomeze</string>
-    <string name="index">ukekwaho COVID19</string>
+    <string name="index">ukekwaho COVID-19</string>
     <string name="check_internet">\"Habonetse ikibazo mugukoresha murandasi (internet) \"</string>
     <string name="enter_nid">Nyamuneka, banza ushyiremo indangamuntu cyangwa pasiporo yawe</string>
     <string name="south">Amajyepfo</string>
@@ -207,7 +207,7 @@
     <string name="west">Iburengerazuba</string>
     <string name="kigali">Umujyi wa kigali</string>
     <string name="not_in_covid_system"> Indangamuntu cyangwa pasiporo mwatanze ntabwo ibonetse muri system ya COVID-19. Usuzumwa arashyirwa muri sisitemu nk\'umuntu mushya </string>
-    <string name="case_id">Case ID</string>
+    <string name="case_id">Code</string>
     <string name="community_health_worker_names">Amazina yawe</string>
     <string name="chw_info">Umujyanama w\'ubuzima</string>
     <string name="enter_chw">Nyamuneka banza wandike amazina yawe</string>
@@ -223,20 +223,22 @@
     <string name="valid_phone">Nyamuneka Andika nimero ya telefone yuzuye ,igizwe n\' imibare icumi</string>
     <string name="not_available_index">N/A</string>
     <string name="turn_on_location">Nyamuneka emeza amerezo byawe...</string>
-    <string name="tuberculosis">Tuberculosis</string>
-    <string name="pneumonia">Pneumonia</string>
-    <string name="asthma">Asthma</string>
-    <string name="flu">Flu</string>
+    <string name="tuberculosis">Igituntu</string>
+    <string name="pneumonia">Umusonga</string>
+    <string name="asthma">Asima</string>
+    <string name="flu">Ibicurane</string>
     <string name="cold">Cold</string>
-    <string name="others">Simbizi</string>
+    <string name="others">indi ndwara</string>
     <string name="pres_btn_exit_again">press back button again to exit</string>
     <string name="dontknow">Simbizi</string>
-    <string name="Index">ukekwaho COVID19</string>
+    <string name="Index">ukekwaho COVID-19</string>
     <string name="nullrt">Usuzumwa ntabwo akeneye gukorerwa isuzumwa rya RDT</string>
-    <string name="contact">Uwahuye n uwanduye Covid19</string>
+    <string name="contact">Uwahuye n uwanduye COVID-19</string>
     <string name="names">Amazina</string>
     <string name="results_with_e_ascov">Ibisubizo bya e-ascov</string>
     <string name="results_with_rdt_toolkit">Ibisubizo bya RDT Toolkit:</string>
     <string name="click_below_to_screen_another_person">Kanda buto "bika ukomeza",ubashe gusuzuma undi muntu</string>
+    <string name="indexii">ukekwaho COVID-19</string>
+    <string name="back_to_home">Bika ukomeze isuzuma</string>
 
 </resources>

@@ -96,6 +96,7 @@
             android:id="@+id/cxcold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="@string/cold" />
         <CheckBox
             android:id="@+id/cxothers"
@@ -103,6 +104,21 @@
             android:layout_height="wrap_content"
             android:text="@string/others" />
 
+        <EditText
+            android:id="@+id/et_other_heartdisease"
+            android:layout_width="match_parent"
+            android:background="@drawable/edit_bg"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_marginLeft="5dp"
+            android:visibility="gone"
+            android:layout_marginRight="5dp"
+            android:inputType="text"
+            />
 
     </LinearLayout>
 
