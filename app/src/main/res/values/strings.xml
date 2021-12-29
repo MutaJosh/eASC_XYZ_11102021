@@ -91,7 +91,7 @@
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
         <item>Yego|Oya</item>
-        <item>Yego|Oya|Ntibishoboka k umugabo</item>
+        <item>Yego|Oya|Ntibishoboka k\'umugabo</item>
         <item></item>
     </string-array>
 
@@ -185,7 +185,7 @@
     <string name="enter_all_fieldss">Nyamuneka, ni ngombwa kuzuza ibisabwa byose hejuru</string>
     <string name="dose1">Iya mbere</string>
     <string name="dose2">Iya kabiri</string>
-    <string name="dose3">Iya mbere n iya kabiri</string>
+    <string name="dose3">"Iya mbere n'iya kabiri"</string>
     <string name="patient_detailss">Umwirondo w\'usuzumwa</string>
     <string name="save_and_continues">Bika ukomeza</string>
     <string name="noo">Oya</string>
@@ -233,7 +233,7 @@
     <string name="dontknow">Simbizi</string>
     <string name="Index">ukekwaho COVID-19</string>
     <string name="nullrt">Usuzumwa ntabwo akeneye gukorerwa isuzumwa rya RDT</string>
-    <string name="contact">Uwahuye n uwanduye COVID-19</string>
+    <string name="contact">"Uwahuye n'uwanduye COVID-19"</string>
     <string name="names">Amazina</string>
     <string name="results_with_e_ascov">Ibisubizo bya e-ascov</string>
     <string name="results_with_rdt_toolkit">Ibisubizo bya RDT Toolkit:</string>

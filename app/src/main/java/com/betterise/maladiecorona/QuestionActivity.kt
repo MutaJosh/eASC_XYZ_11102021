@@ -111,6 +111,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             var poll = questionManager!!.createPoll(this)
             PollManager().addPoll(this, poll)
 
+
             val intent = Intent(this, ActivityChooseCategory::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

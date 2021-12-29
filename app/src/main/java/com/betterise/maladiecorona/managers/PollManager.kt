@@ -1,6 +1,7 @@
 package com.betterise.maladiecorona.managers
 
 import android.content.Context
+import android.util.Log
 import com.betterise.maladiecorona.model.out.Poll
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -32,6 +33,7 @@ class PollManager {
     fun getPolls(context : Context) : MutableList<Poll>{
 
         var json  = context.getSharedPreferences(PREFS, PRIVATE_MODE).getString(PREF_POLLS, "")
+            .replace("\\u0027","").replace("\\u0020","")
 
         if (json.isNullOrEmpty())
             return arrayListOf()

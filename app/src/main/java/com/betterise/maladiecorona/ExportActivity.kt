@@ -24,6 +24,11 @@ import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import com.google.gson.JsonObject
+import org.json.JSONObject
+
+
+
 
 
 /**
@@ -56,6 +61,9 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
 
         networkManager = NetworkManager(this, getString(R.string.api_url))
         polls = pollManager.getPolls(this)
+
+        Log.e("ohereza",polls.toString())
+
         export_text.text = getString(R.string.export_text, polls.size)
 
         if (java.lang.String.valueOf(polls.size).equals("0") ){
@@ -88,7 +96,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
 
         for ((key, value1) in allEntries) {
             val value = value1!!
-           // Log.d("Data from Storage", "$key: $value")
+            Log.e("Amakuru", "$key: $value")
 
                // Toast.makeText(this, "$key: $value",Toast.LENGTH_LONG).show()
 
@@ -102,8 +110,9 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
         if (polls.size > 0 && !isSending) {
             isSending = true
 
-
             val items = PollItems(polls)
+
+
 
             networkManager.apiService.postPolls(items)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -124,6 +133,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
                         last_export.text = getLastExportFlag()
                         pollManager.clearPolls(this)
                         polls = pollManager.getPolls(this)
+
 
                         export_text.text = getString(R.string.export_text, polls.size)
 

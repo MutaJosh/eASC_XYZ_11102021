@@ -253,6 +253,8 @@ public class PatientDetailsActivity extends AppCompatActivity implements  View.O
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Number_Dose=adapterView.getItemAtPosition(i)+"";
+
+
             }
 
             @Override
