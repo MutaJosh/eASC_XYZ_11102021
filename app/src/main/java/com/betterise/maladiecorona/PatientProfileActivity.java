@@ -105,6 +105,7 @@ public class PatientProfileActivity extends AppCompatActivity implements View.On
         result_ascovprofile.setText(getIntent().getStringExtra("ascov_resulti"));
         result_rdtresultprofile.setText(getIntent().getStringExtra("rdt_result"));
         tvcaseindex.setText(getIntent().getStringExtra("Index"));
+        tvcaseindex.setTextIsSelectable(true);
         tvcategory.setText("Code");
     }
 
