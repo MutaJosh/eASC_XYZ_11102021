@@ -121,7 +121,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
                 .subscribeOn(Schedulers.io())
                 .subscribe({ res ->
 
-                    Log.e("Result", res.toString())
+                    Log.e("Results", res.toString())
                     resulti=res.toString()
 
 
