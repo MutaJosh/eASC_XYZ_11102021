@@ -240,6 +240,7 @@ public class PatientDetailsActivity extends AppCompatActivity implements  View.O
         listnumbervacc.add(getString(R.string.dose1));
         listnumbervacc.add(getString(R.string.dose2));
         listnumbervacc.add(getString(R.string.dose3));
+        listnumbervacc.add(getString(R.string.dose_booster));
         listnumbervacc.add(getString(R.string.dontknow));
 
 

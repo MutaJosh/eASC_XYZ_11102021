@@ -33,7 +33,7 @@ class PollManager {
     fun getPolls(context : Context) : MutableList<Poll>{
 
         var json  = context.getSharedPreferences(PREFS, PRIVATE_MODE).getString(PREF_POLLS, "")
-            .replace("\\u0027","").replace("\\u0020","")
+            .replace("\\u0027"," ").replace("\\u0020"," ")
 
         if (json.isNullOrEmpty())
             return arrayListOf()

@@ -44,6 +44,8 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
 
     }
 
+    private var resulti:String=""
+
     private var pollManager = PollManager()
     private lateinit var networkManager : NetworkManager
     private lateinit var polls : MutableList<Poll>
@@ -120,12 +122,13 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
                 .subscribe({ res ->
 
                     Log.e("Result", res.toString())
+                    resulti=res.toString()
 
 
                     if (res[ApiService.API_STATUS].asString != ApiService.API_SUCCESS) {
                         //progressDialog.dismiss()
                     // export_text.text = getString(R.string.export_error)
-
+                        Toast.makeText(this, resulti, Toast.LENGTH_LONG).show()
                     }  else {
 
                         // On success, flagging date and erasing current poll list
@@ -160,7 +163,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
         }
 
     } else {
-       // Toast.makeText(this, getString(R.string.disconnected_internet), Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(R.string.disconnected_internet), Toast.LENGTH_LONG).show()
     }
 
     }
