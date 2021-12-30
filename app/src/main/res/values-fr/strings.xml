@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">e-ASCOV</string>
+    <string name="app_name">Offline e-ASCOV</string>
 
     <string name="informations">Informations</string>
     <string name="intro">Bienvenue sur l\'application E-Ascov. Passez aux étapes suivantes</string>
@@ -225,4 +225,6 @@
     <string name="results_with_e_ascov">Results with e-ascov</string>
     <string name="results_with_rdt_toolkit">Results with RDT Toolkit:</string>
     <string name="click_below_to_screen_another_person">Click below button to screen another person</string>
+    <string name="indexii">\"Index : \"</string>
+    <string name="back_to_home">Back to Home</string>
 </resources>

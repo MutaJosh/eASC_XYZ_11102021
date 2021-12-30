@@ -24,6 +24,11 @@ import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import com.google.gson.JsonObject
+import org.json.JSONObject
+
+
+
 
 
 /**
@@ -38,6 +43,8 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
         const val prefLastExport = "prefLastExport"
 
     }
+
+    private var resulti:String=""
 
     private var pollManager = PollManager()
     private lateinit var networkManager : NetworkManager
@@ -56,6 +63,9 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
 
         networkManager = NetworkManager(this, getString(R.string.api_url))
         polls = pollManager.getPolls(this)
+
+        Log.e("ohereza",polls.toString())
+
         export_text.text = getString(R.string.export_text, polls.size)
 
         if (java.lang.String.valueOf(polls.size).equals("0") ){
@@ -80,7 +90,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
     override fun onClick(v: View?) {
 
         if (checkForInternet(this)) {
-            Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show()
 
 //  val sharedPreferences: SharedPreferences = baseContext.getSharedPreferences(prefs, MODE_PRIVATE)
         val sharedPreferences2: SharedPreferences = baseContext.getSharedPreferences(prefs, MODE_PRIVATE)
@@ -88,7 +98,7 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
 
         for ((key, value1) in allEntries) {
             val value = value1!!
-            Log.d("Data from Storage", "$key: $value")
+            Log.e("Amakuru", "$key: $value")
 
                // Toast.makeText(this, "$key: $value",Toast.LENGTH_LONG).show()
 
@@ -102,8 +112,9 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
         if (polls.size > 0 && !isSending) {
             isSending = true
 
-
             val items = PollItems(polls)
+
+
 
             networkManager.apiService.postPolls(items)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -111,15 +122,13 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
                 .subscribe({ res ->
 
                     Log.e("Result", res.toString())
+                    resulti=res.toString()
 
 
                     if (res[ApiService.API_STATUS].asString != ApiService.API_SUCCESS) {
                         //progressDialog.dismiss()
                     // export_text.text = getString(R.string.export_error)
-
-
-
-
+                        Toast.makeText(this, resulti, Toast.LENGTH_LONG).show()
                     }  else {
 
                         // On success, flagging date and erasing current poll list
@@ -128,10 +137,15 @@ class ExportActivity : AppCompatActivity(), View.OnClickListener{
                         pollManager.clearPolls(this)
                         polls = pollManager.getPolls(this)
 
+
                         export_text.text = getString(R.string.export_text, polls.size)
 
 
-                        Toast.makeText(this,"Result "+res.toString(),Toast.LENGTH_LONG).show()
+                       // Toast.makeText(this,"Result "+res.toString()+"\n"+ "Byakunze,wohereje Amakuru muri sisitemu ",Toast.LENGTH_LONG).show()
+
+                        Toast.makeText(this,"Kohereza amakuru muri sisitemu byagenze neza",Toast.LENGTH_LONG).show()
+
+
 
                     }
 

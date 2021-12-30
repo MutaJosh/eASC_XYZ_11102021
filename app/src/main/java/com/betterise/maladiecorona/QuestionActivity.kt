@@ -11,9 +11,11 @@ import android.util.Log
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import com.betterise.maladiecorona.managers.AgentManager
 import com.betterise.maladiecorona.managers.GeolocManager
@@ -24,6 +26,8 @@ import com.betterise.maladiecorona.model.QuestionType
 import com.betterise.maladiecorona.model.ResultType
 import kotlinx.android.synthetic.main.activity_question.*
 import kotlinx.android.synthetic.main.activity_results.*
+import kotlinx.android.synthetic.main.activity_splash.*
+import kotlinx.android.synthetic.main.question_bullet.*
 import kotlinx.android.synthetic.main.question_bullet.view.*
 import kotlinx.android.synthetic.main.question_city.view.*
 import kotlinx.android.synthetic.main.question_digit.view.*
@@ -62,7 +66,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
     private var asth:String="no";
     private var fl:String="no";
     private var co:String="no";
-    private var ot:String="no";
+    private var other:String="no";
     private var qn:String="";
 
     companion object {
@@ -110,6 +114,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             AgentManager().saverdt_result(this,getString(R.string.nullrt))
             var poll = questionManager!!.createPoll(this)
             PollManager().addPoll(this, poll)
+
 
             val intent = Intent(this, ActivityChooseCategory::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -189,12 +194,14 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
         if (qi.equals("21")) {
             //Toast.makeText(baseContext, "diseases\n "+tub+pn+asth+co+fl+ot, Toast.LENGTH_LONG).show()
 
-            AgentManager().saverespiratory_diseases(baseContext, tub+","+pn+","+asth+","+co+","+fl+","+ot)
+            AgentManager().saverespiratory_diseases(baseContext, "Tuberculosis: "+tub+", pneumonia: "+pn+","
+                            +"Asthma: "+asth+","+"Flu: "+fl+","+"others: "+other)
             // Toast.makeText(baseContext, "test btn rdt removal", Toast.LENGTH_LONG).show()
             var result_ascoov=  questionManager!!.getResults()
 
             test_resultascov.visibility=VISIBLE
-            test_resultascov.text="Index : "+getIntent().getStringExtra("Indexi")+"\n \n \n"+baseContext.getString(
+            test_resultascov.setTextIsSelectable(true);
+            test_resultascov.text=getString(R.string.indexii)+" : "+getIntent().getStringExtra("Indexi")+"\n \n \n"+baseContext.getString(
                 when (result_ascoov){
                     ResultType.CASE1 -> R.string.result1
                     ResultType.CASE2 -> R.string.result2
@@ -345,10 +352,24 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
                         co="Cold"
                     }
                 }
+
                 group?.cxothers?.setOnCheckedChangeListener{ buttonView, isChecked ->
                     if (isChecked){
-                        ot=getString(R.string.dontknow)
+//                        other=getString(R.string.dontknow)
+                        group?.et_other_heartdisease?.visibility= VISIBLE
+
+                    // group?.et_other_heartdisease?.setText("okay")
+//                        var editText = findViewById(R.id.et_other_heartdisease) as EditText
+
+                     other=group?.et_other_heartdisease?.text.toString()
+
+
+                        group?.et_other_heartdisease?.doAfterTextChanged {
+                            //Log.e("texti",et_other_heartdisease.text.toString()+" lll")
+                            other=et_other_heartdisease.text.toString()
+                        }
                     }
+
                 }
 
             }
@@ -801,8 +822,7 @@ class QuestionActivity : AppCompatActivity(), View.OnClickListener, GeolocManage
             val session = RdtUtils.getRdtSession(data!!);
             val result = session?.result
 
-
-            Toast.makeText(baseContext,getString(R.string.click_below_to_screen_another_person),Toast.LENGTH_LONG).show();
+            Toast.makeText(baseContext,"Byakunze wamaze kumusuzuma ,Kanda hano usuzume ukurikira",Toast.LENGTH_LONG).show();
 
             group?.rdt_result?.text = getString(
                 when (result?.results.toString()) {
