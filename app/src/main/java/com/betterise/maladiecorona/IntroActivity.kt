@@ -145,7 +145,7 @@ class IntroActivity : AppCompatActivity() {
             val builder_main = AlertDialog.Builder(this)
 
           //  builder_main.setTitle("Are you sure ?")
-            builder_main.setMessage("Ukeneye ubufasha  bujyanye no gukoresha iyi porogaramu. "+"\n"+"Nyamuneka kanda Hamagara ariko niba udakanda buto yo guhagarika")
+            builder_main.setMessage("Ukeneye Ubufasha  bujyanye no gukoresha iyi porogaramu. "+"\n"+"Nyamuneka kanda Hamagara ariko niba udakanda buto yo guhagarika")
             builder_main.setNegativeButton("GUSUBIKA",
                 DialogInterface.OnClickListener { dialog, which -> })
             builder_main.setPositiveButton("HAMAGARA",
