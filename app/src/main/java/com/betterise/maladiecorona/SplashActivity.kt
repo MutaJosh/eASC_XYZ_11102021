@@ -20,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
             conf.setLocale(locale)
             resources.updateConfiguration(conf, resources.displayMetrics)
 
-            startActivity(Intent(this, AgentActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             overridePendingTransition(R.anim.fadein, R.anim.fadeout)
             finish()
         }, 2000)

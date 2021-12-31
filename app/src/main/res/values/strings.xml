@@ -137,8 +137,8 @@
     <string name="Invalid_code" tools:ignore="MissingTranslation">Kode ya Index washyizemo ntabwo ibonetse. Reba niba yanditse neza, wongere ugerageze </string>
 
 
-    <string name="case_index" >Case Code </string>
-    <string name="Firstname" >Izina ry\'umuryango</string>
+    <string name="case_index">Case Code </string>
+    <string name="Firstname">Izina ry\'umuryango</string>
     <string name="Lastname"> Izina ry\'idini </string>
     <string name="nid">Indangamuntu / Pasiporo</string>
     <string name="Gender">Igitsina</string>
@@ -241,5 +241,9 @@
     <string name="indexii">Ukekwaho COVID-19</string>
     <string name="back_to_home">Bika ukomeze isuzuma</string>
     <string name="dose_booster">Iyo gushimangira</string>
+    <string name="chw_login">Injira</string>
+    <string name="chw_enter_codelogin">Uzuzamo KODE yawe</string>
+    <string name="enter_chw_code">Nyamuneka andika  kode yawe</string>
+
 
 </resources>

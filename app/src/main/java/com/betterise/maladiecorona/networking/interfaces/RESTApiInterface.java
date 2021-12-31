@@ -20,7 +20,9 @@ public interface RESTApiInterface {
     @POST("fetch-nid.php")
     Call<ResponseBody> sendNID(@Body Map<String,String> obj);
 
-
+  //validate chw code
+  @POST("chw_code_check.php")
+  Call<ResponseBody> loginchw(@Body Map<String,String> obj);
 
 
 }

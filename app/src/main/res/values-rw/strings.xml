@@ -242,5 +242,9 @@
     <string name="indexii">Ukekwaho COVID-19</string>
     <string name="back_to_home">Bika ukomeze isuzuma</string>
     <string name="dose_booster">Iyo gushimangira</string>
+    <string name="chw_login">Injira</string>
+    <string name="chw_enter_codelogin">Uzuzamo KODE yawe</string>
+    <string name="enter_chw_code">Nyamuneka andika  kode yawe</string>
+
 
 </resources>

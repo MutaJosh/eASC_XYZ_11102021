@@ -242,5 +242,9 @@
     <string name="indexii">Index :</string>
     <string name="back_to_home">Back to Home</string>
     <string name="dose_booster">Booster</string>
+    <string name="chw_login">Login</string>
+    <string name="chw_enter_codelogin">Uzuzamo KODE yawe</string>
+    <string name="enter_chw_code">Nyamuneka andika  kode yawe</string>
+
 
 </resources>
