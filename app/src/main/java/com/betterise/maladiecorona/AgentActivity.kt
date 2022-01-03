@@ -21,10 +21,6 @@ class AgentActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agent)
 
-
-
-
-
        // phone.setSelection(4)
         phone.doOnTextChanged { text, _, _, _ -> btn_next.isEnabled = !text.isNullOrEmpty() }
         btn_next.setOnClickListener {

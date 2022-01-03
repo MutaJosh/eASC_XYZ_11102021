@@ -58,7 +58,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
                 android:layout_gravity="center_vertical"
-                android:text="@string/chw_enter_codelogin"
+                android:text="@string/phone_question"
                 style="@style/DefaultText"/>
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -91,7 +91,7 @@
                     android:paddingStart="40dp"
                     android:paddingEnd="40dp"
                     android:inputType="phone"
-                    android:text=""
+                    android:text="07"
 
                     />
 
@@ -100,14 +100,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/community_health_worker_names"
                     android:fontFamily="sans-serif-medium"
-                    android:visibility="gone"
                     android:layout_marginTop="20dp"
                     android:padding="5dp"
                     />
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/chw_names"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
                     android:background="@drawable/edit_bg"
                     android:layout_height="wrap_content"
                     android:textSize="17sp"
@@ -142,7 +140,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="@string/chw_login"
+        android:text="@string/save_and_continue"
         style="@style/BottomFormButton"
         android:layout_alignParentBottom="true"/>
 
